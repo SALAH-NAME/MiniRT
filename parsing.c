@@ -50,8 +50,8 @@ t_file	*file_parse(char *file_name)
 		if (file->fd == -1)
 			return (perror("open"), NULL);
 		file->content = read_file(file->fd);
-		printf("%s\n", file->content);
-		file->size = file_size(file->content);
+		file->size = ft_strlen(file->content);
+		printf("%s \n%ld\n", file->content, file->size);
 	}
 	return (file);
 }

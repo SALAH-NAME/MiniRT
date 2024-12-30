@@ -5,7 +5,13 @@ OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
 NAME = miniRT
 
+
+
+
+# custom command : remove (./miniRT file.rt) later
 all: $(LIBFT) $(NAME)
+	./miniRT file.rt
+
 
 $(LIBFT):
 	@make -s -C libft all
