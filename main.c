@@ -14,8 +14,20 @@
 
 void	free_all(t_file *file)
 {
-	free(file->content);
-	free(file);
+	char	**tmp;
+
+	if (file)
+	{
+		tmp = file->lines;
+		while (tmp && *tmp)
+		{
+			printf("%s\n", *tmp);
+			free(*(tmp++));
+		}
+		free(file->lines);
+		free(file->content);
+		free(file);
+	}
 }
 
 int	main(int ac, char **av)

@@ -3,20 +3,21 @@ CFLAGS = -Wall -Wextra -Werror -ggdb
 SRC = main.c parsing.c #ray.c sphere.c vector.c
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
+INCLUDES = miniRT.h includes/meta_data.h
 NAME = miniRT
 
 
 
 
-# custom command : remove (./miniRT file.rt) later
+# custom command : remove custom command  later
 all: $(LIBFT) $(NAME)
-	./miniRT file.rt
+	@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./miniRT "file.rt"
 
 
 $(LIBFT):
 	@make -s -C libft all
 
-$(NAME): $(OBJ) miniRT.h
+$(NAME): $(OBJ) $(INCLUDES)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 %.o: %.c

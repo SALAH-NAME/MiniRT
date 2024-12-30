@@ -25,15 +25,21 @@
 # include <sys/types.h>
 # include <unistd.h>
 
+# define KB_4 4096
+# define EXT ".rt"
+
 typedef struct s_file
 {
 	char	*name;
 	int		fd;
 	char	*content;
+	char	**lines;
 	size_t	size;
+  t_Scene *scene;
 }			t_file;
 
 // parse
 t_file		*file_parse(char *file_name);
+void		free_all(t_file *file);
 
 #endif

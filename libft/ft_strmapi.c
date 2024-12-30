@@ -15,9 +15,7 @@
 char	toggle(unsigned int i, char c)
 {
 	(void)i;
-	if (c == -99 || c == -100 || c == -36)
-		return ('$');
-	return (c);
+	return (ft_tolower(c));
 }
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
