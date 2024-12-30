@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef META_DATA_H
-# define META_DATA_H
+#ifndef SCENE_DATA_H
+# define SCENE_DATA_H
 
-# include "../miniRT.h"
+# include "miniRT.h"
 
 typedef struct AmbientLight
 {
@@ -25,7 +25,7 @@ typedef struct Camera
 {
 	double			position[3];
 	double			orientation[3];
-	double			fov;
+	int				fov;
 }					t_Camera;
 
 typedef struct Light
@@ -62,16 +62,12 @@ typedef struct Scene
 {
 	t_AmbientLight	*ambient;
 	t_Camera		*camera;
-	t_Light			*lights;
-
+	t_Light			*light;
 	int				light_count;
 	t_Sphere		*spheres;
-
 	int				sphere_count;
-
 	t_Plane			*planes;
 	int				plane_count;
-
 	t_Cylinder		*cylinders;
 	int				cylinder_count;
 }					t_Scene;

@@ -12,16 +12,50 @@
 
 #include "miniRT.h"
 
-char ***parse_data(char **lines)
+
+void free_information(char **information)
 {
-  char ***data;
-
-
+  char **tmp = information;
+  
+  while (tmp && *tmp) 
+  {
+    if(*tmp)
+    {
+      printf("%s\n",*tmp);
+      free(*tmp);
+    }
+    tmp++;
+  }
 }
 
 
 
+t_Scene	*scene_info(char **elements)
+{
+	t_Scene	*scene;
+	char	**information;
+  char **tmp;
 
+	scene = ft_calloc(1, sizeof(t_Scene));
+	if (scene)
+	{
+		while (*elements)
+		{
+      printf("%s\n",*elements);
+			information = ft_split(*elements, ' ');
+      tmp = information;
+			if (strcmp(*information, "L") == 0)
+				init_light(information+1, scene->light);
+			else if (strcmp(*information, "C") == 0)
+				init_camera(information+1, scene->camera);
+			else if (strcmp(*information, "A") == 0)
+				init_ambient(information+1, scene->ambient);
+			elements++;
+      free_information(tmp);
+		}
+	}
+	return (scene);
+}
 
 int	valid_file_name(char *file_name)
 {
@@ -76,7 +110,7 @@ t_file	*file_parse(char *file_name)
 			return (perror("open"), free(file), NULL);
 		file->content = read_file(file->fd);
 		file->lines = ft_split(file->content, '\n');
-    file->data =  parse_data(file->lines, ft_arrlen(file->lines));
+		file->scene = scene_info(file->lines);
 	}
 	return (file);
 }

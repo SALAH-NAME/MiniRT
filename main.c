@@ -20,10 +20,7 @@ void	free_all(t_file *file)
 	{
 		tmp = file->lines;
 		while (tmp && *tmp)
-		{
-			printf("%s\n", *tmp);
 			free(*(tmp++));
-		}
 		free(file->lines);
 		free(file->content);
 		free(file);
