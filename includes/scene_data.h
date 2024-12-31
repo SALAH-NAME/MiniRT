@@ -14,6 +14,7 @@
 # define SCENE_DATA_H
 
 # include "miniRT.h"
+# define OBJ_MAX_C 200
 
 typedef struct AmbientLight
 {
@@ -52,7 +53,7 @@ typedef struct Plane
 typedef struct Cylinder
 {
 	double			base[3];
-	double			orientation[3];
+	double			axis[3];
 	double			diameter;
 	double			height;
 	int				color[3];
@@ -64,11 +65,11 @@ typedef struct Scene
 	t_Camera		*camera;
 	t_Light			*light;
 	int				light_count;
-	t_Sphere		*spheres;
+	t_Sphere		*spheres[OBJ_MAX_C];
 	int				sphere_count;
-	t_Plane			*planes;
+	t_Plane			*planes[OBJ_MAX_C];
 	int				plane_count;
-	t_Cylinder		*cylinders;
+	t_Cylinder		*cylinders[OBJ_MAX_C];
 	int				cylinder_count;
 }					t_Scene;
 

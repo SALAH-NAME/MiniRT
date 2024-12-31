@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_arrmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/30 12:13:42 by ysemlali          #+#    #+#             */
-/*   Updated: 2024/12/30 12:15:32 by ysemlali         ###   ########.fr       */
+/*   Created: 2024/12/30 22:09:09 by ysemlali          #+#    #+#             */
+/*   Updated: 2024/12/30 22:09:09 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "libft.h"
 
-
-
-int	main(int ac, char **av)
+void	ft_arrmapi(char **arr, void (*f)(void *))
 {
-	t_file	*file;
+	int	i;
 
-	if (ac != 2)
+	i = 0;
+	if (arr == NULL || f == NULL)
+		return ;
+	while (arr[i])
 	{
-		printf("Usage: %s <file>\n", av[0]);
-		return (1);
+		if (arr[i] != NULL)
+			f(arr[i++]);
 	}
-	file = file_parse(av[1]);
-	free_all(file);
-	return (0);
+	f(arr);
 }

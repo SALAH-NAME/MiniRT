@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/30 12:13:42 by ysemlali          #+#    #+#             */
-/*   Updated: 2024/12/30 12:15:32 by ysemlali         ###   ########.fr       */
+/*   Created: 2024/12/31 13:56:17 by ysemlali          #+#    #+#             */
+/*   Updated: 2024/12/31 13:56:17 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+# include "miniRT.h"
 
-
-
-int	main(int ac, char **av)
+int	valid(char **info, int count)
 {
-	t_file	*file;
+	int	i;
 
-	if (ac != 2)
+	i = 0;
+	if (!info)
+		return (0);
+	while (i < count)
+		if (!info[i++])
+			return (0);
+	return (1);
+}
+
+void	free_all(t_file *file)
+{
+	char	**tmp;
+
+	if (file)
 	{
-		printf("Usage: %s <file>\n", av[0]);
-		return (1);
+		tmp = file->lines;
+		while (tmp && *tmp)
+			free(*(tmp++));
+		free(file->lines);
+		free(file->content);
+		free(file);
 	}
-	file = file_parse(av[1]);
-	free_all(file);
-	return (0);
 }

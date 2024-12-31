@@ -12,47 +12,39 @@
 
 #include "miniRT.h"
 
-
-void free_information(char **information)
+int	init_elements(char **info, t_Scene **scene)
 {
-  char **tmp = information;
-  
-  while (tmp && *tmp) 
-  {
-    if(*tmp)
-    {
-      printf("%s\n",*tmp);
-      free(*tmp);
-    }
-    tmp++;
-  }
+	if (ft_strcmp(info[0], "A") == 0 || ft_strcmp(info[0], "L") == 0
+		|| ft_strcmp(info[0], "C") == 0)
+	{
+		if (init_acl(info + 1, scene, info[0][0]))
+			return (1);
+	}
+	else if (ft_strcmp(info[0], "pl") == 0)
+		(*scene)->planes[(*scene)->plane_count] = init_plane(info + 1, &(*scene)->plane_count);
+	else if (ft_strcmp(info[0], "sp") == 0)
+		(*scene)->spheres[(*scene)->sphere_count] = init_sphere(info + 1, &(*scene)->sphere_count);
+	else if (ft_strcmp(info[0], "cy") == 0)
+		(*scene)->cylinders[(*scene)->cylinder_count] = init_cylinder(info + 1,&(*scene)->cylinder_count);
+	else
+		return (1);
+	return (0);
 }
-
-
 
 t_Scene	*scene_info(char **elements)
 {
 	t_Scene	*scene;
-	char	**information;
-  char **tmp;
 
 	scene = ft_calloc(1, sizeof(t_Scene));
 	if (scene)
 	{
 		while (*elements)
 		{
-      printf("%s\n",*elements);
-			information = ft_split(*elements, ' ');
-      tmp = information;
-			if (strcmp(*information, "L") == 0)
-				init_light(information+1, scene->light);
-			else if (strcmp(*information, "C") == 0)
-				init_camera(information+1, scene->camera);
-			else if (strcmp(*information, "A") == 0)
-				init_ambient(information+1, scene->ambient);
+			if (init_elements(ft_split(*elements, ' '), &scene))
+				return (printf("syntax error"), NULL);
 			elements++;
-      free_information(tmp);
 		}
+		print_scene(scene);
 	}
 	return (scene);
 }

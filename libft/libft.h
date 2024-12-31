@@ -88,6 +88,8 @@ void				ft_lstadd_front(t_oken **token, t_oken *new);
 void				ft_lstadd_back(t_oken **token, t_oken *new);
 void				ft_lstdelone(t_oken *lst);
 void				ft_dellast(t_oken **lst);
+// new
+void				ft_arrmapi(char **arr, void (*f)(void *));
 
 // get_next_line
 

@@ -45,8 +45,25 @@ void		free_all(t_file *file);
 int			parse_ambient(char *ambient);
 int			parse_light(char *light);
 int			parse_camera(char *camera);
-void		init_light(char **information, t_Light *light);
-void		init_camera(char **information, t_Camera *camera);
-void		init_ambient(char **information, t_AmbientLight *ambient);
+int			init_acl(char **info, t_Scene **scene, char type);
+t_Plane		*init_plane(char **info, int *plane_count);
+t_Sphere	*init_sphere(char **info, int *sphere_count);
+t_Cylinder	*init_cylinder(char **info, int *cylinder_count);
+
+
+
+// utils
+int	valid(char **info, int count);
+void	free_all(t_file *file);
+
+// testing utils
+void		print_scene(t_Scene *scene);
+
+
+
+
+
+
+
 
 #endif
