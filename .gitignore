@@ -1,4 +1,7 @@
 **.o
 **.d
+**.a
 **/exec
-
+miniRT
+.vscode/
+**.dSYM/
