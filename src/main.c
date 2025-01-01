@@ -6,14 +6,17 @@
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:56:56 by souahidi          #+#    #+#             */
-/*   Updated: 2024/12/31 15:56:57 by souahidi         ###   ########.fr       */
+/*   Updated: 2025/01/01 10:28:44 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
-	printf("\n\n=== main ===\n\n");
+	if (argc > 1)
+		printf("\n\n=== main(%s) ===\n\n", argv[1]);
+	else
+		printf("\n\n=== main ===\n\n");
 	return (0);
 }
