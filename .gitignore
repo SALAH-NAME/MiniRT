@@ -2,6 +2,7 @@
 **.d
 **.a
 **/exec
+**/run_test
 miniRT
 .vscode/
 **.dSYM/
