@@ -1,0 +1,65 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   core.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/05 19:33:11 by ysemlali          #+#    #+#             */
+/*   Updated: 2025/01/05 20:26:19 by ysemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CORE_H
+# define CORE_H
+
+# include "mlx.h"
+# include "config.h"
+# include "error.h"
+# include "parser.h"
+# include "scene.h"
+# include "libft.h"
+# include <errno.h>
+# include <fcntl.h>
+# include <limits.h>
+# include <math.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <unistd.h>
+
+# define KB_4 4096
+# define EXT ".rt"
+# define MAX_OBJ 200
+# define DBL_MIN
+# define DBL_MAX
+
+typedef struct s_mlx
+{
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+	int			width;
+	int			height;
+	int			*data;
+}				t_mlx;
+
+typedef struct s_data
+{
+	t_file		*file;
+	t_scene		*scene;
+	t_error		*error;
+	t_config	*config;
+	t_mlx		*mlx;
+}				t_data;
+
+// testing utils
+void			print_scene(t_scene *scene);
+void			free_all(t_data *file);
+#endif

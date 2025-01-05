@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: souahidi <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/01/01 10:30:07 by souahidi         ###   ########.fr        #
+#    Updated: 2025/01/05 20:09:46 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CFLAGS	:= -Wall -Wextra -Werror
 DFLAGS	:= -MMD -MP
 
 INCLUDES	:= -I./includes -I/usr/local/include
+SCENE 		:= scenes/file.rt
 
 SRC_DIR	:= src
 # LIBS_DIR	:= libs
@@ -53,6 +54,7 @@ LIB_FLAGS	:= -lalgebra -lparser -lutils -lft -lmlx -lXext -lX11 -lm -lz
 
 
 all: $(NAME)
+
 
 $(NAME): $(LIBS) $(CORE_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(CORE_OBJS) $(LIB_PATH) $(LIB_FLAGS) -o $(NAME)
