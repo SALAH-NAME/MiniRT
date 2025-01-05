@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:33:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 20:26:19 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/01/05 21:08:04 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,8 @@
 
 # define KB_4 4096
 # define EXT ".rt"
-# define MAX_OBJ 200
 # define DBL_MIN
 # define DBL_MAX
-
-typedef struct s_mlx
-{
-	void		*mlx;
-	void		*win;
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			line_len;
-	int			endian;
-	int			width;
-	int			height;
-	int			*data;
-}				t_mlx;
 
 typedef struct s_data
 {
@@ -56,7 +41,6 @@ typedef struct s_data
 	t_scene		*scene;
 	t_error		*error;
 	t_config	*config;
-	t_mlx		*mlx;
 }				t_data;
 
 // testing utils
