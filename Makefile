@@ -6,7 +6,7 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/01/05 20:09:46 by ysemlali         ###   ########.fr        #
+#    Updated: 2025/01/05 22:30:49 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,12 @@ SRC_DIR	:= src
 # LIBS_DIR	:= libs
 MLX_DIR	:= /usr/local/lib/
 
-ALGEBRA_DIR	:= $(SRC_DIR)/algebra
+ALGEBRA_DIR		:= $(SRC_DIR)/algebra
 CORE_DIR		:= $(SRC_DIR)/core
 LIBFT_DIR		:= $(SRC_DIR)/libft
-PARSER_DIR	:= $(SRC_DIR)/parser
+PARSER_DIR		:= $(SRC_DIR)/parser
 UTILS_DIR		:= $(SRC_DIR)/utils
+WINDOW_DIR 		:= $(SRC_DIR)/window
 
 SRCS	:= $(wildcard $(SRC_DIR)/*.c)
 OBJS	:= $(SRCS:.c=.o)
@@ -41,16 +42,18 @@ ALGEBRA_LIB	:= $(ALGEBRA_DIR)/libalgebra.a
 LIBFT_LIB		:= $(LIBFT_DIR)/libft.a
 PARSER_LIB	:= $(PARSER_DIR)/libparser.a
 UTILS_LIB		:= $(UTILS_DIR)/libutils.a
+WINDOW_LIB 		:= $(WINDOW_DIR)/libwindow.a
 
-LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(PARSER_LIB) $(UTILS_LIB)
+LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(PARSER_LIB) $(UTILS_LIB) $(WINDOW_LIB)
 
 LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(PARSER_DIR) \
 						 -L$(UTILS_DIR) \
 						 -L$(LIBFT_DIR) \
+						 -L$(WINDOW_DIR) \
 						 -L$(MLX_DIR)
 
-LIB_FLAGS	:= -lalgebra -lparser -lutils -lft -lmlx -lXext -lX11 -lm -lz
+LIB_FLAGS	:= -lalgebra -lparser -lutils -lwindow -lft -lmlx -lXext -lX11 -lm -lz
 
 
 all: $(NAME)
@@ -77,6 +80,9 @@ $(PARSER_LIB):
 $(UTILS_LIB):
 	$(MAKE) -C $(UTILS_DIR) CFLAGS="$(CFLAGS)"
 
+$(WINDOW_LIB):
+	$(MAKE) -C $(WINDOW_DIR) CFLAGS="$(CFLAGS)"
+
 -include $(DEPS) $(CORE_DEPS)
 
 clean:
@@ -86,6 +92,7 @@ clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(PARSER_DIR) clean
 	$(MAKE) -C $(UTILS_DIR) clean
+	$(MAKE) -C $(WINDOW_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
@@ -93,6 +100,7 @@ fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(PARSER_DIR) fclean
 	$(MAKE) -C $(UTILS_DIR) fclean
+	$(MAKE) -C $(WINDOW_DIR) fclean
 
 re: fclean all
 
@@ -102,6 +110,9 @@ sanitize: fclean all
 valgrind: CFLAGS += -g
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
+
+yusuf : re
+	./$(NAME) scenes/file.rt
 
 
 .PHONY: all clean fclean re sanitize valgrind

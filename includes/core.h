@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:33:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 21:08:04 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/01/05 22:40:21 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,28 @@
 # define DBL_MIN
 # define DBL_MAX
 
+
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		l_n;
+	int		endian;
+	int		width;
+	int		height;
+}				t_mlx;
+
 typedef struct s_data
 {
 	t_file		*file;
 	t_scene		*scene;
 	t_error		*error;
 	t_config	*config;
+	t_mlx 		*mlx;
 }				t_data;
 
 // testing utils
