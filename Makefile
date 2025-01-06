@@ -6,7 +6,7 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/01/05 20:09:46 by ysemlali         ###   ########.fr        #
+#    Updated: 2025/01/06 10:25:26 by souahidi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,11 @@ CORE_DIR		:= $(SRC_DIR)/core
 LIBFT_DIR		:= $(SRC_DIR)/libft
 PARSER_DIR	:= $(SRC_DIR)/parser
 UTILS_DIR		:= $(SRC_DIR)/utils
+
+ALGEBRA_SRC	:= $(wildcard $(ALGEBRA_DIR)/*.c)
+LIBFT_SRCS	:= $(wildcard $(LIBFT_DIR)/*.c)
+PARSER_SRCS	:= $(wildcard $(PARSER_DIR)/*.c)
+UTILS_SRCS	:= $(wildcard $(UTILS_DIR)/*.c)
 
 SRCS	:= $(wildcard $(SRC_DIR)/*.c)
 OBJS	:= $(SRCS:.c=.o)
@@ -65,16 +70,16 @@ $(NAME): $(LIBS) $(CORE_OBJS) $(OBJS)
 $(CORE_DIR)/%.o: $(CORE_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(ALGEBRA_LIB):
+$(ALGEBRA_LIB): $(ALGEBRA_SRC)
 	$(MAKE) -C $(ALGEBRA_DIR) CFLAGS="$(CFLAGS)"
 
-$(LIBFT_LIB):
+$(LIBFT_LIB): $(LIBFT_SRCS)
 	$(MAKE) -C $(LIBFT_DIR) CFLAGS="$(CFLAGS)"
 
-$(PARSER_LIB):
+$(PARSER_LIB): $(PARSER_SRCS)
 	$(MAKE) -C $(PARSER_DIR) CFLAGS="$(CFLAGS)"
 
-$(UTILS_LIB):
+$(UTILS_LIB): $(UTILS_SRCS)
 	$(MAKE) -C $(UTILS_DIR) CFLAGS="$(CFLAGS)"
 
 -include $(DEPS) $(CORE_DEPS)

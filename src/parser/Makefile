@@ -6,21 +6,28 @@
 #    By: souahidi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 09:07:33 by souahidi          #+#    #+#              #
-#    Updated: 2025/01/01 09:18:24 by souahidi         ###   ########.fr        #
+#    Updated: 2025/01/06 10:33:30 by souahidi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libparser.a
+NAME	:= libparser.a
 
-INCLUDES = -I../../includes/
+LIBFT_DIR		:= ../libft/
+LIBFT				:= $(LIBFT_DIR)/libft.a
+LIBFT_SRCS	:= $(wildcard $(LIBFT_DIR)/*.c)
 
-SRCS = $(wildcard *.c)
-OBJS = $(SRCS:.c=.o)
-DEPS = $(SRCS:.c=.d)
+INCLUDES	:= -I../../includes/
+
+SRCS	:= $(wildcard *.c)
+OBJS	:= $(SRCS:.c=.o)
+DEPS	:= $(SRCS:.c=.d)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(LIBFT): $(LIBFT_SRCS)
+	$(MAKE) -C $(LIBFT_DIR)
+
+$(NAME): $(OBJS) $(LIBFT)
 	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
