@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 21:40:26 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 22:39:59 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/01/07 09:16:16 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void			put_pixel_color(t_data *data, int x, int y, unsigned int color)
     *(unsigned int *)dst = color;
 }
 
-
+# define X 0
+# define Y 1
 void draw_image(t_data *data)
 {
 	int x;
@@ -56,7 +57,7 @@ void draw_image(t_data *data)
 			color = rgb_to_int(rgb);
 			if(y == horizontal)
 				put_pixel_color(data, x, y, color);
-			if(y == vertical)
+			if(x == vertical)
 				put_pixel_color(data, x, y, color);
 			else
 				put_pixel_color(data, x, y, 0x000000);

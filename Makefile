@@ -111,7 +111,7 @@ valgrind: CFLAGS += -g
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
-yusuf : re
+yusuf : all
 	./$(NAME) scenes/file.rt
 
 
