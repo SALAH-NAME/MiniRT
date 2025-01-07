@@ -6,30 +6,14 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:13:42 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/07 12:53:15 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/01/07 17:29:27 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
+# include <X11/keysym.h>
 # include "window.h"
-
-void exit_program(t_data *data)
-{
-	free_all(data);
-	exit(0);
-}
-
-int	key_press(int keycode, t_data *data)
-{
-    if (keycode == 65307)  // ESC key for Linux
-        exit_program(data);
-    return (0);
-}
-
-void escape_key(t_data *data)
-{
-    mlx_hook(data->mlx->win, 2, 1L<<0, &key_press, data);       // Key press events
-}
+# include "algebra.h"
 
 
 void init_image(t_data *data)
@@ -39,8 +23,6 @@ void init_image(t_data *data)
 	data->mlx->width = data->config->res[0];
 	data->mlx->height = data->config->res[1];
 }
-
-
 
 
 int init_mlx(t_data *data)
@@ -53,14 +35,12 @@ int init_mlx(t_data *data)
 		return (1);
 	data->mlx->win = mlx_new_window(data->mlx->mlx, data->config->res[0], data->config->res[1], "miniRT");
 	if (!data->mlx->win)
-		return (1);
-	escape_key(data);
+		return (printf("Error: mlx_new_window\n"), 1);
+	init_image(data);
+	draw_image(data);
 	mlx_loop(data->mlx->mlx);
 	return(0);
 }
-
-
-
 
 
 
@@ -90,11 +70,10 @@ int	main(int ac, char **av)
 	{
 		if (init(data, av[1]))
 			return (free_all(data), 1);
-		// if (init_mlx(data))	
-			// return (free_all(data), 1);
+		if (init_mlx(data))	
+			return (free_all(data), 1);
 			 
-		// t_space init_space(t_space *space, t_camera *camera  , t_data *data)
-		init_space(data);
+		// init_space(data);
 		free_all(data);
 	}
 	return (0);

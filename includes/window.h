@@ -21,14 +21,20 @@ typedef struct t_rgb
 
 typedef struct s_space
 {
+    t_vector3d origin;
+    t_vector3d direction;
     t_vector3d position;
     t_vector3d forward;
     t_vector3d right;
     t_vector3d up;
+    double aspect_ratio;
     double fov;
+    double near;
+    double far;
 }               t_space;
 
 
+t_vector3d xyz_to_vector3d(double *value);
 t_space  init_space(t_data *data);
 void			draw_image(t_data *data);
 unsigned int	rgb_to_int(int *rgb);

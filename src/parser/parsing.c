@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:13:40 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/07 09:34:25 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:54:14 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_scene	*scene_data(t_data *data)
 			free(data->file->line);
 			data->file->line = get_next_line(data->file->fd);
 		}
-		print_scene(scene);
 		free(data->file->line);
 	}
 	check_errors(data);

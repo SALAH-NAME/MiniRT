@@ -6,7 +6,7 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/01/07 09:28:12 by ysemlali         ###   ########.fr        #
+#    Updated: 2025/01/07 14:55:42 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(WINDOW_DIR)\
 						 -L$(MLX_DIR)
 
-LIB_FLAGS	:= -lalgebra -lparser -lutils -lwindow -lft -lmlx -lXext -lX11 -lm -lz
+LIB_FLAGS	:= -lwindow -lalgebra -lparser -lutils  -lft -lmlx -lXext -lX11 -lm -lz
 
 
 all: $(NAME)
@@ -86,7 +86,7 @@ $(PARSER_LIB): $(PARSER_SRCS)
 $(UTILS_LIB): $(UTILS_SRCS)
 	$(MAKE) -C $(UTILS_DIR) CFLAGS="$(CFLAGS)"
 
-$(WINDOW_LIB): $(WINDOW_SRCS)
+$(WINDOW_LIB): $(WINDOW_SRCS) 
 	$(MAKE) -C $(WINDOW_DIR) CFLAGS="$(CFLAGS)"
 
 -include $(DEPS) $(CORE_DEPS)
