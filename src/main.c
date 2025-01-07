@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:13:42 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/07 09:15:45 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:53:15 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ int init_mlx(t_data *data)
 	data->mlx->win = mlx_new_window(data->mlx->mlx, data->config->res[0], data->config->res[1], "miniRT");
 	if (!data->mlx->win)
 		return (1);
-	init_image(data);	
-	draw_image(data);
 	escape_key(data);
 	mlx_loop(data->mlx->mlx);
 	return(0);
@@ -92,8 +90,11 @@ int	main(int ac, char **av)
 	{
 		if (init(data, av[1]))
 			return (free_all(data), 1);
-		if (init_mlx(data))	
-			return (free_all(data), 1);
+		// if (init_mlx(data))	
+			// return (free_all(data), 1);
+			 
+		// t_space init_space(t_space *space, t_camera *camera  , t_data *data)
+		init_space(data);
 		free_all(data);
 	}
 	return (0);

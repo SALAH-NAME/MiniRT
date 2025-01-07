@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:33:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 22:40:21 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/01/07 12:51:10 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "error.h"
 # include "parser.h"
 # include "scene.h"
+# include "window.h"
 # include "libft.h"
 # include <errno.h>
 # include <fcntl.h>
@@ -37,6 +38,7 @@
 
 
 
+typedef struct s_space 		t_space;
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -57,6 +59,7 @@ typedef struct s_data
 	t_error		*error;
 	t_config	*config;
 	t_mlx 		*mlx;
+	t_space 	*space;
 }				t_data;
 
 // testing utils

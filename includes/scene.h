@@ -6,12 +6,18 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:19:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 20:02:04 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/01/07 10:03:34 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
+
+
+# define X 0
+# define Y 1
+# define Z 2
+
 
 typedef struct s_ambientlight
 {

@@ -6,7 +6,7 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/01/05 22:30:49 by ysemlali         ###   ########.fr        #
+#    Updated: 2025/01/07 09:28:12 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,18 @@ SRC_DIR	:= src
 # LIBS_DIR	:= libs
 MLX_DIR	:= /usr/local/lib/
 
-ALGEBRA_DIR		:= $(SRC_DIR)/algebra
+ALGEBRA_DIR	:= $(SRC_DIR)/algebra
 CORE_DIR		:= $(SRC_DIR)/core
 LIBFT_DIR		:= $(SRC_DIR)/libft
-PARSER_DIR		:= $(SRC_DIR)/parser
+PARSER_DIR	:= $(SRC_DIR)/parser
 UTILS_DIR		:= $(SRC_DIR)/utils
-WINDOW_DIR 		:= $(SRC_DIR)/window
+WINDOW_DIR   	:= $(SRC_DIR)/window
+
+ALGEBRA_SRC	:= $(wildcard $(ALGEBRA_DIR)/*.c)
+LIBFT_SRCS	:= $(wildcard $(LIBFT_DIR)/*.c)
+PARSER_SRCS	:= $(wildcard $(PARSER_DIR)/*.c)
+UTILS_SRCS	:= $(wildcard $(UTILS_DIR)/*.c)
+WINDOW_SRCS :=  $(wildcard $(WINDOW_DIR)/*.c)
 
 SRCS	:= $(wildcard $(SRC_DIR)/*.c)
 OBJS	:= $(SRCS:.c=.o)
@@ -42,7 +48,7 @@ ALGEBRA_LIB	:= $(ALGEBRA_DIR)/libalgebra.a
 LIBFT_LIB		:= $(LIBFT_DIR)/libft.a
 PARSER_LIB	:= $(PARSER_DIR)/libparser.a
 UTILS_LIB		:= $(UTILS_DIR)/libutils.a
-WINDOW_LIB 		:= $(WINDOW_DIR)/libwindow.a
+WINDOW_LIB      := $(WINDOW_DIR)/libwindow.a
 
 LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(PARSER_LIB) $(UTILS_LIB) $(WINDOW_LIB)
 
@@ -50,7 +56,7 @@ LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(PARSER_DIR) \
 						 -L$(UTILS_DIR) \
 						 -L$(LIBFT_DIR) \
-						 -L$(WINDOW_DIR) \
+						 -L$(WINDOW_DIR)\
 						 -L$(MLX_DIR)
 
 LIB_FLAGS	:= -lalgebra -lparser -lutils -lwindow -lft -lmlx -lXext -lX11 -lm -lz
@@ -68,19 +74,19 @@ $(NAME): $(LIBS) $(CORE_OBJS) $(OBJS)
 $(CORE_DIR)/%.o: $(CORE_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(ALGEBRA_LIB):
+$(ALGEBRA_LIB): $(ALGEBRA_SRC)
 	$(MAKE) -C $(ALGEBRA_DIR) CFLAGS="$(CFLAGS)"
 
-$(LIBFT_LIB):
+$(LIBFT_LIB): $(LIBFT_SRCS)
 	$(MAKE) -C $(LIBFT_DIR) CFLAGS="$(CFLAGS)"
 
-$(PARSER_LIB):
+$(PARSER_LIB): $(PARSER_SRCS)
 	$(MAKE) -C $(PARSER_DIR) CFLAGS="$(CFLAGS)"
 
-$(UTILS_LIB):
+$(UTILS_LIB): $(UTILS_SRCS)
 	$(MAKE) -C $(UTILS_DIR) CFLAGS="$(CFLAGS)"
 
-$(WINDOW_LIB):
+$(WINDOW_LIB): $(WINDOW_SRCS)
 	$(MAKE) -C $(WINDOW_DIR) CFLAGS="$(CFLAGS)"
 
 -include $(DEPS) $(CORE_DEPS)
@@ -111,9 +117,11 @@ valgrind: CFLAGS += -g
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
-yusuf : all
+yusuf: all
 	./$(NAME) scenes/file.rt
+	
 
 
 .PHONY: all clean fclean re sanitize valgrind
 .SECONDARY:
+

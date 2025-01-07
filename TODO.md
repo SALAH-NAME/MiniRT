@@ -15,3 +15,10 @@
   - [x] Length
 - [x] Unit tests for vector operations
 
+
+
+### Coordinate system
+- [] Define a coordinate system
+- [] Map 3d to Camera Space
+- [] Project Camera to 3d Space
+- [] Map to Screen Coordinates

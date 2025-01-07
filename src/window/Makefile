@@ -6,13 +6,16 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 09:07:33 by souahidi          #+#    #+#              #
-#    Updated: 2025/01/05 21:43:37 by ysemlali         ###   ########.fr        #
+#    Updated: 2025/01/07 09:44:08 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libwindow.a
 
 INCLUDES = -I../../includes/
+
+
+
 
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
@@ -38,3 +41,4 @@ re: fclean all
 
 .PHONY: all clean fclean re
 .SECONDARY: $(OBJS) $(DEPS)
+
