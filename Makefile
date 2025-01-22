@@ -6,7 +6,7 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/01/06 10:25:26 by souahidi         ###   ########.fr        #
+#    Updated: 2025/01/22 16:12:55 by souahidi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,13 @@ CORE_DIR		:= $(SRC_DIR)/core
 LIBFT_DIR		:= $(SRC_DIR)/libft
 PARSER_DIR	:= $(SRC_DIR)/parser
 UTILS_DIR		:= $(SRC_DIR)/utils
+LIST_DIR		:= $(SRC_DIR)/list
 
 ALGEBRA_SRC	:= $(wildcard $(ALGEBRA_DIR)/*.c)
 LIBFT_SRCS	:= $(wildcard $(LIBFT_DIR)/*.c)
 PARSER_SRCS	:= $(wildcard $(PARSER_DIR)/*.c)
 UTILS_SRCS	:= $(wildcard $(UTILS_DIR)/*.c)
+LIST_SRCS		:= $(wildcard $(LIST_DIR)/*.c)
 
 SRCS	:= $(wildcard $(SRC_DIR)/*.c)
 OBJS	:= $(SRCS:.c=.o)
@@ -46,16 +48,18 @@ ALGEBRA_LIB	:= $(ALGEBRA_DIR)/libalgebra.a
 LIBFT_LIB		:= $(LIBFT_DIR)/libft.a
 PARSER_LIB	:= $(PARSER_DIR)/libparser.a
 UTILS_LIB		:= $(UTILS_DIR)/libutils.a
+LIST_LIB		:= $(LIST_DIR)/liblist.a
 
-LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(PARSER_LIB) $(UTILS_LIB)
+LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(PARSER_LIB) $(UTILS_LIB) $(LIST_LIB)
 
 LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(PARSER_DIR) \
 						 -L$(UTILS_DIR) \
 						 -L$(LIBFT_DIR) \
-						 -L$(MLX_DIR)
+						 -L$(MLX_DIR) \
+						 -L$(LIST_DIR)
 
-LIB_FLAGS	:= -lalgebra -lparser -lutils -lft -lmlx -lXext -lX11 -lm -lz
+LIB_FLAGS	:= -lalgebra -lparser -lutils -lft -llist -lmlx -lXext -lX11 -lm -lz
 
 
 all: $(NAME)
@@ -82,6 +86,9 @@ $(PARSER_LIB): $(PARSER_SRCS)
 $(UTILS_LIB): $(UTILS_SRCS)
 	$(MAKE) -C $(UTILS_DIR) CFLAGS="$(CFLAGS)"
 
+$(LIST_LIB): $(LIST_SRCS)
+	$(MAKE) -C $(LIST_DIR) CFLAGS="$(CFLAGS)"
+
 -include $(DEPS) $(CORE_DEPS)
 
 clean:
@@ -91,6 +98,7 @@ clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(PARSER_DIR) clean
 	$(MAKE) -C $(UTILS_DIR) clean
+	$(MAKE) -C $(LIST_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
@@ -98,6 +106,7 @@ fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(PARSER_DIR) fclean
 	$(MAKE) -C $(UTILS_DIR) fclean
+	$(MAKE) -C $(LIST_DIR) fclean
 
 re: fclean all
 
