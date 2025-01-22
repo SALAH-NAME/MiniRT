@@ -13,20 +13,20 @@
 #ifndef ALGEBRA_H
 # define ALGEBRA_H
 
-typedef struct s_vector3d
+typedef struct s_vec3
 {
 	double	x;
 	double	y;
 	double	z;
-}			t_vector3d;
+}			t_vec3;
 
-t_vector3d	vector3d_addition(t_vector3d vec_1, t_vector3d vec_2);
-t_vector3d	vector3d_subtract(t_vector3d vec_1, t_vector3d vec_2);
-t_vector3d	vector3d_scale(t_vector3d vec_1, double scalar);
-t_vector3d	vector3d_cross(t_vector3d vec_1, t_vector3d vec_2);
-t_vector3d	vector3d_normalize(t_vector3d vec);
+t_vec3		vec3_addition(t_vec3 vec_1, t_vec3 vec_2);
+t_vec3		vec3_subtract(t_vec3 vec_1, t_vec3 vec_2);
+t_vec3		vec3_scale(t_vec3 vec_1, double scalar);
+t_vec3		vec3_cross(t_vec3 vec_1, t_vec3 vec_2);
+t_vec3		vec3_normalize(t_vec3 vec);
 
-double		vector3d_magnitude(t_vector3d vec);
-double		vector3d_dot(t_vector3d vec_1, t_vector3d vec_2);
+double		vec3_magnitude(t_vec3 vec);
+double		vec3_dot(t_vec3 vec_1, t_vec3 vec_2);
 
 #endif

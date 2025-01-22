@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector3d_subtract.c                                :+:      :+:    :+:   */
+/*   tests_vec3_dot.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/01 15:44:44 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/01 15:45:05 by souahidi         ###   ########.fr       */
+/*   Created: 2025/01/22 10:09:50 by souahidi          #+#    #+#             */
+/*   Updated: 2025/01/22 10:09:51 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "algebra.h"
+#include "tests.h"
 
-t_vector3d	vector3d_subtract(t_vector3d vec_1, t_vector3d vec_2)
+void	tests_vec3_dot(void)
 {
-	t_vector3d	vector;
+	t_vec3	v1;
+	t_vec3	v2;
+	t_vec3	v3;
+	t_vec3	v4;
 
-	vector.x = vec_1.x - vec_2.x;
-	vector.y = vec_1.y - vec_2.y;
-	vector.z = vec_1.z - vec_2.z;
-	return (vector);
+	v1 = (t_vec3){1, 2, 3};
+	v2 = (t_vec3){4, 5, 6};
+	v3 = (t_vec3){-1, -2, -3};
+	v4 = (t_vec3){0, 0, 0};
+	printf("\n-- vec3_dot --\n");
+	test_message(vec3_dot(v1, v2) == 32, "Dot Product Test 1");
+	test_message(vec3_dot(v1, v3) == -14, "Dot Product Test 2");
+	test_message(vec3_dot(v1, v4) == 0, "Dot Product Test 3");
 }

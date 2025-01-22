@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector3d_magnitude.c                               :+:      :+:    :+:   */
+/*   vec3_subtract.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/01 21:55:28 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/01 22:03:54 by souahidi         ###   ########.fr       */
+/*   Created: 2025/01/22 10:09:19 by souahidi          #+#    #+#             */
+/*   Updated: 2025/01/22 10:09:20 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algebra.h"
-#include <math.h>
 
-double	vector3d_magnitude(t_vector3d v)
+t_vec3	vec3_subtract(t_vec3 vec_1, t_vec3 vec_2)
 {
-	return (sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z)));
+	t_vec3	vector;
+
+	vector.x = vec_1.x - vec_2.x;
+	vector.y = vec_1.y - vec_2.y;
+	vector.z = vec_1.z - vec_2.z;
+	return (vector);
 }

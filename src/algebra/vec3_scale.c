@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector3d_dot.c                                     :+:      :+:    :+:   */
+/*   vec3_scale.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/01 21:31:51 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/01 21:40:14 by souahidi         ###   ########.fr       */
+/*   Created: 2025/01/22 10:08:53 by souahidi          #+#    #+#             */
+/*   Updated: 2025/01/22 10:08:54 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algebra.h"
 
-double	vector3d_dot(t_vector3d a, t_vector3d b)
+t_vec3	vec3_scale(t_vec3 vec, double scalar)
 {
-	return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z));
+	t_vec3	scaled_vector;
+
+	scaled_vector.x = vec.x * scalar;
+	scaled_vector.y = vec.y * scalar;
+	scaled_vector.z = vec.z * scalar;
+	return (scaled_vector);
 }

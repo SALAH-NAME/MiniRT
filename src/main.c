@@ -12,8 +12,6 @@
 
 #include "core.h"
 
-
-
 int	init(t_data *data, char *av)
 {
 	if (parse_config_init(data))
@@ -25,7 +23,6 @@ int	init(t_data *data, char *av)
 
 int	main(int ac, char **av)
 {
-
 	t_data	*data;
 
 	if (ac != 2)

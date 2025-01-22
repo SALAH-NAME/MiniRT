@@ -15,7 +15,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-bool	vector3d_equals(t_vector3d a, t_vector3d b)
+bool	vec3_equals(t_vec3 a, t_vec3 b)
 {
 	return (a.x == b.x && a.y == b.y && a.z == b.z);
 }
@@ -31,12 +31,12 @@ void	test_message(bool pass, char *message)
 int	main(void)
 {
 	printf("\n=== TESTS LIB_ALGEBRA ===\n");
-	tests_vector3d_addition();
-	tests_vector3d_subtraction();
-	tests_vector3d_dot();
-	tests_vector3d_magnitude();
-	tests_vector3d_cross();
-	tests_vector3d_normalize();
-	tests_vector3d_scale();
+	tests_vec3_addition();
+	tests_vec3_subtraction();
+	tests_vec3_dot();
+	tests_vec3_magnitude();
+	tests_vec3_cross();
+	tests_vec3_normalize();
+	tests_vec3_scale();
 	return (0);
 }

@@ -22,13 +22,13 @@
 # include <stdio.h>
 
 void	test_message(bool pass, char *message);
-bool	vector3d_equals(t_vector3d a, t_vector3d b);
-void	tests_vector3d_addition(void);
-void	tests_vector3d_subtraction(void);
-void	tests_vector3d_dot(void);
-void	tests_vector3d_magnitude(void);
-void	tests_vector3d_cross(void);
-void	tests_vector3d_normalize(void);
-void	tests_vector3d_scale(void);
+bool	vec3_equals(t_vec3 a, t_vec3 b);
+void	tests_vec3_addition(void);
+void	tests_vec3_subtraction(void);
+void	tests_vec3_dot(void);
+void	tests_vec3_magnitude(void);
+void	tests_vec3_cross(void);
+void	tests_vec3_normalize(void);
+void	tests_vec3_scale(void);
 
 #endif

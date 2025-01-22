@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector3d_addition.c                                :+:      :+:    :+:   */
+/*   vec3_cross.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/01 13:18:29 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/01 13:21:11 by souahidi         ###   ########.fr       */
+/*   Created: 2025/01/22 10:09:09 by souahidi          #+#    #+#             */
+/*   Updated: 2025/01/22 10:09:10 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algebra.h"
 
-t_vector3d	vector3d_addition(t_vector3d vec_1, t_vector3d vec_2)
+t_vec3	vec3_cross(t_vec3 vec_1, t_vec3 vec_2)
 {
-	t_vector3d	vector;
+	t_vec3	vector;
 
-	vector.x = vec_1.x + vec_2.x;
-	vector.y = vec_1.y + vec_2.y;
-	vector.z = vec_1.z + vec_2.z;
+	vector.x = vec_1.y * vec_2.z - vec_1.z * vec_2.y;
+	vector.y = vec_1.z * vec_2.x - vec_1.x * vec_2.z;
+	vector.z = vec_1.x * vec_2.y - vec_1.y * vec_2.x;
 	return (vector);
 }
