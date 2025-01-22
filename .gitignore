@@ -1,6 +1,7 @@
 **.o
 **.d
 **.a
+**.gch
 **/exec
 **/run_test
 miniRT
