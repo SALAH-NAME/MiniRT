@@ -6,7 +6,7 @@
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 12:51:25 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/01 13:07:18 by souahidi         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:29:19 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_vec3
 	double	z;
 }			t_vec3;
 
+t_vec3		vec3_create(double x, double y, double z);
 t_vec3		vec3_addition(t_vec3 vec_1, t_vec3 vec_2);
 t_vec3		vec3_subtract(t_vec3 vec_1, t_vec3 vec_2);
 t_vec3		vec3_scale(t_vec3 vec_1, double scalar);

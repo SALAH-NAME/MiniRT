@@ -6,7 +6,7 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/01/22 16:12:55 by souahidi         ###   ########.fr        #
+#    Updated: 2025/01/28 18:51:59 by souahidi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,14 +62,15 @@ LIB_PATH	:= -L$(ALGEBRA_DIR) \
 LIB_FLAGS	:= -lalgebra -lparser -lutils -lft -llist -lmlx -lXext -lX11 -lm -lz
 
 
-all: $(NAME)
-
+all: $(NAME) 
 
 $(NAME): $(LIBS) $(CORE_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(CORE_OBJS) $(LIB_PATH) $(LIB_FLAGS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(CORE_OBJS): ./includes/minirt.h
 
 $(CORE_DIR)/%.o: $(CORE_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -114,7 +115,7 @@ sanitize: CFLAGS += -fsanitize=address -g
 sanitize: fclean all
 
 valgrind: CFLAGS += -g
-valgrind: all
+valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
 

@@ -6,11 +6,14 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:13:42 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 21:07:15 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:29:46 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#define PARSING 0
+#if PARSING
+
+# include "core.h"
 
 int	init(t_data *data, char *av)
 {
@@ -41,3 +44,39 @@ int	main(int ac, char **av)
 	free_all(data);
 	return (0);
 }
+
+#else
+
+# include "minirt.h"
+# include <stdio.h>
+# include <stdlib.h>
+
+int	main(void)
+{
+	t_render	world;
+
+	// Parsing map
+	// Setup mlx
+	world.mlx.ptr = mlx_init();
+	world.mlx.win = mlx_new_window(world.mlx.ptr, WIDTH, HEIGHT, "miniRT");
+	world.mlx.img = mlx_new_image(world.mlx.ptr, WIDTH, HEIGHT);
+	world.mlx.addr = mlx_get_data_addr(world.mlx.img, &world.mlx.bits_per_pixel,
+			&world.mlx.line_length, &world.mlx.endian);
+	// Hooks
+	mlx_hook(world.mlx.win, KeyPress, KeyPressMask, &handle_keypress, &world);
+	mlx_hook(world.mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,
+		&world);
+	
+	init_scene(&world);
+	render_scene(&world);
+
+	mlx_loop(world.mlx.ptr);
+	mlx_destroy_image(world.mlx.ptr, world.mlx.img);
+	mlx_destroy_window(world.mlx.ptr, world.mlx.win);
+	mlx_destroy_display(world.mlx.ptr);
+	free(world.mlx.ptr);
+	// Free all
+	return (0);
+}
+
+#endif
