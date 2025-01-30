@@ -17,7 +17,7 @@ CFLAGS	:= -Wall -Wextra -Werror
 DFLAGS	:= -MMD -MP
 
 INCLUDES	:= -I./includes -I/usr/local/include
-SCENE 		:= scenes/file.rt
+SCENE 		:= scenes/fil.rt
 
 SRC_DIR	:= src
 # LIBS_DIR	:= libs
@@ -118,6 +118,8 @@ valgrind: CFLAGS += -g
 valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
+yusuf: all
+	./$(NAME) $(SCENE)
 
 .PHONY: all clean fclean re sanitize valgrind
 .SECONDARY:

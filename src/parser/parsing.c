@@ -85,7 +85,7 @@ int	load(t_data *data, char *file_name)
 		file->file_name = file_name;
 		file->fd = open(file_name, O_RDONLY);
 		if (file->fd == -1)
-			return (perror("open"), 1);
+			return (perror(file_name), 1);
 		data->scene = scene_data(data);
 		close(file->fd);
 	}

@@ -20,7 +20,7 @@ int	init(t_data *data, char *av)
 	if (parse_config_init(data))
 		return (1);
 	if (load(data, av))
-		return (free_all(data), 1);
+		return (1);
 	return (0);
 }
 
@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 	if (data)
 	{
 		if (init(data, av[1]))
-			return (free_all(data), 1);
+			return (free_all(data),1);
 	}
 	free_all(data);
 	return (0);

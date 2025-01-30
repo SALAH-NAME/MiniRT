@@ -21,8 +21,8 @@
 # include <stdbool.h>
 # include <stdlib.h>
 
-# define WIDTH 600
-# define HEIGHT 600
+# define WIDTH 1920
+# define HEIGHT 1080
 # define EPSILON 1e-6
 
 typedef struct s_color

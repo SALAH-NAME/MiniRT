@@ -49,8 +49,8 @@ void	init_scene(t_render *render)
 	t_object	*sphere2;
 
 	render->scene.camera.position = vec3_create(0, 0, 0);
-	render->scene.camera.direction = vec3_create(0, 0, -1);
-	render->scene.camera.fov = 60;
+	render->scene.camera.direction = vec3_create(1, -1, 0);
+	render->scene.camera.fov = 70;
 	render->scene.ambient.itensity = 0.2;
 	render->scene.ambient.color = color_create(1, 1, 1);
 	light = create_light();

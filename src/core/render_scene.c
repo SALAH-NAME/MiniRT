@@ -12,6 +12,7 @@
 
 #include "minirt.h"
 #include <math.h>
+#include <stdio.h>
 
 void	pixel_to_viewport(int x, int y, t_render *render, t_vec3 *direction)
 {
@@ -24,17 +25,19 @@ void	pixel_to_viewport(int x, int y, t_render *render, t_vec3 *direction)
 	half_fov_tan = tan((render->scene.camera.fov * M_PI / 180) / 2.0);
 	if (WIDTH >= HEIGHT)
 	{
-		viewport_right = half_fov_tan;
-		viewport_top = viewport_right / (double)(WIDTH / HEIGHT);
+		viewport_top = half_fov_tan;
+		viewport_right = viewport_top * (double)WIDTH / (double)HEIGHT;
 	}
 	else
 	{
-		viewport_top = half_fov_tan;
-		viewport_right = viewport_top / (double)(HEIGHT / WIDTH);
+		viewport_right = half_fov_tan;
+		viewport_top = viewport_right * (double)HEIGHT / (double)WIDTH;
 	}
 	px = (2.0 * ((x + 0.5) / WIDTH) - 1.0) * viewport_right;
 	py = (1.0 - 2.0 * ((y + 0.5) / HEIGHT)) * viewport_top;
 	*direction = vec3_normalize(vec3_create(px, py, -1.0));
+  /*printf("directoin normalized %f %f %f\n", direction->x , direction->y, direction->z);*/
+  /*exit(0);*/
 }
 
 void	put_pixel_to_img(t_mlx *mlx, int x, int y, t_color color)
