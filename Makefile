@@ -17,7 +17,7 @@ CFLAGS	:= -Wall -Wextra -Werror
 DFLAGS	:= -MMD -MP
 
 INCLUDES	:= -I./includes -I/usr/local/include
-SCENE 		:= scenes/fil.rt
+SCENE 		:= scenes/file.rt
 
 SRC_DIR	:= src
 # LIBS_DIR	:= libs

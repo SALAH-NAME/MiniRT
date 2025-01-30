@@ -19,7 +19,7 @@ int	init(t_data *data, char *av)
 {
 	if (parse_config_init(data))
 		return (1);
-	if (load(data, av))
+	if (load_file(data, av))
 		return (1);
 	return (0);
 }

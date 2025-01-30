@@ -74,7 +74,7 @@ int	valid_file_name(char *file_name)
 	return (0);
 }
 
-int	load(t_data *data, char *file_name)
+int	load_file(t_data *data, char *file_name)
 {
 	t_file	*file;
 
