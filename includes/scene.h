@@ -13,15 +13,24 @@
 #ifndef SCENE_H
 # define SCENE_H
 
+# include "algebra.h"
+
+typedef struct s_color
+{
+	float			r;
+	float			g;
+	float			b;
+}					t_color;
+
 typedef struct s_ambientlight
 {
 	double				ratio;
-	int					color[3];
+	t_color				color;
 }						t_ambientlight;
 
 typedef struct s_camera
 {
-	double				position[3];
+	t_vec3			position;
 	double				orientation[3];
 	int					fov;
 }						t_camera;
@@ -30,7 +39,7 @@ typedef struct s_light
 {
 	double				position[3];
 	double				brightness;
-	int					color[3];
+	t_color				color;
 }						t_light;
 
 typedef struct s_sphere
@@ -38,7 +47,7 @@ typedef struct s_sphere
 	int					id;
 	double				center[3];
 	double				diameter;
-	int					color[3];
+	t_color				color;
 	struct s_sphere		*next;
 }						t_sphere;
 
@@ -47,7 +56,7 @@ typedef struct s_plane
 	int					id;
 	double				point[3];
 	double				normal[3];
-	int					color[3];
+	t_color				color;
 	struct s_plane		*next;
 }						t_plane;
 
@@ -58,7 +67,7 @@ typedef struct s_cylinder
 	double				axis[3];
 	double				diameter;
 	double				height;
-	int					color[3];
+	t_color				color;
 	struct s_cylinder	*next;
 }						t_cylinder;
 

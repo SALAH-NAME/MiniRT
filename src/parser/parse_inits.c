@@ -24,7 +24,7 @@ void	ratio_init(t_data *data, double *ratio, char *val, t_range range)
 		set_error(data, ERR_RATIO_R, val, NULL);
 }
 
-void	color_init(t_data *data, int *color, char *val)
+void	color_init(t_data *data, t_color color, char *val)
 {
 	char	**split;
 
@@ -37,14 +37,14 @@ void	color_init(t_data *data, int *color, char *val)
 	if (v_valid(split[0]) == 0 || v_valid(split[1]) == 0
 		|| v_valid(split[2]) == 0)
 		set_error(data, ERR_COLOR_V, val, NULL);
-	if (ft_atoi_safe(split[0], &color[0]) == 0 || color[0] < 0
-		|| color[0] > 255)
+	if (ft_atoi_safe(split[0], &color.r) == 0 || color.r < 0
+		|| color.r > 255)
 		set_error(data, ERR_COLOR_R, split[0], NULL);
-	if (ft_atoi_safe(split[1], &color[1]) == 0 || color[1] < 0
-		|| color[1] > 255)
+	if (ft_atoi_safe(split[1], &color.g) == 0 || color.g < 0
+		|| color.g > 255)
 		set_error(data, ERR_COLOR_R, split[1], NULL);
-	if (ft_atoi_safe(split[2], &color[2]) == 0 || color[2] < 0
-		|| color[2] > 255)
+	if (ft_atoi_safe(split[2], &color.b) == 0 || color.b < 0
+		|| color.b > 255)
 		set_error(data, ERR_COLOR_R, split[2], NULL);
 	ft_arrmapi(split, free);
 	data->file->split = NULL;

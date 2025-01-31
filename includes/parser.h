@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include "core.h"
+# include "scene.h"
 
 typedef struct s_file
 {
@@ -37,8 +38,8 @@ void		cy_init(t_data *data);
 void		pl_init(t_data *data);
 void		sp_init(t_data *data);
 // info-init
+void	color_init(t_data *data, t_color color, char *val);
 void		ratio_init(t_data *data, double *ratio, char *line, t_range range);
-void		color_init(t_data *data, int *color, char *val);
 void		vector_init(t_data *data, double *vector, char *val);
 void		position_init(t_data *data, double *pos, char *val);
 void		degree_init(t_data *data, int *degree, char *val);

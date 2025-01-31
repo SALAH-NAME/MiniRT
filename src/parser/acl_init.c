@@ -77,7 +77,7 @@ void	c_init(t_data *data)
 	data->scene->camera = ft_calloc(1, sizeof(t_camera));
 	data->scene->c_c++;
 	if (data->file->error)
-		position_init(data, data->scene->camera->position, data->file->row[1]);
+		position_init(data, &data->scene->camera->position, data->file->row[1]);
 	if (data->file->error)
 		vector_init(data, data->scene->camera->orientation, data->file->row[2]);
 	if (data->file->error)
