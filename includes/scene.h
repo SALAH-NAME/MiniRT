@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:19:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 20:02:04 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:34:12 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,56 +22,82 @@ typedef struct s_color
 	float			b;
 }					t_color;
 
+
+typedef struct s_material
+{
+	double			diffuse_coefficient;
+	double			specular_coefficient;
+	double			shininess;
+}					t_material;
+
 typedef struct s_ambientlight
 {
+
+	int 			id;
 	double				ratio;
 	t_color				color;
 }						t_ambientlight;
 
 typedef struct s_camera
 {
-	t_vec3			position;
-	double				orientation[3];
+	int 			id;
+	t_vec3				position;
+	t_vec3				orientation;
 	int					fov;
 }						t_camera;
 
 typedef struct s_light
 {
-	double				position[3];
+	int 			id;
+	t_vec3				position;
 	double				brightness;
 	t_color				color;
 }						t_light;
 
 typedef struct s_sphere
 {
-	int					id;
-	double				center[3];
-	double				diameter;
+	int 			id;
+	t_vec3				center;
+	double				radios;
 	t_color				color;
+	t_material			material;
 	struct s_sphere		*next;
 }						t_sphere;
 
 typedef struct s_plane
 {
-	int					id;
-	double				point[3];
-	double				normal[3];
+	int 			id;
+	t_vec3				center;
+	t_vec3				normal;
 	t_color				color;
+	t_material		material;
 	struct s_plane		*next;
 }						t_plane;
 
 typedef struct s_cylinder
 {
-	int					id;
-	double				base[3];
-	double				axis[3];
-	double				diameter;
+	int 			id;
+	t_vec3				center;
+	t_vec3				normal;
+	double				radios;
 	double				height;
 	t_color				color;
+	t_material		material;
 	struct s_cylinder	*next;
 }						t_cylinder;
 
-typedef struct s_scene
+
+typedef struct s_cone
+{
+	int 			id;
+	t_vec3			center;
+	double			angle;
+	double			height;
+	t_material		material;
+}					t_cone;
+
+
+typedef struct s_count
 {
 	int					a_c;
 	int					c_c;
@@ -79,12 +105,17 @@ typedef struct s_scene
 	int					sp_c;
 	int					cy_c;
 	int					pl_c;
+} t_count;
+
+typedef struct s_scene
+{
 	t_ambientlight		*ambient;
 	t_camera			*camera;
 	t_light				*light;
 	t_sphere			*spheres;
 	t_plane				*planes;
 	t_cylinder			*cylinders;
+	t_count				count;
 }						t_scene;
 
 #endif

@@ -6,21 +6,23 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 18:07:01 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/04 18:11:50 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:46:53 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi_safe(const char *str, void *out)
+int	ft_atoi_safe(const void *value, float *out)
 {
 	int		sign;
 	long	output;
+	const char *str;
 
 	sign = 1;
 	output = 0;
-	if (!str)
-		return (*(int *)out = 0, 0);
+	if (!value)
+		return (*out = 0, 0);
+	str = (const char *)value;
 	while ((*str >= 9 && *str <= 13) || *str == ' ')
 		str++;
 	if (*str == '-' || *str == '+')
@@ -36,6 +38,6 @@ int	ft_atoi_safe(const char *str, void *out)
 		output = (output * 10) + (*str - '0');
 		str++;
 	}
-	*(int *)out = (int)(output * sign); // Correct way to store the result
+	*out = (output * sign); 
 	return (1);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   parse_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:14:13 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 19:53:17 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:34:47 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ void	check_errors(t_data *data)
 {
 	if (data->scene)
 	{
-		if (data->scene->a_c == 0)
+		if (data->scene->count.a_c == 0)
 			set_error(data, ERR_MS_A, NULL, NULL);
-		if (data->scene->c_c == 0)
+		if (data->scene->count.c_c == 0)
 			set_error(data, ERR_MS_C, NULL, NULL);
-		if (data->scene->l_c == 0)
+		if (data->scene->count.l_c == 0)
 			set_error(data, ERR_MS_L, NULL, NULL);
-		if (data->scene->pl_c == 0)
+		if (data->scene->count.pl_c == 0)
 			set_error(data, ERR_MS_PL, NULL, NULL);
-		if (data->scene->sp_c == 0)
+		if (data->scene->count.sp_c == 0)
 			set_error(data, ERR_MS_SP, NULL, NULL);
-		if (data->scene->cy_c == 0)
+		if (data->scene->count.cy_c == 0)
 			set_error(data, ERR_MS_CY, NULL, NULL);
 	}
 }

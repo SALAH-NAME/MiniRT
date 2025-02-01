@@ -6,11 +6,11 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:13:42 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/28 16:29:46 by souahidi         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:19:17 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define PARSING 0
+#define PARSING 1
 #if PARSING
 
 # include "core.h"

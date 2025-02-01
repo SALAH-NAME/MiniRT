@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:36:23 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/04 18:09:04 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:47:08 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int					get_num_len(long n);
 
 // new
 void				ft_arrmapi(char **arr, void (*f)(void *));
-int	ft_atoi_safe(const char *str, void *out);
+// int	ft_atoi_safe(const void *value, void *out);
+int	ft_atoi_safe(const void *value, float *out);
 int					ft_strtod_safe(const char *s, double *out);
 void				ft_split_stack(const char *str, char *buf, char **ptrs);
 

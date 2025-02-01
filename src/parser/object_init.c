@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 15:57:51 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 19:40:54 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:30:02 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	pl_init(t_data *data)
 		return ;
 	}
 	new_plane = ft_calloc(1, sizeof(t_plane));
-	new_plane->id = data->scene->pl_c++;
+	new_plane->id = data->scene->count.pl_c++;
 	if (data->file->error)
-		position_init(data, new_plane->point, data->file->row[1]);
+		position_init(data, &new_plane->center, data->file->row[1]);
 	if (data->file->error)
-		vector_init(data, new_plane->normal, data->file->row[2]);
+		vector_init(data, &new_plane->normal, data->file->row[2]);
 	if (data->file->error)
-		color_init(data, new_plane->color, data->file->row[3]);
+		color_init(data, &new_plane->color, data->file->row[3]);
 	new_plane->next = data->scene->planes;
 	data->scene->planes = new_plane;
 }
@@ -48,14 +48,14 @@ void	sp_init(t_data *data)
 		return ;
 	}
 	new_sphere = ft_calloc(1, sizeof(t_sphere));
-	new_sphere->id = data->scene->sp_c++;
+	new_sphere->id = data->scene->count.sp_c++;
 	range = data->config->info[3].range;
 	if (data->file->error)
-		position_init(data, new_sphere->center, data->file->row[1]);
+		position_init(data, &new_sphere->center, data->file->row[1]);
 	if (data->file->error)
-		ratio_init(data, &new_sphere->diameter, data->file->row[2], range);
+		ratio_init(data, &new_sphere->radios, data->file->row[2], range);
 	if (data->file->error)
-		color_init(data, new_sphere->color, data->file->row[3]);
+		color_init(data, &new_sphere->color, data->file->row[3]);
 	new_sphere->next = data->scene->spheres;
 	data->scene->spheres = new_sphere;
 }
@@ -73,18 +73,18 @@ void	cy_init(t_data *data)
 		return ;
 	}
 	new_cylinder = ft_calloc(1, sizeof(t_cylinder));
-	new_cylinder->id = data->scene->cy_c++;
+	new_cylinder->id = data->scene->count.cy_c++;
 	range = data->config->info[3].range;
 	if (data->file->error)
-		position_init(data, new_cylinder->base, data->file->row[1]);
+		position_init(data, &new_cylinder->center, data->file->row[1]);
 	if (data->file->error)
-		vector_init(data, new_cylinder->axis, data->file->row[2]);
+		vector_init(data, &new_cylinder->normal, data->file->row[2]);
 	if (data->file->error)
-		ratio_init(data, &new_cylinder->diameter, data->file->row[3], range);
+		ratio_init(data, &new_cylinder->radios, data->file->row[3], range);
 	if (data->file->error)
 		ratio_init(data, &new_cylinder->height, data->file->row[4], range);
 	if (data->file->error)
-		color_init(data, new_cylinder->color, data->file->row[5]);
+		color_init(data, &new_cylinder->color, data->file->row[5]);
 	new_cylinder->next = data->scene->cylinders;
 	data->scene->cylinders = new_cylinder;
 }

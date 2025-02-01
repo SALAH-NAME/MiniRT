@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:44:07 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/28 18:52:46 by souahidi         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:22:30 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define MINIRT_H
 
 # include "algebra.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
+// # include <X11/X.h>
+// # include <X11/keysym.h>
 # include <math.h>
-# include <mlx.h>
+// # include <mlx.h>
 # include <stdbool.h>
 # include <stdlib.h>
 
@@ -25,7 +25,7 @@
 # define HEIGHT 1920
 # define EPSILON 1e-6
 
-typedef struct s_color
+color
 {
 	float			r;
 	float			g;
@@ -77,7 +77,6 @@ typedef struct s_plane
 	t_vec3			normal;
 	t_material		material;
 }					t_plane;
-
 typedef struct s_cylinder
 {
 	t_vec3			center;
@@ -94,6 +93,7 @@ typedef struct s_cone
 	double			angle;
 	double			height;
 }					t_cone;
+
 
 typedef struct s_transform
 {
@@ -117,7 +117,6 @@ typedef struct s_object
 	struct s_object	*next;
 	int				id;
 }					t_object;
-
 typedef struct s_camera
 {
 	t_vec3			position;
@@ -125,7 +124,7 @@ typedef struct s_camera
 	double			fov;
 }					t_camera;
 
-typedef struct s_light
+light
 {
 	t_vec3			position;
 	t_vec3			itensity;
@@ -133,6 +132,7 @@ typedef struct s_light
 	struct s_light	*next;
 }					t_light;
 
+typedef struct s_
 typedef struct s_hit
 {
 	bool			hit;

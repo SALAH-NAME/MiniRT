@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 21:52:30 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 20:04:19 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:51:29 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 typedef struct s_data	t_data;
 
 # define UN -1 // for undefined values or unused values
+# define WIDTH 1080
+# define HEIGHT 1920
+# define EPSILON 1e-6
+
 
 enum					e_obj
 {

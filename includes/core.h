@@ -6,14 +6,14 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:33:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 21:08:04 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:19:49 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CORE_H
 # define CORE_H
 
-# include "mlx.h"
+// # include "mlx.h"
 # include "config.h"
 # include "error.h"
 # include "parser.h"

@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:51:29 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 19:40:54 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:39:50 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_scene(t_scene *scene)
 		printf("Ambient Light:\n");
 		printf("  Ratio: %f\n", scene->ambient->ratio);
 		printf("  Color: %f, %f, %f\n", scene->ambient->color.r,
-			scene->ambient->color.g, scene->ambient->color.g);
+			scene->ambient->color.g, scene->ambient->color.b);
 	}
 	else
 		printf("Ambient Light: Not initialized\n");
@@ -31,11 +31,11 @@ void	print_scene(t_scene *scene)
 	if (scene->light)
 	{
 		printf("Light:\n");
-		printf("  Position: %f, %f, %f\n", scene->light->position[0],
-			scene->light->position[1], scene->light->position[2]);
+		printf("  Position: %f, %f, %f\n", scene->light->position.x,
+			scene->light->position.y, scene->light->position.z);
 		printf("  Brightness: %f\n", scene->light->brightness);
 		printf("  Color: %f, %f, %f\n", scene->light->color.r,
-			scene->light->color.g, scene->light->color.g);
+			scene->light->color.g, scene->light->color.b);
 	}
 	else
 		printf("Light: Not initialized\n");
@@ -43,10 +43,10 @@ void	print_scene(t_scene *scene)
 	if (scene->camera)
 	{
 		printf("Camera:\n");
-		printf("  Position: %f, %f, %f\n", scene->camera->position[0],
-			scene->camera->position[1], scene->camera->position[2]);
-		printf("  Orientation: %f, %f, %f\n", scene->camera->orientation[0],
-			scene->camera->orientation[1], scene->camera->orientation[2]);
+		printf("  Position: %f, %f, %f\n", scene->camera->position.x,
+			scene->camera->position.y, scene->camera->position.z);
+		printf("  Orientation: %f, %f, %f\n", scene->camera->orientation.x,
+			scene->camera->orientation.y, scene->camera->orientation.z);
 		printf("  Field of View: %d\n", scene->camera->fov);
 	}
 	else
@@ -56,11 +56,11 @@ void	print_scene(t_scene *scene)
 	while (sphere)
 	{
 		printf("Sphere:\n");
-		printf("  Center: (%f, %f, %f)\n", sphere->center[0], sphere->center[1],
-			sphere->center[2]);
-		printf("  Diameter: %f\n", sphere->diameter);
+		printf("  Center: (%f, %f, %f)\n", sphere->center.x, sphere->center.y,
+			sphere->center.z);
+		printf("  Diameter: %f\n", sphere->radios);
 		printf("  Color: (%f, %f, %f)\n", sphere->color.r,
-			sphere->color.g, sphere->color.g);
+			sphere->color.g, sphere->color.b);
 		sphere = sphere->next;
 	}
 
@@ -68,12 +68,12 @@ void	print_scene(t_scene *scene)
 	while (plane)
 	{
 		printf("Plane:\n");
-		printf("  Point: (%f, %f, %f)\n", plane->point[0], plane->point[1],
-			plane->point[2]);
-		printf("  Normal: (%f, %f, %f)\n", plane->normal[0], plane->normal[1],
-			plane->normal[2]);
+		printf("  Point: (%f, %f, %f)\n", plane->center.x, plane->center.y,
+			plane->center.z);
+		printf("  Normal: (%f, %f, %f)\n", plane->normal.x, plane->normal.y,
+			plane->normal.z);
 		printf("  Color: (%f, %f, %f)\n", plane->color.r,
-			plane->color.g, plane->color.g);
+			plane->color.g, plane->color.b);
 		plane = plane->next;
 	}
 
@@ -81,14 +81,14 @@ void	print_scene(t_scene *scene)
 	while (cylinder)
 	{
 		printf("Cylinder:\n");
-		printf("  Base: (%f, %f, %f)\n", cylinder->base[0], cylinder->base[1],
-			cylinder->base[2]);
-		printf("  Axis: (%f, %f, %f)\n", cylinder->axis[0], cylinder->axis[1],
-			cylinder->axis[2]);
-		printf("  Diameter: %f\n", cylinder->diameter);
+		printf("  Base: (%f, %f, %f)\n", cylinder->center.x, cylinder->center.y,
+			cylinder->center.z);
+		printf("  Axis: (%f, %f, %f)\n", cylinder->normal.x, cylinder->normal.y,
+			cylinder->normal.z);
+		printf("  Diameter: %f\n", cylinder->radios);
 		printf("  Height: %f\n", cylinder->height);
 		printf("  Color: (%f, %f, %f)\n", cylinder->color.r,
-			cylinder->color.g, cylinder->color.g);
+			cylinder->color.g, cylinder->color.b);
 		cylinder = cylinder->next;
 	}
 }

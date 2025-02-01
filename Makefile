@@ -6,7 +6,7 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/01/28 18:51:59 by souahidi         ###   ########.fr        #
+#    Updated: 2025/02/01 11:24:14 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC_DIR	:= src
 MLX_DIR	:= /usr/local/lib/
 
 ALGEBRA_DIR	:= $(SRC_DIR)/algebra
-CORE_DIR		:= $(SRC_DIR)/core
+# CORE_DIR		:= $(SRC_DIR)/core
 LIBFT_DIR		:= $(SRC_DIR)/libft
 PARSER_DIR	:= $(SRC_DIR)/parser
 UTILS_DIR		:= $(SRC_DIR)/utils
@@ -59,7 +59,7 @@ LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(MLX_DIR) \
 						 -L$(LIST_DIR)
 
-LIB_FLAGS	:= -lalgebra -lparser -lutils -lft -llist -lmlx -lXext -lX11 -lm -lz
+LIB_FLAGS	:= -lalgebra -lparser -lutils -lft -llist  -lm -lz
 
 
 all: $(NAME) 

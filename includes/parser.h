@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:42:49 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 19:55:16 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:14:09 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void		cy_init(t_data *data);
 void		pl_init(t_data *data);
 void		sp_init(t_data *data);
 // info-init
-void	color_init(t_data *data, t_color color, char *val);
-void		ratio_init(t_data *data, double *ratio, char *line, t_range range);
-void		vector_init(t_data *data, double *vector, char *val);
-void		position_init(t_data *data, double *pos, char *val);
-void		degree_init(t_data *data, int *degree, char *val);
+void	color_init(t_data *data, t_color *color, char *val);
+void	ratio_init(t_data *data, double *ratio, char *line, t_range range);
+void	position_init(t_data *data, t_vec3 *pos, char *val);
+void	vector_init(t_data *data, t_vec3 *vector, char *val);
+void	degree_init(t_data *data, int *degree, char *val);
 
 // utils
 int			valid(char **info, int count);
