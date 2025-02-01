@@ -40,6 +40,10 @@ void	l_init(t_data *data)
 {
 	t_range	range;
 
+  t_light *light = ft_calloc(sizeof(t_light));
+  if(light)
+  {
+
 	if (data->scene->count.l_c > data->config->elements[LIGHT].max_count)
 	{
 		set_error(data, ERR_INV_ARG_NUM, *data->file->row, NULL);
@@ -60,6 +64,8 @@ void	l_init(t_data *data)
 			range);
 	if (data->file->error)
 		color_init(data, &data->scene->light->color, data->file->row[3]);
+  }
+
 }
 
 void	c_init(t_data *data)

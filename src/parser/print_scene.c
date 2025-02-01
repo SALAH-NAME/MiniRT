@@ -59,8 +59,8 @@ void	print_scene(t_scene *scene)
 		printf("  Center: (%f, %f, %f)\n", sphere->center.x, sphere->center.y,
 			sphere->center.z);
 		printf("  Diameter: %f\n", sphere->radios);
-		printf("  Color: (%f, %f, %f)\n", sphere->color.r,
-			sphere->color.g, sphere->color.b);
+		printf("  Color: (%f, %f, %f)\n", sphere->material.color.r,
+			sphere->material.color.g, sphere->material.color.b);
 		sphere = sphere->next;
 	}
 
@@ -72,8 +72,8 @@ void	print_scene(t_scene *scene)
 			plane->center.z);
 		printf("  Normal: (%f, %f, %f)\n", plane->normal.x, plane->normal.y,
 			plane->normal.z);
-		printf("  Color: (%f, %f, %f)\n", plane->color.r,
-			plane->color.g, plane->color.b);
+		printf("  Color: (%f, %f, %f)\n", plane->material.color.r,
+			plane->material.color.g, plane->material.color.b);
 		plane = plane->next;
 	}
 
@@ -87,8 +87,8 @@ void	print_scene(t_scene *scene)
 			cylinder->normal.z);
 		printf("  Diameter: %f\n", cylinder->radios);
 		printf("  Height: %f\n", cylinder->height);
-		printf("  Color: (%f, %f, %f)\n", cylinder->color.r,
-			cylinder->color.g, cylinder->color.b);
+		printf("  Color: (%f, %f, %f)\n", cylinder->material.color.r,
+			cylinder->material.color.g, cylinder->material.color.b);
 		cylinder = cylinder->next;
 	}
 }

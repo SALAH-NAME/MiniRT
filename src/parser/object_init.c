@@ -30,7 +30,7 @@ void	pl_init(t_data *data)
 	if (data->file->error)
 		vector_init(data, &new_plane->normal, data->file->row[2]);
 	if (data->file->error)
-		color_init(data, &new_plane->color, data->file->row[3]);
+		color_init(data, &new_plane->material.color, data->file->row[3]);
 	new_plane->next = data->scene->planes;
 	data->scene->planes = new_plane;
 }
@@ -55,7 +55,7 @@ void	sp_init(t_data *data)
 	if (data->file->error)
 		ratio_init(data, &new_sphere->radios, data->file->row[2], range);
 	if (data->file->error)
-		color_init(data, &new_sphere->color, data->file->row[3]);
+		color_init(data, &new_sphere->material.color, data->file->row[3]);
 	new_sphere->next = data->scene->spheres;
 	data->scene->spheres = new_sphere;
 }
@@ -84,7 +84,7 @@ void	cy_init(t_data *data)
 	if (data->file->error)
 		ratio_init(data, &new_cylinder->height, data->file->row[4], range);
 	if (data->file->error)
-		color_init(data, &new_cylinder->color, data->file->row[5]);
+		color_init(data, &new_cylinder->material.color, data->file->row[5]);
 	new_cylinder->next = data->scene->cylinders;
 	data->scene->cylinders = new_cylinder;
 }

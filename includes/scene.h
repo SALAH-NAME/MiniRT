@@ -25,6 +25,7 @@ typedef struct s_color
 
 typedef struct s_material
 {
+	t_color				color;
 	double			diffuse_coefficient;
 	double			specular_coefficient;
 	double			shininess;
@@ -35,7 +36,7 @@ typedef struct s_ambientlight
 
 	int 			id;
 	double				ratio;
-	t_color				color;
+  t_color       color;
 }						t_ambientlight;
 
 typedef struct s_camera
@@ -51,7 +52,8 @@ typedef struct s_light
 	int 			id;
 	t_vec3				position;
 	double				brightness;
-	t_color				color;
+  t_color         color;
+  t_light         *next;
 }						t_light;
 
 typedef struct s_sphere
@@ -59,7 +61,6 @@ typedef struct s_sphere
 	int 			id;
 	t_vec3				center;
 	double				radios;
-	t_color				color;
 	t_material			material;
 	struct s_sphere		*next;
 }						t_sphere;
@@ -69,7 +70,6 @@ typedef struct s_plane
 	int 			id;
 	t_vec3				center;
 	t_vec3				normal;
-	t_color				color;
 	t_material		material;
 	struct s_plane		*next;
 }						t_plane;
@@ -81,7 +81,6 @@ typedef struct s_cylinder
 	t_vec3				normal;
 	double				radios;
 	double				height;
-	t_color				color;
 	t_material		material;
 	struct s_cylinder	*next;
 }						t_cylinder;
