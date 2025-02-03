@@ -6,7 +6,7 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/02/01 11:24:14 by ysemlali         ###   ########.fr        #
+#    Updated: 2025/02/03 19:56:06 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(MLX_DIR) \
 						 -L$(LIST_DIR)
 
-LIB_FLAGS	:= -lalgebra -lparser -lutils -lft -llist  -lm -lz
+LIB_FLAGS	:= -lalgebra -lparser -lutils -lft -llist -lmlx -lXext -lX11 -lm -lz
 
 
 all: $(NAME) 
