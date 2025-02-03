@@ -6,90 +6,96 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:51:29 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/01 12:39:50 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:47:58 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 
+void print_object(t_object *obj)
+{
+    printf("\nObject Type: ");
+    switch (obj->type)
+    {
+        case OBJ_SPHERE:
+            printf("Sphere\n");
+            printf("  Center: %f, %f, %f\n", 
+                obj->data.sphere.center.x,
+                obj->data.sphere.center.y,
+                obj->data.sphere.center.z);
+            printf("  Diameter: %f\n", obj->data.sphere.radios);
+            break;
+            
+        case OBJ_PLANE:
+            printf("Plane\n");
+            printf("  Center: %f, %f, %f\n",
+                obj->data.plane.center.x,
+                obj->data.plane.center.y, 
+                obj->data.plane.center.z);
+            printf("  Normal: %f, %f, %f\n",
+                obj->data.plane.normal.x,
+                obj->data.plane.normal.y,
+                obj->data.plane.normal.z);
+            break;
+            
+        case OBJ_CYLINDER:
+            printf("Cylinder\n");
+            printf("  Center: %f, %f, %f\n",
+                obj->data.cylinder.center.x,
+                obj->data.cylinder.center.y,
+                obj->data.cylinder.center.z);
+            printf("  Normal: %f, %f, %f\n", 
+                obj->data.cylinder.normal.x,
+                obj->data.cylinder.normal.y,
+                obj->data.cylinder.normal.z);
+            printf("  Diameter: %f\n", obj->data.cylinder.radios);
+            printf("  Height: %f\n", obj->data.cylinder.height);
+            break;
+    }
+    printf("  Material Color: %f, %f, %f\n",
+        obj->material.color.r,
+        obj->material.color.g,
+        obj->material.color.b);
+    printf("\n");
+}
+
+
 void	print_scene(t_scene *scene)
 {
-	t_sphere	*sphere;
-	t_plane		*plane;
-	t_cylinder	*cylinder;
-  t_lights  *lights;
+	t_lights		*light;
+	t_object   *objects;
 
-	if (scene->ambient)
 	{
 		printf("Ambient lights:\n");
-		printf("  Ratio: %f\n", scene->ambient->ratio);
-		printf("  Color: %f, %f, %f\n", scene->ambient->color.r,
-			scene->ambient->color.g, scene->ambient->color.b);
+		printf("  Ratio: %f\n", scene->ambient.ratio);
+		printf("  Color: %f, %f, %f\n", scene->ambient.color.r,
+			scene->ambient.color.g, scene->ambient.color.b);
 	}
-	else
-		printf("Ambient lights: Not initialized\n");
 
-  lights  = scene->lights;
-	while (lights)
+	light = scene->lights;
+	while (light)
 	{
-		printf("lights:\n");
-		printf("  Position: %f, %f, %f\n", lights->position.x,
-			lights->position.y, lights->position.z);
-		printf("  Brightness: %f\n", lights->brightness);
-		printf("  Color: %f, %f, %f\n", lights->color.r,
-			lights->color.g, lights->color.b);
-    lights = lights->next;
+		printf("Light:\n");
+		printf("  Position: %f, %f, %f\n", light->position.x,
+			light->position.y, light->position.z);
+		printf("  Brightness: %f\n", light->brightness);
+		printf("  Color: %f, %f, %f\n", light->color.r,
+			light->color.g, light->color.b);
+		light = light->next;
 	}
 
-	if (scene->camera)
 	{
 		printf("Camera:\n");
-		printf("  Position: %f, %f, %f\n", scene->camera->position.x,
-			scene->camera->position.y, scene->camera->position.z);
-		printf("  Orientation: %f, %f, %f\n", scene->camera->orientation.x,
-			scene->camera->orientation.y, scene->camera->orientation.z);
-		printf("  Field of View: %d\n", scene->camera->fov);
+		printf("  Position: %f, %f, %f\n", scene->camera.position.x,
+			scene->camera.position.y, scene->camera.position.z);
+		printf("  Orientation: %f, %f, %f\n", scene->camera.orientation.x,
+			scene->camera.orientation.y, scene->camera.orientation.z);
+		printf("  Field of View: %d\n", scene->camera.fov);
 	}
-	else
-		printf("Camera: Not initialized\n");
-
-	sphere = scene->spheres;
-	while (sphere)
+	objects =  scene->objects;
+	while (objects)
 	{
-		printf("Sphere:\n");
-		printf("  Center: (%f, %f, %f)\n", sphere->center.x, sphere->center.y,
-			sphere->center.z);
-		printf("  Diameter: %f\n", sphere->radios);
-		printf("  Color: (%f, %f, %f)\n", sphere->material.color.r,
-			sphere->material.color.g, sphere->material.color.b);
-		sphere = sphere->next;
-	}
-
-	plane = scene->planes;
-	while (plane)
-	{
-		printf("Plane:\n");
-		printf("  Point: (%f, %f, %f)\n", plane->center.x, plane->center.y,
-			plane->center.z);
-		printf("  Normal: (%f, %f, %f)\n", plane->normal.x, plane->normal.y,
-			plane->normal.z);
-		printf("  Color: (%f, %f, %f)\n", plane->material.color.r,
-			plane->material.color.g, plane->material.color.b);
-		plane = plane->next;
-	}
-
-	cylinder = scene->cylinders;
-	while (cylinder)
-	{
-		printf("Cylinder:\n");
-		printf("  Base: (%f, %f, %f)\n", cylinder->center.x, cylinder->center.y,
-			cylinder->center.z);
-		printf("  Axis: (%f, %f, %f)\n", cylinder->normal.x, cylinder->normal.y,
-			cylinder->normal.z);
-		printf("  Diameter: %f\n", cylinder->radios);
-		printf("  Height: %f\n", cylinder->height);
-		printf("  Color: (%f, %f, %f)\n", cylinder->material.color.r,
-			cylinder->material.color.g, cylinder->material.color.b);
-		cylinder = cylinder->next;
+		print_object(objects);
+		objects = objects->next;
 	}
 }

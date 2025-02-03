@@ -21,7 +21,7 @@
  *     1. Identifier string (e.g., "A" for Ambient light, "C" for Camera).
  *     2. Type flag (ID, NONE, etc.).
  *     3. Parsing constraints (UN = unlimited instances, 1 = single instance).
- *     4. Expected number of parameters.
+ *     4. Expected number of parameters for Identifier.
  *     5. Function pointer to the initializer for that element.
  * 
  *   - Breakdown of each element:
@@ -48,8 +48,6 @@
  *     - "DOUBLE": DOUBLE type, valid range from INT_MIN to INT_MAX (general purpose).
  *     - Last entry is a NULL terminator.
  *
- * res[]:
- *   - Default resolution of the rendered image: 1920x1080.
  */
 
 int	parse_config_init(t_data *data)
@@ -75,7 +73,5 @@ int	parse_config_init(t_data *data)
 	info[4] = (t_info){NULL, NONE, {{UN, UN}, {UN, UN}}, NULL};
 	data->config->elements = elements;
 	data->config->info = info;
-	data->config->res[0] = 1920;
-	data->config->res[1] = 1080;
 	return (0);
 }

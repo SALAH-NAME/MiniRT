@@ -13,11 +13,12 @@
 #ifndef CORE_H
 # define CORE_H
 
-// # include "mlx.h"
 # include "config.h"
 # include "error.h"
 # include "parser.h"
 # include "scene.h"
+# include "algebra.h"
+# include "minirt.h"
 # include "libft.h"
 # include <errno.h>
 # include <fcntl.h>
@@ -25,10 +26,12 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <string.h>
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
+
 
 # define KB_4 4096
 # define EXT ".rt"
@@ -40,10 +43,15 @@ typedef struct s_data
 	t_file		*file;
 	t_scene		*scene;
 	t_error		*error;
+  t_render  *render;
 	t_config	*config;
 }				t_data;
 
 // testing utils
 void			print_scene(t_scene *scene);
 void			free_all(t_data *file);
+
+
+
+
 #endif

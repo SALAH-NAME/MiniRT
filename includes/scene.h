@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:19:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/01 12:34:12 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:47:21 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@ typedef struct s_color
 	float			b;
 }					t_color;
 
-
-typedef struct s_material
+typedef struct s_transform
 {
-	t_color				color;
-	double			diffuse_coefficient;
-	double			specular_coefficient;
-	double			shininess;
-}					t_material;
+	t_vec3			position;
+	t_vec3			rotation;
+}					t_transform;
 
 typedef struct s_ambientlight
 {
@@ -58,41 +55,33 @@ typedef struct s_lights
 
 typedef struct s_sphere
 {
-	int 			id;
 	t_vec3				center;
 	double				radios;
-	t_material			material;
 	struct s_sphere		*next;
 }						t_sphere;
 
 typedef struct s_plane
 {
-	int 			id;
 	t_vec3				center;
 	t_vec3				normal;
-	t_material		material;
 	struct s_plane		*next;
 }						t_plane;
 
 typedef struct s_cylinder
 {
-	int 			id;
 	t_vec3				center;
 	t_vec3				normal;
 	double				radios;
 	double				height;
-	t_material		material;
 	struct s_cylinder	*next;
 }						t_cylinder;
 
 
 typedef struct s_cone
 {
-	int 			id;
 	t_vec3			center;
 	double			angle;
 	double			height;
-	t_material		material;
 }					t_cone;
 
 
@@ -106,15 +95,51 @@ typedef struct s_count
 	int					pl_c;
 } t_count;
 
+typedef enum e_object_type
+{
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER,
+	// OBJ_CONE,
+	// OBJ_HYPERBOLOID,
+	// OBJ_PARABOLOID
+}					t_object_type;
+
+typedef struct s_material
+{
+	t_color				color;
+	double			diffuse_coefficient;
+	double			specular_coefficient;
+	double			shininess;
+}					t_material;
+
+
+typedef struct s_object
+{
+	t_object_type	type;
+	t_transform		transform;
+	t_material		material;
+	union			u_object
+	{
+		t_sphere	sphere;
+		t_plane		plane;
+		t_cylinder	cylinder;
+		t_cone		cone;
+	} data;
+	struct s_object	*next;
+	int				id;
+}					t_object;
+
 typedef struct s_scene
 {
-	t_ambientlight		*ambient;
-	t_camera			*camera;
-	t_lights				*lights;
-	t_sphere			*spheres;
-	t_plane				*planes;
-	t_cylinder			*cylinders;
-	t_count				count;
+	t_ambientlight		ambient;
+	t_camera			    camera;
+	t_lights          *lights;
+
+	t_object		      *objects;
+	t_lights			    *selected_light;
+	t_object		      *selected_obj;
+	t_count				    count;
 }						t_scene;
 
 #endif

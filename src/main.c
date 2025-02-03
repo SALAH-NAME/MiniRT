@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:13:42 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/01 11:19:17 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:38:18 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #if PARSING
 
 # include "core.h"
+# include "minirt.h"
+
 
 int	init(t_data *data, char *av)
 {
@@ -53,6 +55,9 @@ int	main(int ac, char **av)
 
 int	main(void)
 {
+  # include "core.h"
+  # include "minirt.h"
+  # include  "algebra.h"
 	t_render	world;
 
 	// Parsing map
@@ -77,6 +82,7 @@ int	main(void)
 	free(world.mlx.ptr);
 	// Free all
 	return (0);
+
 }
 
 #endif

@@ -11,54 +11,23 @@
 /* ************************************************************************** */
 
 #include "core.h"
-
-void	free_spheres(t_sphere *spheres)
+void	free_objects(t_object *objects)
 {
-	t_sphere	*tmp;
+	t_object	*tmp;
 
-	while (spheres)
+	while (objects)
 	{
-		tmp = spheres->next;
-		free(spheres);
-		spheres = tmp;
-	}
-}
-
-void	free_planes(t_plane *planes)
-{
-	t_plane	*tmp;
-
-	while (planes)
-	{
-		tmp = planes->next;
-		free(planes);
-		planes = tmp;
-	}
-}
-
-void	free_cylinders(t_cylinder *cylinders)
-{
-	t_cylinder	*tmp;
-
-	while (cylinders)
-	{
-		tmp = cylinders->next;
-		free(cylinders);
-		cylinders = tmp;
+		tmp = objects->next;
+		free(objects);
+		objects = tmp;
 	}
 }
 
 void	free_scene(t_scene *scene)
 {
-	if (scene->ambient)
-		free(scene->ambient);
 	if (scene->lights)
 		free(scene->lights);
-	if (scene->camera)
-		free(scene->camera);
-	free_spheres(scene->spheres);
-	free_planes(scene->planes);
-	free_cylinders(scene->cylinders);
+	free_objects(scene->objects);
 }
 
 void	free_all(t_data *data)
