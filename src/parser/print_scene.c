@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:51:29 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/03 18:47:58 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:51:58 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,50 +15,49 @@
 void print_object(t_object *obj)
 {
     printf("\nObject Type: ");
-    switch (obj->type)
+    
+    if (obj->type == OBJ_SPHERE)
     {
-        case OBJ_SPHERE:
-            printf("Sphere\n");
-            printf("  Center: %f, %f, %f\n", 
-                obj->data.sphere.center.x,
-                obj->data.sphere.center.y,
-                obj->data.sphere.center.z);
-            printf("  Diameter: %f\n", obj->data.sphere.radios);
-            break;
-            
-        case OBJ_PLANE:
-            printf("Plane\n");
-            printf("  Center: %f, %f, %f\n",
-                obj->data.plane.center.x,
-                obj->data.plane.center.y, 
-                obj->data.plane.center.z);
-            printf("  Normal: %f, %f, %f\n",
-                obj->data.plane.normal.x,
-                obj->data.plane.normal.y,
-                obj->data.plane.normal.z);
-            break;
-            
-        case OBJ_CYLINDER:
-            printf("Cylinder\n");
-            printf("  Center: %f, %f, %f\n",
-                obj->data.cylinder.center.x,
-                obj->data.cylinder.center.y,
-                obj->data.cylinder.center.z);
-            printf("  Normal: %f, %f, %f\n", 
-                obj->data.cylinder.normal.x,
-                obj->data.cylinder.normal.y,
-                obj->data.cylinder.normal.z);
-            printf("  Diameter: %f\n", obj->data.cylinder.radios);
-            printf("  Height: %f\n", obj->data.cylinder.height);
-            break;
+        printf("Sphere\n");
+        printf("  Center: %f, %f, %f\n", 
+            obj->data.sphere.center.x,
+            obj->data.sphere.center.y,
+            obj->data.sphere.center.z);
+        printf("  Diameter: %f\n", obj->data.sphere.radios);
     }
+    else if (obj->type == OBJ_PLANE)
+    {
+        printf("Plane\n");
+        printf("  Center: %f, %f, %f\n",
+            obj->data.plane.center.x,
+            obj->data.plane.center.y, 
+            obj->data.plane.center.z);
+        printf("  Normal: %f, %f, %f\n",
+            obj->data.plane.normal.x,
+            obj->data.plane.normal.y,
+            obj->data.plane.normal.z);
+    }
+    else if (obj->type == OBJ_CYLINDER)
+    {
+        printf("Cylinder\n");
+        printf("  Center: %f, %f, %f\n",
+            obj->data.cylinder.center.x,
+            obj->data.cylinder.center.y,
+            obj->data.cylinder.center.z);
+        printf("  Normal: %f, %f, %f\n", 
+            obj->data.cylinder.normal.x,
+            obj->data.cylinder.normal.y,
+            obj->data.cylinder.normal.z);
+        printf("  Diameter: %f\n", obj->data.cylinder.radios);
+        printf("  Height: %f\n", obj->data.cylinder.height);
+    }
+
     printf("  Material Color: %f, %f, %f\n",
         obj->material.color.r,
         obj->material.color.g,
         obj->material.color.b);
     printf("\n");
 }
-
 
 void	print_scene(t_scene *scene)
 {
