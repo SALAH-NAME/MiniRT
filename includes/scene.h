@@ -47,14 +47,14 @@ typedef struct s_camera
 	int					fov;
 }						t_camera;
 
-typedef struct s_light
+typedef struct s_lights
 {
 	int 			id;
 	t_vec3				position;
 	double				brightness;
   t_color         color;
-  t_light         *next;
-}						t_light;
+  struct s_lights         *next;
+}						t_lights;
 
 typedef struct s_sphere
 {
@@ -110,7 +110,7 @@ typedef struct s_scene
 {
 	t_ambientlight		*ambient;
 	t_camera			*camera;
-	t_light				*light;
+	t_lights				*lights;
 	t_sphere			*spheres;
 	t_plane				*planes;
 	t_cylinder			*cylinders;

@@ -15,12 +15,6 @@
 void	a_init(t_data *data)
 {
 	t_range	range;
-
-	if (data->scene->count.a_c > data->config->elements[AMBIENT].max_count)
-	{
-		set_error(data, ERR_INV_ARG_NUM, *data->file->row, NULL);
-		return ;
-	}
 	if (!valid(data->file->row + 1, data->config->elements[AMBIENT].v_count))
 	{
 		set_error(data, ERR_MS_VAL_PARAM, *data->file->row, NULL);
@@ -40,41 +34,26 @@ void	l_init(t_data *data)
 {
 	t_range	range;
 
-  t_light *light = ft_calloc(sizeof(t_light));
-  if(light)
-  {
-
-	if (data->scene->count.l_c > data->config->elements[LIGHT].max_count)
-	{
-		set_error(data, ERR_INV_ARG_NUM, *data->file->row, NULL);
-		return ;
-	}
 	if (!valid(data->file->row + 1, data->config->elements[LIGHT].v_count))
 	{
 		set_error(data, ERR_MS_VAL_PARAM, *data->file->row, NULL);
 		return ;
 	}
+  t_lights *light = ft_calloc(1, sizeof(t_lights));
 	range = data->config->info[0].range;
-	data->scene->light = ft_calloc(1, sizeof(t_light));
 	data->scene->count.l_c++;
 	if (data->file->error)
-		position_init(data, &data->scene->light->position, data->file->row[1]);
+		position_init(data, &light->position, data->file->row[1]);
 	if (data->file->error)
-		ratio_init(data, &data->scene->light->brightness, data->file->row[2],
+		ratio_init(data, &light->brightness, data->file->row[2],
 			range);
 	if (data->file->error)
-		color_init(data, &data->scene->light->color, data->file->row[3]);
-  }
-
+		color_init(data, &light->color, data->file->row[3]);
+  light->next = data->scene->lights;
 }
 
 void	c_init(t_data *data)
 {
-	if (data->scene->count.c_c > data->config->elements[CAMERA].max_count)
-	{
-		set_error(data, ERR_INV_ARG_NUM, *data->file->row, NULL);
-		return ;
-	}
 	if (!valid(data->file->row + 1, data->config->elements[CAMERA].v_count))
 	{
 		set_error(data, ERR_MS_VAL_PARAM, *data->file->row, NULL);

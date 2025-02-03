@@ -12,6 +12,46 @@
 
 #include "core.h"
 
+/**
+ * parse_config_init - Initializes configuration settings for parsing scene elements.
+ *
+ * elements[] (t_elems):
+ *   - Represents different object types that can be parsed from the scene file.
+ *   - Each entry consists of:
+ *     1. Identifier string (e.g., "A" for Ambient light, "C" for Camera).
+ *     2. Type flag (ID, NONE, etc.).
+ *     3. Parsing constraints (UN = unlimited instances, 1 = single instance).
+ *     4. Expected number of parameters.
+ *     5. Function pointer to the initializer for that element.
+ * 
+ *   - Breakdown of each element:
+ *     - "A"  (Ambient Light): ID, 1 instance max, expects 2 params, uses `a_init`
+ *     - "C"  (Camera): ID, 1 instance max, expects 3 params, uses `c_init`
+ *     - "L"  (Light Source): ID, 1 instance max, expects 3 params, uses `l_init`
+ *     - "pl" (Plane): ID, unlimited instances, expects 3 params, uses `pl_init`
+ *     - "sp" (Sphere): ID, unlimited instances, expects 3 params, uses `sp_init`
+ *     - "cy" (Cylinder): ID, unlimited instances, expects 5 params, uses `cy_init`
+ *     - Last entry is a NULL terminator to mark the end of the array.
+ *
+ * info[] (t_info):
+ *   - Defines validation rules for different properties used in scene elements.
+ *   - Each entry consists of:
+ *     1. Property name (e.g., "RATIO", "AXIS").
+ *     2. Type of data (VECTOR, COLOR, DOUBLE, etc.).
+ *     3. Valid range for values (either double range `d_r` or integer range `i_r`).
+ *     4. Unused function pointer (NULL for now).
+ * 
+ *   - Breakdown of each info entry:
+ *     - "RATIO": VECTOR type, must be between [0.0, 1.0] (e.g., ambient light ratio).
+ *     - "AXIS": VECTOR type, must be between [-1.0, 1.0] (used for direction vectors).
+ *     - "COLOR": COLOR type, must be in [0, 255] range for RGB components.
+ *     - "DOUBLE": DOUBLE type, valid range from INT_MIN to INT_MAX (general purpose).
+ *     - Last entry is a NULL terminator.
+ *
+ * res[]:
+ *   - Default resolution of the rendered image: 1920x1080.
+ */
+
 int	parse_config_init(t_data *data)
 {
 	static t_elems	elements[7];

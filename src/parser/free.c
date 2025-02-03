@@ -52,8 +52,8 @@ void	free_scene(t_scene *scene)
 {
 	if (scene->ambient)
 		free(scene->ambient);
-	if (scene->light)
-		free(scene->light);
+	if (scene->lights)
+		free(scene->lights);
 	if (scene->camera)
 		free(scene->camera);
 	free_spheres(scene->spheres);

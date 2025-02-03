@@ -12,6 +12,15 @@
 
 #include "core.h"
 
+
+static void print_hint_error(char *hint)
+{
+  ft_putstr_fd("Hint: ", 2);
+	ft_putstr_fd(hint, 2);
+	ft_putstr_fd("----------------------------------------", 2);
+	ft_putendl_fd("----------------------------------------", 2);
+}
+
 static void	print_error(t_error *er)
 {
 	char	*line_num;
@@ -36,7 +45,8 @@ static void	print_error(t_error *er)
 	ft_putendl_fd("'", 2);
 	ft_putstr_fd("----------------------------------------", 2);
 	ft_putendl_fd("----------------------------------------", 2);
-	ft_putstr_fd(er->hint, 2);
+  if(*er->hint)
+    print_hint_error( er->hint);
 	free(line_num);
 }
 
@@ -74,4 +84,10 @@ void	check_errors(t_data *data)
 		if (data->scene->count.cy_c == 0)
 			set_error(data, ERR_MS_CY, NULL, NULL);
 	}
+	if (data->scene->count.l_c > data->config->elements[LIGHT].max_count)
+		set_error(data, ERR_INV_ARG_NUM, "L", NULL);
+  else if (data->scene->count.c_c > data->config->elements[CAMERA].max_count)
+		set_error(data, ERR_INV_ARG_NUM, "C", NULL);
+  else if (data->scene->count.a_c > data->config->elements[AMBIENT].max_count)
+		set_error(data, ERR_INV_ARG_NUM, "A", NULL);
 }

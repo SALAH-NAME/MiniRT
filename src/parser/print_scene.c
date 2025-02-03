@@ -17,28 +17,29 @@ void	print_scene(t_scene *scene)
 	t_sphere	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
+  t_lights  *lights;
 
 	if (scene->ambient)
 	{
-		printf("Ambient Light:\n");
+		printf("Ambient lights:\n");
 		printf("  Ratio: %f\n", scene->ambient->ratio);
 		printf("  Color: %f, %f, %f\n", scene->ambient->color.r,
 			scene->ambient->color.g, scene->ambient->color.b);
 	}
 	else
-		printf("Ambient Light: Not initialized\n");
+		printf("Ambient lights: Not initialized\n");
 
-	if (scene->light)
+  lights  = scene->lights;
+	while (lights)
 	{
-		printf("Light:\n");
-		printf("  Position: %f, %f, %f\n", scene->light->position.x,
-			scene->light->position.y, scene->light->position.z);
-		printf("  Brightness: %f\n", scene->light->brightness);
-		printf("  Color: %f, %f, %f\n", scene->light->color.r,
-			scene->light->color.g, scene->light->color.b);
+		printf("lights:\n");
+		printf("  Position: %f, %f, %f\n", lights->position.x,
+			lights->position.y, lights->position.z);
+		printf("  Brightness: %f\n", lights->brightness);
+		printf("  Color: %f, %f, %f\n", lights->color.r,
+			lights->color.g, lights->color.b);
+    lights = lights->next;
 	}
-	else
-		printf("Light: Not initialized\n");
 
 	if (scene->camera)
 	{
