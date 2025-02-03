@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:19:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/03 18:47:21 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:14:27 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,13 +133,13 @@ typedef struct s_object
 typedef struct s_scene
 {
 	t_ambientlight		ambient;
-	t_camera			    camera;
-	t_lights          *lights;
+	t_camera			camera;
+	t_lights			*lights;
 
-	t_object		      *objects;
-	t_lights			    *selected_light;
-	t_object		      *selected_obj;
-	t_count				    count;
+	t_object			*objects;
+	t_lights			*selected_light;
+	t_object			*selected_obj;
+	t_count				count;
 }						t_scene;
 
 #endif

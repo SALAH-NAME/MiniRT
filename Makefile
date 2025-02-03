@@ -6,14 +6,14 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/02/03 19:56:06 by ysemlali         ###   ########.fr        #
+#    Updated: 2025/02/03 19:57:52 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= miniRT
 
 CC			:= cc
-CFLAGS	:= -Wall -Wextra -Werror -ggdb
+CFLAGS	:= -Wall -Wextra -Werror
 DFLAGS	:= -MMD -MP
 
 INCLUDES	:= -I./includes -I/usr/local/include
@@ -24,7 +24,7 @@ SRC_DIR	:= src
 MLX_DIR	:= /usr/local/lib/
 
 ALGEBRA_DIR	:= $(SRC_DIR)/algebra
-# CORE_DIR		:= $(SRC_DIR)/core
+CORE_DIR		:= $(SRC_DIR)/core
 LIBFT_DIR		:= $(SRC_DIR)/libft
 PARSER_DIR	:= $(SRC_DIR)/parser
 UTILS_DIR		:= $(SRC_DIR)/utils
@@ -117,9 +117,10 @@ sanitize: fclean all
 valgrind: CFLAGS += -g
 valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
-
 yusuf: all
-	./$(NAME) $(SCENE)
+	./$(NAME) scenes/file.rt
+
 
 .PHONY: all clean fclean re sanitize valgrind
 .SECONDARY:
+

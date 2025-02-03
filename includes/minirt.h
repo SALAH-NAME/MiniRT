@@ -6,15 +6,15 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:44:07 by souahidi          #+#    #+#             */
-/*   Updated: 2025/02/01 12:22:30 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:12:06 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <stdbool.h>
 # include <mlx.h>
+# include <stdbool.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include "algebra.h"
@@ -55,7 +55,7 @@ typedef struct s_mlx
 typedef struct s_render
 {
 	t_mlx			mlx;
-  t_scene  *scene;
+  	t_scene  		*scene;
 }					t_render;
 
 int					handle_keypress(int keysym, t_render *world);

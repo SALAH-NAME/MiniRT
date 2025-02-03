@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:33:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/01 11:19:49 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:10:58 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_data
 	t_file		*file;
 	t_scene		*scene;
 	t_error		*error;
-  t_render  *render;
+  	t_render  	*render;
 	t_config	*config;
 }				t_data;
 

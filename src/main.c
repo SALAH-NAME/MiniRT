@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:13:42 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/03 19:53:32 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:10:25by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #if PARSING
 
 # include "core.h"
-# include "minirt.h"
 
 int load_render(t_data *data)
 {
@@ -30,7 +29,7 @@ int load_render(t_data *data)
 	// Hooks
 	mlx_hook(world.mlx.win, KeyPress, KeyPressMask, &handle_keypress, &world);
 	mlx_hook(world.mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,	&world);
-  world.scene = data->scene;
+	world.scene = data->scene;
 	init_scene(&world);
 	render_scene(&world);
 
