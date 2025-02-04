@@ -47,7 +47,8 @@ void		degree_init(t_data *data, int *degree, char *val);
 // utils
 int			valid(char **info, int count);
 void		free_all(t_data *file);
-int			v_valid(char *val);
+int			float_valid(char *val);
+int			int_valid(char *val);
 
 // testing utils
 void		set_error(t_data *data, char *desc, char *pr, char *hint);

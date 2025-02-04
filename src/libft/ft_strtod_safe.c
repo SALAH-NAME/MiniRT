@@ -38,11 +38,10 @@ int	ft_strtod_safe(const char *s, double *out)
 		return (0);
 	while (ft_isspace(*s))
 		s++;
-	if (*s == '-' || *s == '+')
-	{
+	if (*s == '-')
 		negative = -1;
+	if (*s == '-' || *s == '+')
 		s++;
-	}
 	while (ft_isdigit(*s))
 	{
 		if (n > (LONG_MAX - (*s - '0')) / 10)

@@ -81,7 +81,7 @@ int	load_file(t_data *data, char *file_name)
 			return (perror(file_name), 1);
 		scene_data(data);
 		close(file->fd);
-    return(data->file->error == 0);
+		return (data->file->error == 0);
 	}
 	return (0);
 }

@@ -16,7 +16,7 @@ void	ratio_init(t_data *data, double *ratio, char *val, t_range range)
 {
 	if (!val)
 		set_error(data, ERR_MS_RATIO, val, NULL);
-	if (v_valid(val) == 0)
+	if (float_valid(val) == 0)
 		set_error(data, ERR_RATIO_V, val, NULL);
 	if (ft_strtod_safe(val, ratio) == 0)
 		set_error(data, ERR_RATIO_R, val, NULL);
@@ -34,8 +34,8 @@ void	color_init(t_data *data, t_color *color, char *val)
 	data->file->split = split;
 	if (ft_arrlen(split) != 3)
 		set_error(data, ERR_MS_COLOR, val, NULL);
-	if (v_valid(split[0]) == 0 || v_valid(split[1]) == 0
-		|| v_valid(split[2]) == 0)
+	if (int_valid(split[0]) == 0 || int_valid(split[1]) == 0
+		|| int_valid(split[2]) == 0)
 		set_error(data, ERR_COLOR_V, val, NULL);
 	if (ft_atoi_safe(split[0], &color->r) == 0 || color->r < 0
 		|| color->r > 255)
@@ -60,8 +60,8 @@ void	position_init(t_data *data, t_vec3 *pos, char *val)
 	data->file->split = split;
 	if (ft_arrlen(split) != 3)
 		set_error(data, ERR_MS_COORD, val, NULL);
-	if (v_valid(split[0]) == 0 || v_valid(split[1]) == 0
-		|| v_valid(split[2]) == 0)
+	if (float_valid(split[0]) == 0 || float_valid(split[1]) == 0
+		|| float_valid(split[2]) == 0)
 		set_error(data, ERR_COORD_V, val, NULL);
 	if (ft_strtod_safe(split[0], &pos->x) == 0)
 		set_error(data, ERR_COORD_R, split[0], NULL);
@@ -75,15 +75,12 @@ void	position_init(t_data *data, t_vec3 *pos, char *val)
 
 void	degree_init(t_data *data, int *degree, char *val)
 {
-	float	tmp;
-
 	if (!val)
 		set_error(data, ERR_MS_DEGREE, val, NULL);
-	if (v_valid(val) == 0)
+	if (int_valid(val) == 0)
 		set_error(data, ERR_DEGREE_V, val, NULL);
-	if (ft_atoi_safe(val, &tmp) == 0)
+	if (ft_atoi_safe(val, degree) == 0)
 		set_error(data, ERR_DEGREE_V, val, NULL);
-	*degree = (int)tmp;
 	if (*degree < 0.0 || *degree > 180.0)
 		set_error(data, ERR_DEGREE_R, val, NULL);
 }
@@ -98,8 +95,8 @@ void	vector_init(t_data *data, t_vec3 *vector, char *val)
 	data->file->split = split;
 	if (ft_arrlen(split) != 3)
 		set_error(data, ERR_MS_VECTOR, val, NULL);
-	if (v_valid(split[0]) == 0 || v_valid(split[1]) == 0
-		|| v_valid(split[2]) == 0)
+	if (float_valid(split[0]) == 0 || float_valid(split[1]) == 0
+		|| float_valid(split[2]) == 0)
 		set_error(data, ERR_VECTOR_V, val, NULL);
 	if (ft_strtod_safe(split[0], &vector->x) == 0)
 		set_error(data, ERR_VECTOR_R, split[0], NULL);

@@ -32,17 +32,34 @@ int	valid(char **info, int count)
 // 	return (fabs(length - 1.0) < 0.0001);
 // }
 
-int	v_valid(char *val)
+int	float_valid(char *val)
 {
 	if (!val || !*val)
 		return (0);
-	if (*val == '-')
+	if (*val == '-' || *val == '+')
 		val++;
 	if (!*val)
 		return (0);
 	while (*val)
 	{
 		if (!ft_isdigit(*val) && *val != '.')
+			return (0);
+		val++;
+	}
+	return (1);
+}
+
+int	int_valid(char *val)
+{
+	if (!val || !*val)
+		return (0);
+	if (*val == '-' || *val == '+')
+		val++;
+	if (!*val)
+		return (0);
+	while (*val)
+	{
+		if (!ft_isdigit(*val))
 			return (0);
 		val++;
 	}

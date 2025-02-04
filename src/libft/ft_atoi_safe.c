@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	ft_atoi_safe(const void *value, float *out)
+int	ft_atoi_safe(const void *value, int *out)
 {
 	int			sign;
 	long		output;
@@ -27,7 +27,7 @@ int	ft_atoi_safe(const void *value, float *out)
 		str++;
 	if (*str == '-')
 		sign *= -1;
-	if (*str == '-')
+	if (*str == '-' || *str == '+')
 		str++;
 	while (*str >= '0' && *str <= '9')
 	{
