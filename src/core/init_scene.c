@@ -5,11 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:44:47 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/28 19:03:05by ysouahid         ###   ########.fr       */
+/*   Created: 2025/02/04 13:06:16 by souahidi          #+#    #+#             */
+/*   Updated: 2025/02/04 13:06:16 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "core.h"
 #include "minirt.h"
 
 static t_light	*create_light(void)
@@ -18,7 +19,7 @@ static t_light	*create_light(void)
 
 	light = malloc(sizeof(t_light));
 	light->position = vec3_create(-10, 10, 10);
-	light->itensity = vec3_create(0.7, 0.7, 0.7);
+	light->brightness = 0.7;
 	light->color = color_create(1, 1, 1);
 	light->next = NULL;
 	return (light);
@@ -35,7 +36,6 @@ static t_object	*create_sphere(t_vec3 pos, double r, t_material material,
 	sphere->material = material;
 	sphere->data.sphere.center = vec3_create(pos.x, pos.y, pos.z);
 	sphere->data.sphere.radius = r;
-	sphere->data.sphere.material = material;
 	sphere->id = id;
 	sphere->next = NULL;
 	return (sphere);
@@ -49,9 +49,9 @@ void	init_scene(t_render *render)
 	t_object	*sphere2;
 
 	render->scene.camera.position = vec3_create(0, 0, 0);
-	render->scene.camera.direction = vec3_create(1, -1, 0);
+	render->scene.camera.orientation = vec3_create(1, -1, 0);
 	render->scene.camera.fov = 60;
-	render->scene.ambient.itensity = 0.2;
+	render->scene.ambient.ratio = 0.2;
 	render->scene.ambient.color = color_create(1, 1, 1);
 	light = create_light();
 	render->scene.lights = light;

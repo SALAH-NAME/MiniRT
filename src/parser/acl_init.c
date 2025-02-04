@@ -31,7 +31,7 @@ void	a_init(t_data *data)
 
 void	l_init(t_data *data)
 {
-	t_range		range;
+	t_range	range;
 	t_light	*light;
 
 	if (!valid(data->file->row + 1, data->config->elements[LIGHT].v_count))

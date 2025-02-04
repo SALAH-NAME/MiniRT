@@ -20,8 +20,8 @@
 # include <mlx.h>
 # include <stdbool.h>
 
-# define WIDTH 1080
-# define HEIGHT 1920
+# define WIDTH 480
+# define HEIGHT 560
 # define EPSILON 1e-6
 
 typedef struct s_ray
@@ -55,7 +55,7 @@ typedef struct s_mlx
 typedef struct s_render
 {
 	t_mlx		mlx;
-	t_scene		*scene;
+	t_scene		scene;
 }				t_render;
 
 int				handle_keypress(int keysym, t_render *world);

@@ -16,8 +16,6 @@
 typedef struct s_data	t_data;
 
 # define UN -1 // for undefined values or unused values
-# define WIDTH 1080
-# define HEIGHT 1920
 # define EPSILON 1e-6
 
 enum					e_obj

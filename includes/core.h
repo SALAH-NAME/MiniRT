@@ -34,8 +34,6 @@
 
 # define KB_4 4096
 # define EXT ".rt"
-# define DBL_MIN
-# define DBL_MAX
 
 typedef struct s_data
 {

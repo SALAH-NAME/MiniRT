@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "core.h"
 
 t_color	apply_ambient(t_hit hit, t_scene *scene)
 {
-	return (color_multiply(hit.material.color, scene->ambient.itensity));
+	return (color_multiply(hit.material.color, scene->ambient.ratio));
 }
 
 t_color	calculate_diffuse(t_hit hit, t_vec3 light_dir, double coef)
