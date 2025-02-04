@@ -39,7 +39,7 @@ void	scene_data(t_data *data)
 {
 	t_scene	scene;
 
-  ft_bzero(&scene, sizeof(scene));
+	ft_bzero(&scene, sizeof(scene));
 	data->file->error = 1;
 	data->file->line = NULL;
 	data->file->line_index = 0;

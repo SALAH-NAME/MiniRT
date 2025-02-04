@@ -24,7 +24,8 @@
 /*	world.mlx.ptr = mlx_init();*/
 /*	world.mlx.win = mlx_new_window(world.mlx.ptr, WIDTH, HEIGHT, "miniRT");*/
 /*	world.mlx.img = mlx_new_image(world.mlx.ptr, WIDTH, HEIGHT);*/
-/*	world.mlx.addr = mlx_get_data_addr(world.mlx.img, &world.mlx.bits_per_pixel,*/
+/*	world.mlx.addr = mlx_get_data_addr(world.mlx.img,
+			&world.mlx.bits_per_pixel,*/
 /*			&world.mlx.line_length, &world.mlx.endian);*/
 /*	// Hooks*/
 /*	mlx_hook(world.mlx.win, KeyPress, KeyPressMask, &handle_keypress, &world);*/
@@ -49,7 +50,7 @@ int	init(t_data *data, char *av)
 	if (load_file(data, av))
 		return (1);
 	/*if (load_render(data))*/
-		/*return (1);*/
+	/*return (1);*/
 	return (0);
 }
 
