@@ -36,7 +36,7 @@ void	pl_init(t_data *data)
 		return ;
 	}
 	new_object = ft_calloc(1, sizeof(t_object));
-	new_object->id = data->scene->count.pl_c++;
+	new_object->id = data->scene.count.pl_c++;
 	new_object->type = OBJ_PLANE;
 	if (data->file->error)
 		position_init(data, &new_object->data.plane.center, data->file->row[1]);
@@ -44,10 +44,10 @@ void	pl_init(t_data *data)
 		vector_init(data, &new_object->data.plane.normal, data->file->row[2]);
 	if (data->file->error)
 		color_init(data, &new_object->material.color, data->file->row[3]);
-	if (data->scene->objects == NULL)
-		data->scene->objects = new_object;
+	if (data->scene.objects == NULL)
+		data->scene.objects = new_object;
 	else
-		get_lst_last(data->scene->objects)->next = new_object;
+		get_lst_last(data->scene.objects)->next = new_object;
 }
 
 void	sp_init(t_data *data)
@@ -63,7 +63,7 @@ void	sp_init(t_data *data)
 		return ;
 	}
 	new_object = ft_calloc(1, sizeof(t_object));
-	new_object->id = data->scene->count.sp_c++;
+	new_object->id = data->scene.count.sp_c++;
 	new_object->type = OBJ_SPHERE;
 	range = data->config->info[3].range;
 	if (data->file->error)
@@ -74,10 +74,10 @@ void	sp_init(t_data *data)
 			range);
 	if (data->file->error)
 		color_init(data, &new_object->material.color, data->file->row[3]);
-	if (data->scene->objects == NULL)
-		data->scene->objects = new_object;
+	if (data->scene.objects == NULL)
+		data->scene.objects = new_object;
 	else
-		get_lst_last(data->scene->objects)->next = new_object;
+		get_lst_last(data->scene.objects)->next = new_object;
 }
 
 void	cy_init(t_data *data)
@@ -93,7 +93,7 @@ void	cy_init(t_data *data)
 		return ;
 	}
 	new_object = ft_calloc(1, sizeof(t_object));
-	new_object->id = data->scene->count.cy_c++;
+	new_object->id = data->scene.count.cy_c++;
 	new_object->type = OBJ_CYLINDER;
 	range = data->config->info[3].range;
 	if (data->file->error)
@@ -110,8 +110,8 @@ void	cy_init(t_data *data)
 			range);
 	if (data->file->error)
 		color_init(data, &new_object->material.color, data->file->row[5]);
-	if (data->scene->objects == NULL)
-		data->scene->objects = new_object;
+	if (data->scene.objects == NULL)
+		data->scene.objects = new_object;
 	else
-		get_lst_last(data->scene->objects)->next = new_object;
+		get_lst_last(data->scene.objects)->next = new_object;
 }

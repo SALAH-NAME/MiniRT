@@ -35,31 +35,26 @@ void	parse_line(t_data *data)
 	ft_arrmapi(data->file->row, free);
 }
 
-t_scene	*scene_data(t_data *data)
+void	scene_data(t_data *data)
 {
-	t_scene	*scene;
+	t_scene	scene;
 
-	scene = ft_calloc(1, sizeof(t_scene));
-	if (scene)
+	data->file->error = 1;
+	data->file->line = NULL;
+	data->file->line_index = 0;
+	data->scene = scene;
+	data->file->line = get_next_line(data->file->fd);
+	while (data->file->line)
 	{
-		data->file->error = 1;
-		data->file->line = NULL;
-		data->file->line_index = 0;
-		data->scene = scene;
-		data->file->line = get_next_line(data->file->fd);
-		while (data->file->line)
-		{
-			data->file->line_index++;
-			if (data->file->error)
-				parse_line(data);
-			free(data->file->line);
-			data->file->line = get_next_line(data->file->fd);
-		}
-		print_scene(scene);
+		data->file->line_index++;
+		if (data->file->error)
+			parse_line(data);
 		free(data->file->line);
+		data->file->line = get_next_line(data->file->fd);
 	}
+	print_scene(&scene);
+	free(data->file->line);
 	check_errors(data);
-	return (scene);
 }
 
 int	valid_file_name(char *file_name)
@@ -86,7 +81,7 @@ int	load_file(t_data *data, char *file_name)
 		file->fd = open(file_name, O_RDONLY);
 		if (file->fd == -1)
 			return (perror(file_name), 1);
-		data->scene = scene_data(data);
+		scene_data(data);
 		close(file->fd);
 	}
 	return (0);

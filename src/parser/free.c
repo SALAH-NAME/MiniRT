@@ -26,8 +26,17 @@ void	free_objects(t_object *objects)
 
 void	free_scene(t_scene *scene)
 {
+		t_lights *tmp;
+
 	if (scene->lights)
-		free(scene->lights);
+	{
+		while (scene->lights)
+		{
+			tmp = scene->lights->next;
+			free(scene->lights);
+			scene->lights = tmp;
+		}
+	}
 	free_objects(scene->objects);
 }
 
@@ -47,11 +56,7 @@ void	free_all(t_data *data)
 			}
 			free(data->file);
 		}
-		if (data->scene)
-		{
-			free_scene(data->scene);
-			free(data->scene);
-		}
+		free_scene(&data->scene);
 		free(data);
 	}
 }
