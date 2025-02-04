@@ -17,28 +17,27 @@
 
 typedef struct s_color
 {
-	float			r;
-	float			g;
-	float			b;
-}					t_color;
+	float				r;
+	float				g;
+	float				b;
+}						t_color;
 
 typedef struct s_transform
 {
-	t_vec3			position;
-	t_vec3			rotation;
-}					t_transform;
+	t_vec3				position;
+	t_vec3				rotation;
+}						t_transform;
 
 typedef struct s_ambientlight
 {
-
-	int 			id;
+	int					id;
 	double				ratio;
-  t_color       color;
+	t_color				color;
 }						t_ambientlight;
 
 typedef struct s_camera
 {
-	int 			id;
+	int					id;
 	t_vec3				position;
 	t_vec3				orientation;
 	int					fov;
@@ -46,17 +45,17 @@ typedef struct s_camera
 
 typedef struct s_lights
 {
-	int 			id;
+	int					id;
 	t_vec3				position;
 	double				brightness;
-  t_color         color;
-  struct s_lights         *next;
+	t_color				color;
+	struct s_lights		*next;
 }						t_lights;
 
 typedef struct s_sphere
 {
 	t_vec3				center;
-	double				radios;
+	double				radius;
 	struct s_sphere		*next;
 }						t_sphere;
 
@@ -71,19 +70,17 @@ typedef struct s_cylinder
 {
 	t_vec3				center;
 	t_vec3				normal;
-	double				radios;
+	double				radius;
 	double				height;
 	struct s_cylinder	*next;
 }						t_cylinder;
 
-
 typedef struct s_cone
 {
-	t_vec3			center;
-	double			angle;
-	double			height;
-}					t_cone;
-
+	t_vec3				center;
+	double				angle;
+	double				height;
+}						t_cone;
 
 typedef struct s_count
 {
@@ -93,7 +90,7 @@ typedef struct s_count
 	int					sp_c;
 	int					cy_c;
 	int					pl_c;
-} t_count;
+}						t_count;
 
 typedef enum e_object_type
 {
@@ -103,32 +100,31 @@ typedef enum e_object_type
 	// OBJ_CONE,
 	// OBJ_HYPERBOLOID,
 	// OBJ_PARABOLOID
-}					t_object_type;
+}						t_object_type;
 
 typedef struct s_material
 {
 	t_color				color;
-	double			diffuse_coefficient;
-	double			specular_coefficient;
-	double			shininess;
-}					t_material;
-
+	double				diffuse_coefficient;
+	double				specular_coefficient;
+	double				shininess;
+}						t_material;
 
 typedef struct s_object
 {
-	t_object_type	type;
-	t_transform		transform;
-	t_material		material;
-	union			u_object
+	t_object_type		type;
+	t_transform			transform;
+	t_material			material;
+	union				u_object
 	{
-		t_sphere	sphere;
-		t_plane		plane;
-		t_cylinder	cylinder;
-		t_cone		cone;
+		t_sphere		sphere;
+		t_plane			plane;
+		t_cylinder		cylinder;
+		t_cone			cone;
 	} data;
-	struct s_object	*next;
-	int				id;
-}					t_object;
+	struct s_object		*next;
+	int					id;
+}						t_object;
 
 typedef struct s_scene
 {

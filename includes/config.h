@@ -20,7 +20,6 @@ typedef struct s_data	t_data;
 # define HEIGHT 1920
 # define EPSILON 1e-6
 
-
 enum					e_obj
 {
 	AMBIENT,

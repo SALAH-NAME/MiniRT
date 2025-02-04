@@ -15,7 +15,7 @@
 
 # include "core.h"
 
-int load_render(t_data *data)
+int	load_render(t_data *data)
 {
 	t_render	world;
 
@@ -28,11 +28,11 @@ int load_render(t_data *data)
 			&world.mlx.line_length, &world.mlx.endian);
 	// Hooks
 	mlx_hook(world.mlx.win, KeyPress, KeyPressMask, &handle_keypress, &world);
-	mlx_hook(world.mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,	&world);
+	mlx_hook(world.mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,
+		&world);
 	world.scene = data->scene;
 	init_scene(&world);
 	render_scene(&world);
-
 	mlx_loop(world.mlx.ptr);
 	mlx_destroy_image(world.mlx.ptr, world.mlx.img);
 	mlx_destroy_window(world.mlx.ptr, world.mlx.win);
@@ -48,8 +48,8 @@ int	init(t_data *data, char *av)
 		return (1);
 	if (load_file(data, av))
 		return (1);
-  if(load_render(data))
-    return(1);
+	if (load_render(data))
+		return (1);
 	return (0);
 }
 
@@ -68,7 +68,7 @@ int	main(int ac, char **av)
 	if (data)
 	{
 		if (init(data, av[1]))
-			return (free_all(data),1);
+			return (free_all(data), 1);
 	}
 	free_all(data);
 	return (0);
@@ -82,11 +82,11 @@ int	main(int ac, char **av)
 
 int	main(void)
 {
-  # include "core.h"
-  # include "minirt.h"
-  # include  "algebra.h"
 	t_render	world;
 
+# include "algebra.h"
+# include "core.h"
+# include "minirt.h"
 	// Parsing map
 	// Setup mlx
 	world.mlx.ptr = mlx_init();
@@ -98,10 +98,8 @@ int	main(void)
 	mlx_hook(world.mlx.win, KeyPress, KeyPressMask, &handle_keypress, &world);
 	mlx_hook(world.mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,
 		&world);
-	
 	init_scene(&world);
 	render_scene(&world);
-
 	mlx_loop(world.mlx.ptr);
 	mlx_destroy_image(world.mlx.ptr, world.mlx.img);
 	mlx_destroy_window(world.mlx.ptr, world.mlx.win);
@@ -109,7 +107,6 @@ int	main(void)
 	free(world.mlx.ptr);
 	// Free all
 	return (0);
-
 }
 
 #endif

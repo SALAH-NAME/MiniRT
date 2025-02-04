@@ -15,6 +15,7 @@
 void	a_init(t_data *data)
 {
 	t_range	range;
+
 	if (!valid(data->file->row + 1, data->config->elements[AMBIENT].v_count))
 	{
 		set_error(data, ERR_MS_VAL_PARAM, *data->file->row, NULL);
@@ -31,14 +32,15 @@ void	a_init(t_data *data)
 
 void	l_init(t_data *data)
 {
-	t_range	range;
+	t_range		range;
+	t_lights	*light;
 
 	if (!valid(data->file->row + 1, data->config->elements[LIGHT].v_count))
 	{
 		set_error(data, ERR_MS_VAL_PARAM, *data->file->row, NULL);
 		return ;
 	}
-  t_lights *light = ft_calloc(1, sizeof(t_lights));
+	light = ft_calloc(1, sizeof(t_lights));
 	range = data->config->info[0].range;
 	data->scene->count.l_c++;
 	if (data->file->error)
@@ -47,8 +49,8 @@ void	l_init(t_data *data)
 		ratio_init(data, &light->brightness, data->file->row[2], range);
 	if (data->file->error)
 		color_init(data, &light->color, data->file->row[3]);
-  light->next = data->scene->lights;
-  data->scene->lights = light;
+	light->next = data->scene->lights;
+	data->scene->lights = light;
 }
 
 void	c_init(t_data *data)

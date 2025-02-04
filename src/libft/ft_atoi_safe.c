@@ -14,9 +14,9 @@
 
 int	ft_atoi_safe(const void *value, float *out)
 {
-	int		sign;
-	long	output;
-	const char *str;
+	int			sign;
+	long		output;
+	const char	*str;
 
 	sign = 1;
 	output = 0;
@@ -25,12 +25,10 @@ int	ft_atoi_safe(const void *value, float *out)
 	str = (const char *)value;
 	while ((*str >= 9 && *str <= 13) || *str == ' ')
 		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign *= -1;
+	if (*str == '-')
+		sign *= -1;
+	if (*str == '-')
 		str++;
-	}
 	while (*str >= '0' && *str <= '9')
 	{
 		if (output > (LONG_MAX - (*str - '0')) / 10)
@@ -38,6 +36,6 @@ int	ft_atoi_safe(const void *value, float *out)
 		output = (output * 10) + (*str - '0');
 		str++;
 	}
-	*out = (output * sign); 
+	*out = (output * sign);
 	return (1);
 }

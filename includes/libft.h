@@ -83,7 +83,7 @@ int					get_num_len(long n);
 // new
 void				ft_arrmapi(char **arr, void (*f)(void *));
 // int	ft_atoi_safe(const void *value, void *out);
-int	ft_atoi_safe(const void *value, float *out);
+int					ft_atoi_safe(const void *value, float *out);
 int					ft_strtod_safe(const char *s, double *out);
 void				ft_split_stack(const char *str, char *buf, char **ptrs);
 

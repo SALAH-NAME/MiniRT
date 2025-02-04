@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "core.h"
+
 void	free_objects(t_object *objects)
 {
 	t_object	*tmp;

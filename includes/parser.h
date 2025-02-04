@@ -38,11 +38,11 @@ void		cy_init(t_data *data);
 void		pl_init(t_data *data);
 void		sp_init(t_data *data);
 // info-init
-void	color_init(t_data *data, t_color *color, char *val);
-void	ratio_init(t_data *data, double *ratio, char *line, t_range range);
-void	position_init(t_data *data, t_vec3 *pos, char *val);
-void	vector_init(t_data *data, t_vec3 *vector, char *val);
-void	degree_init(t_data *data, int *degree, char *val);
+void		color_init(t_data *data, t_color *color, char *val);
+void		ratio_init(t_data *data, double *ratio, char *line, t_range range);
+void		position_init(t_data *data, t_vec3 *pos, char *val);
+void		vector_init(t_data *data, t_vec3 *vector, char *val);
+void		degree_init(t_data *data, int *degree, char *val);
 
 // utils
 int			valid(char **info, int count);

@@ -70,7 +70,7 @@ void	sp_init(t_data *data)
 		position_init(data, &new_object->data.sphere.center,
 			data->file->row[1]);
 	if (data->file->error)
-		ratio_init(data, &new_object->data.sphere.radios, data->file->row[2],
+		ratio_init(data, &new_object->data.sphere.radius, data->file->row[2],
 			range);
 	if (data->file->error)
 		color_init(data, &new_object->material.color, data->file->row[3]);
@@ -103,7 +103,7 @@ void	cy_init(t_data *data)
 		vector_init(data, &new_object->data.cylinder.normal,
 			data->file->row[2]);
 	if (data->file->error)
-		ratio_init(data, &new_object->data.cylinder.radios, data->file->row[3],
+		ratio_init(data, &new_object->data.cylinder.radius, data->file->row[3],
 			range);
 	if (data->file->error)
 		ratio_init(data, &new_object->data.cylinder.height, data->file->row[4],

@@ -24,10 +24,9 @@ void	tests_vec3_subtraction(void)
 	v3 = (t_vec3){-1, -2, -3};
 	v4 = (t_vec3){0, 0, 0};
 	printf("\n-- vec3_subtraction --\n");
-	test_message(vec3_equals(vec3_subtract(v1, v2),
-			(t_vec3){-3, -3, -3}), "Subtraction Test 1");
-	test_message(vec3_equals(vec3_subtract(v1, v3),
-			(t_vec3){2, 4, 6}), "Subtraction Test 2");
-	test_message(vec3_equals(vec3_subtract(v1, v4), v1),
-		"Subtraction Test 3");
+	test_message(vec3_equals(vec3_subtract(v1, v2), (t_vec3){-3, -3, -3}),
+		"Subtraction Test 1");
+	test_message(vec3_equals(vec3_subtract(v1, v3), (t_vec3){2, 4, 6}),
+		"Subtraction Test 2");
+	test_message(vec3_equals(vec3_subtract(v1, v4), v1), "Subtraction Test 3");
 }

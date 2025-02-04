@@ -75,14 +75,15 @@ void	position_init(t_data *data, t_vec3 *pos, char *val)
 
 void	degree_init(t_data *data, int *degree, char *val)
 {
-	float tmp;
+	float	tmp;
+
 	if (!val)
 		set_error(data, ERR_MS_DEGREE, val, NULL);
 	if (v_valid(val) == 0)
 		set_error(data, ERR_DEGREE_V, val, NULL);
 	if (ft_atoi_safe(val, &tmp) == 0)
 		set_error(data, ERR_DEGREE_V, val, NULL);
-	*degree  = (int)tmp;
+	*degree = (int)tmp;
 	if (*degree < 0.0 || *degree > 180.0)
 		set_error(data, ERR_DEGREE_R, val, NULL);
 }

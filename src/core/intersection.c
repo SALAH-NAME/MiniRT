@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
 #include "float.h"
+#include "minirt.h"
 
 t_hit	init_hit(t_object *obj)
 {
