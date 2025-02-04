@@ -68,22 +68,23 @@ void	set_error(t_data *data, char *desc, char *pr, char *hint)
 
 void	check_errors(t_data *data)
 {
-	if (data->scene.count.a_c == 0)
-		set_error(data, ERR_MS_A, NULL, NULL);
-	if (data->scene.count.c_c == 0)
-		set_error(data, ERR_MS_C, NULL, NULL);
-	if (data->scene.count.l_c == 0)
-		set_error(data, ERR_MS_L, NULL, NULL);
-	if (data->scene.count.pl_c == 0)
-		set_error(data, ERR_MS_PL, NULL, NULL);
-	if (data->scene.count.sp_c == 0)
-		set_error(data, ERR_MS_SP, NULL, NULL);
-	if (data->scene.count.cy_c == 0)
-		set_error(data, ERR_MS_CY, NULL, NULL);
-	if (data->scene.count.l_c > data->config->elements[LIGHT].max_count)
-		set_error(data, ERR_INV_ARG_NUM, "L", NULL);
-	else if (data->scene.count.c_c > data->config->elements[CAMERA].max_count)
-		set_error(data, ERR_INV_ARG_NUM, "C", NULL);
-	else if (data->scene.count.a_c > data->config->elements[AMBIENT].max_count)
-		set_error(data, ERR_INV_ARG_NUM, "A", NULL);
+  (void)data;
+	/*if (data->scene.count.a_c == 0)*/
+	/*	set_error(data, ERR_MS_A, NULL, NULL);*/
+	/*if (data->scene.count.c_c == 0)*/
+	/*	set_error(data, ERR_MS_C, NULL, NULL);*/
+	/*if (data->scene.count.l_c == 0)*/
+	/*	set_error(data, ERR_MS_L, NULL, NULL);*/
+	/*if (data->scene.count.pl_c == 0)*/
+	/*	set_error(data, ERR_MS_PL, NULL, NULL);*/
+	/*if (data->scene.count.sp_c == 0)*/
+	/*	set_error(data, ERR_MS_SP, NULL, NULL);*/
+	/*if (data->scene.count.cy_c == 0)*/
+	/*	set_error(data, ERR_MS_CY, NULL, NULL);*/
+	/*if (data->scene.count.l_c > data->config->elements[LIGHT].max_count)*/
+	/*	set_error(data, ERR_INV_ARG_NUM, "L", NULL);*/
+	/*else if (data->scene.count.c_c > data->config->elements[CAMERA].max_count)*/
+	/*	set_error(data, ERR_INV_ARG_NUM, "C", NULL);*/
+	/*else if (data->scene.count.a_c > data->config->elements[AMBIENT].max_count)*/
+	/*	set_error(data, ERR_INV_ARG_NUM, "A", NULL);*/
 }

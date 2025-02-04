@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define PARSING 0
+#define PARSING 1
 #if PARSING
 
 # include "core.h"
