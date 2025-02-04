@@ -37,13 +37,10 @@ void	parse_line(t_data *data)
 
 void	scene_data(t_data *data)
 {
-	t_scene	scene;
-
-	ft_bzero(&scene, sizeof(scene));
+	ft_bzero(&data->scene, sizeof(t_scene));
 	data->file->error = 1;
 	data->file->line = NULL;
 	data->file->line_index = 0;
-	data->scene = scene;
 	data->file->line = get_next_line(data->file->fd);
 	while (data->file->line)
 	{
@@ -53,7 +50,7 @@ void	scene_data(t_data *data)
 		free(data->file->line);
 		data->file->line = get_next_line(data->file->fd);
 	}
-	print_scene(&scene);
+	print_scene(&data->scene);
 	free(data->file->line);
 	check_errors(data);
 }

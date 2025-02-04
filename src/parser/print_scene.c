@@ -50,12 +50,14 @@ void	print_scene(t_scene *scene)
 	t_lights	*light;
 	t_object	*objects;
 
+	// Printing ambient light
 	{
-		printf("Ambient lights:\n");
+		printf("Ambient light:\n");
 		printf("  Ratio: %f\n", scene->ambient.ratio);
 		printf("  Color: %f, %f, %f\n", scene->ambient.color.r,
 			scene->ambient.color.g, scene->ambient.color.b);
 	}
+	// Printing lights in the scene
 	light = scene->lights;
 	while (light)
 	{
@@ -67,6 +69,7 @@ void	print_scene(t_scene *scene)
 			light->color.b);
 		light = light->next;
 	}
+	// Printing camera info
 	{
 		printf("Camera:\n");
 		printf("  Position: %f, %f, %f\n", scene->camera.position.x,
@@ -75,6 +78,7 @@ void	print_scene(t_scene *scene)
 			scene->camera.orientation.y, scene->camera.orientation.z);
 		printf("  Field of View: %d\n", scene->camera.fov);
 	}
+	// Printing objects in the scene
 	objects = scene->objects;
 	while (objects)
 	{

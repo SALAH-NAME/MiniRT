@@ -64,8 +64,8 @@ LIB_FLAGS	:= -lalgebra -lparser -lutils -lft -llist -lmlx -lXext -lX11 -lm -lz
 
 all: $(NAME) 
 
-$(NAME): $(LIBS) $(CORE_OBJS) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(CORE_OBJS) $(LIB_PATH) $(LIB_FLAGS) -o $(NAME)
+$(NAME): $(LIBS)  $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS)  $(LIB_PATH) $(LIB_FLAGS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
