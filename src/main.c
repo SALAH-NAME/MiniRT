@@ -15,32 +15,32 @@
 
 # include "core.h"
 
-int	load_render(t_data *data)
-{
-	t_render	world;
-
-	// Parsing map
-	// Setup mlx
-	world.mlx.ptr = mlx_init();
-	world.mlx.win = mlx_new_window(world.mlx.ptr, WIDTH, HEIGHT, "miniRT");
-	world.mlx.img = mlx_new_image(world.mlx.ptr, WIDTH, HEIGHT);
-	world.mlx.addr = mlx_get_data_addr(world.mlx.img, &world.mlx.bits_per_pixel,
-			&world.mlx.line_length, &world.mlx.endian);
-	// Hooks
-	mlx_hook(world.mlx.win, KeyPress, KeyPressMask, &handle_keypress, &world);
-	mlx_hook(world.mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,
-		&world);
-	world.scene = data->scene;
-	init_scene(&world);
-	render_scene(&world);
-	mlx_loop(world.mlx.ptr);
-	mlx_destroy_image(world.mlx.ptr, world.mlx.img);
-	mlx_destroy_window(world.mlx.ptr, world.mlx.win);
-	mlx_destroy_display(world.mlx.ptr);
-	free(world.mlx.ptr);
-	// Free all
-	return (0);
-}
+/*int	load_render(t_data *data)*/
+/*{*/
+/*	t_render	world;*/
+/**/
+/*	// Parsing map*/
+/*	// Setup mlx*/
+/*	world.mlx.ptr = mlx_init();*/
+/*	world.mlx.win = mlx_new_window(world.mlx.ptr, WIDTH, HEIGHT, "miniRT");*/
+/*	world.mlx.img = mlx_new_image(world.mlx.ptr, WIDTH, HEIGHT);*/
+/*	world.mlx.addr = mlx_get_data_addr(world.mlx.img, &world.mlx.bits_per_pixel,*/
+/*			&world.mlx.line_length, &world.mlx.endian);*/
+/*	// Hooks*/
+/*	mlx_hook(world.mlx.win, KeyPress, KeyPressMask, &handle_keypress, &world);*/
+/*	mlx_hook(world.mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,*/
+/*		&world);*/
+/*	world.scene = data->scene;*/
+/*	init_scene(&world);*/
+/*	render_scene(&world);*/
+/*	mlx_loop(world.mlx.ptr);*/
+/*	mlx_destroy_image(world.mlx.ptr, world.mlx.img);*/
+/*	mlx_destroy_window(world.mlx.ptr, world.mlx.win);*/
+/*	mlx_destroy_display(world.mlx.ptr);*/
+/*	free(world.mlx.ptr);*/
+/*	// Free all*/
+/*	return (0);*/
+/*}*/
 
 int	init(t_data *data, char *av)
 {
@@ -48,8 +48,8 @@ int	init(t_data *data, char *av)
 		return (1);
 	if (load_file(data, av))
 		return (1);
-	if (load_render(data))
-		return (1);
+	/*if (load_render(data))*/
+		/*return (1);*/
 	return (0);
 }
 
