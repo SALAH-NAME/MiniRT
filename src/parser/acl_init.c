@@ -32,14 +32,14 @@ void	a_init(t_data *data)
 void	l_init(t_data *data)
 {
 	t_range		range;
-	t_lights	*light;
+	t_light	*light;
 
 	if (!valid(data->file->row + 1, data->config->elements[LIGHT].v_count))
 	{
 		set_error(data, ERR_MS_VAL_PARAM, *data->file->row, NULL);
 		return ;
 	}
-	light = ft_calloc(1, sizeof(t_lights));
+	light = ft_calloc(1, sizeof(t_light));
 	range = data->config->info[0].range;
 	data->scene.count.l_c++;
 	if (data->file->error)

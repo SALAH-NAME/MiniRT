@@ -43,14 +43,14 @@ typedef struct s_camera
 	int					fov;
 }						t_camera;
 
-typedef struct s_lights
+typedef struct s_light
 {
 	int					id;
 	t_vec3				position;
 	double				brightness;
 	t_color				color;
-	struct s_lights		*next;
-}						t_lights;
+	struct s_light		*next;
+}						t_light;
 
 typedef struct s_sphere
 {
@@ -130,10 +130,10 @@ typedef struct s_scene
 {
 	t_ambientlight		ambient;
 	t_camera			camera;
-	t_lights			*lights;
+	t_light				*lights;
 
 	t_object			*objects;
-	t_lights			*selected_light;
+	t_light				*selected_light;
 	t_object			*selected_obj;
 	t_count				count;
 }						t_scene;

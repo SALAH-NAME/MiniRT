@@ -26,7 +26,7 @@ void	free_objects(t_object *objects)
 
 void	free_scene(t_scene *scene)
 {
-	t_lights	*tmp;
+	t_light	*tmp;
 
 	if (scene->lights)
 	{

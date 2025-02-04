@@ -47,7 +47,7 @@ void	print_object(t_object *obj)
 
 void	print_scene(t_scene *scene)
 {
-	t_lights	*light;
+	t_light	*light;
 	t_object	*objects;
 
 	// Printing ambient light
