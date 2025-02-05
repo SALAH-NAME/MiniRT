@@ -119,6 +119,7 @@ sanitize: fclean all
 valgrind: CFLAGS += -g
 valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
+
 yusuf: all
 	./$(NAME) scenes/file.rt
 
