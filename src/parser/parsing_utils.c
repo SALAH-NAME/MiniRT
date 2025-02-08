@@ -12,6 +12,23 @@
 
 #include "core.h"
 
+int	comma_count(char *val)
+{
+	int	count;
+
+	count = 0;
+	if (val)
+	{
+		while (*val)
+		{
+			if (*val == ',')
+				count++;
+			val++;
+		}
+	}
+	return (count == 2);
+}
+
 int	valid(char **info, int count)
 {
 	int	i;

@@ -43,12 +43,14 @@ void		ratio_init(t_data *data, double *ratio, char *line, t_range range);
 void		position_init(t_data *data, t_vec3 *pos, char *val);
 void		vector_init(t_data *data, t_vec3 *vector, char *val);
 void		degree_init(t_data *data, int *degree, char *val);
+void		radius_init(t_data *data, double *radius, char *val);
 
 // utils
 int			valid(char **info, int count);
 void		free_all(t_data *file);
 int			float_valid(char *val);
 int			int_valid(char *val);
+int			comma_count(char *val);
 
 // testing utils
 void		set_error(t_data *data, char *desc, char *pr, char *hint);

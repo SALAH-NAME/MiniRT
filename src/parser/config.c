@@ -60,8 +60,8 @@
 
 int	parse_config_init(t_data *data)
 {
-	static t_elems	elements[7];
-	static t_info	info[5];
+	static t_elems	elements[ELEM_COUNT];
+	static t_info	info[PARAM_COUNT];
 
 	data->config = ft_calloc(1, sizeof(t_config));
 	if (!data->config)
@@ -72,13 +72,11 @@ int	parse_config_init(t_data *data)
 	elements[PLANE] = (t_elems){"pl", ID, UN, 3, &pl_init};
 	elements[SPHERE] = (t_elems){"sp", ID, UN, 3, &sp_init};
 	elements[CYLINDER] = (t_elems){"cy", ID, UN, 5, &cy_init};
-	elements[6] = (t_elems){NULL, NONE, UN, UN, NULL};
-	info[RATIO] = (t_info){"RATIO", VECTOR, {.d_r = {0.0, 1.0}}, NULL};
-	info[AXIS] = (t_info){"AXIS", VECTOR, {.d_r = {-1.0, 1.0}}, NULL};
-	info[COLOR] = (t_info){"COLOR", COLOR, {.i_r = {0, 255}}, NULL};
-	info[DOUBLE] = (t_info){"DOUBLE", DOUBLE, {.d_r = {(double)INT_MIN,
-		(double)INT_MAX}}, NULL};
-	info[4] = (t_info){NULL, NONE, {{UN, UN}, {UN, UN}}, NULL};
+	info[RATIO] = (t_info){"RATIO", VECTOR, {.d_r = {0.0, 1.0}}};
+	info[AXIS] = (t_info){"AXIS", VECTOR, {.d_r = {-1.0, 1.0}}};
+	info[COLOR] = (t_info){"COLOR", COLOR, {.i_r = {0, 255}}};
+	info[DOUBLE] = (t_info){"DOUBLE", DOUBLE, {.d_r = {FLT_MIN, FLT_MAX}}};
+	info[DIAMETER] = (t_info){"DIAMETER", DOUBLE, {.d_r = {0, FLT_MAX}}};
 	data->config->elements = elements;
 	data->config->info = info;
 	return (0);

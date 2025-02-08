@@ -26,7 +26,7 @@ t_object	*get_lst_last(t_object *list)
 
 void	pl_init(t_data *data)
 {
-	t_object	*new_object;
+	t_object	*obj;
 
 	if (data->file->error == 0)
 		return ;
@@ -35,25 +35,21 @@ void	pl_init(t_data *data)
 		set_error(data, ERR_MS_VAL_PARAM, *data->file->row, NULL);
 		return ;
 	}
-	new_object = ft_calloc(1, sizeof(t_object));
-	new_object->id = data->scene.count.pl_c++;
-	new_object->type = OBJ_PLANE;
-	if (data->file->error)
-		position_init(data, &new_object->data.plane.center, data->file->row[1]);
-	if (data->file->error)
-		vector_init(data, &new_object->data.plane.normal, data->file->row[2]);
-	if (data->file->error)
-		color_init(data, &new_object->material.color, data->file->row[3]);
+	obj = ft_calloc(1, sizeof(t_object));
+	obj->id = data->scene.count.pl_c++;
+	obj->type = OBJ_PLANE;
+	position_init(data, &obj->data.plane.center, data->file->row[1]);
+	vector_init(data, &obj->data.plane.normal, data->file->row[2]);
+	color_init(data, &obj->material.color, data->file->row[3]);
 	if (data->scene.objects == NULL)
-		data->scene.objects = new_object;
+		data->scene.objects = obj;
 	else
-		get_lst_last(data->scene.objects)->next = new_object;
+		get_lst_last(data->scene.objects)->next = obj;
 }
 
 void	sp_init(t_data *data)
 {
-	t_object	*new_object;
-	t_range		range;
+	t_object	*obj;
 
 	if (data->file->error == 0)
 		return ;
@@ -62,27 +58,21 @@ void	sp_init(t_data *data)
 		set_error(data, ERR_MS_VAL_PARAM, *data->file->row, NULL);
 		return ;
 	}
-	new_object = ft_calloc(1, sizeof(t_object));
-	new_object->id = data->scene.count.sp_c++;
-	new_object->type = OBJ_SPHERE;
-	range = data->config->info[3].range;
-	if (data->file->error)
-		position_init(data, &new_object->data.sphere.center,
-			data->file->row[1]);
-	if (data->file->error)
-		ratio_init(data, &new_object->data.sphere.radius, data->file->row[2],
-			range);
-	if (data->file->error)
-		color_init(data, &new_object->material.color, data->file->row[3]);
+	obj = ft_calloc(1, sizeof(t_object));
+	obj->id = data->scene.count.sp_c++;
+	obj->type = OBJ_SPHERE;
+	position_init(data, &obj->data.sphere.center, data->file->row[1]);
+	radius_init(data, &obj->data.sphere.radius, data->file->row[2]);
+	color_init(data, &obj->material.color, data->file->row[3]);
 	if (data->scene.objects == NULL)
-		data->scene.objects = new_object;
+		data->scene.objects = obj;
 	else
-		get_lst_last(data->scene.objects)->next = new_object;
+		get_lst_last(data->scene.objects)->next = obj;
 }
 
 void	cy_init(t_data *data)
 {
-	t_object	*new_object;
+	t_object	*obj;
 	t_range		range;
 
 	if (data->file->error == 0)
@@ -92,26 +82,17 @@ void	cy_init(t_data *data)
 		set_error(data, ERR_MS_VAL_PARAM, *data->file->row, NULL);
 		return ;
 	}
-	new_object = ft_calloc(1, sizeof(t_object));
-	new_object->id = data->scene.count.cy_c++;
-	new_object->type = OBJ_CYLINDER;
-	range = data->config->info[3].range;
-	if (data->file->error)
-		position_init(data, &new_object->data.cylinder.center,
-			data->file->row[1]);
-	if (data->file->error)
-		vector_init(data, &new_object->data.cylinder.normal,
-			data->file->row[2]);
-	if (data->file->error)
-		ratio_init(data, &new_object->data.cylinder.radius, data->file->row[3],
-			range);
-	if (data->file->error)
-		ratio_init(data, &new_object->data.cylinder.height, data->file->row[4],
-			range);
-	if (data->file->error)
-		color_init(data, &new_object->material.color, data->file->row[5]);
+	obj = ft_calloc(1, sizeof(t_object));
+	obj->id = data->scene.count.cy_c++;
+	obj->type = OBJ_CYLINDER;
+	range = data->config->info[DOUBLE].range;
+	position_init(data, &obj->data.cylinder.center, data->file->row[1]);
+	vector_init(data, &obj->data.cylinder.normal, data->file->row[2]);
+	radius_init(data, &obj->data.cylinder.radius, data->file->row[3]);
+	ratio_init(data, &obj->data.cylinder.height, data->file->row[4], range);
+	color_init(data, &obj->material.color, data->file->row[5]);
 	if (data->scene.objects == NULL)
-		data->scene.objects = new_object;
+		data->scene.objects = obj;
 	else
-		get_lst_last(data->scene.objects)->next = new_object;
+		get_lst_last(data->scene.objects)->next = obj;
 }

@@ -12,23 +12,11 @@
 
 #include "core.h"
 
-void	ratio_init(t_data *data, double *ratio, char *val, t_range range)
-{
-	if (!val)
-		set_error(data, ERR_MS_RATIO, val, NULL);
-	if (float_valid(val) == 0)
-		set_error(data, ERR_RATIO_V, val, NULL);
-	if (ft_strtod_safe(val, ratio) == 0)
-		set_error(data, ERR_RATIO_R, val, NULL);
-	if (*ratio < range.d_r[0] || *ratio > range.d_r[1])
-		set_error(data, ERR_RATIO_R, val, NULL);
-}
-
 void	color_init(t_data *data, t_color *color, char *val)
 {
 	char	**split;
 
-	if (!val)
+	if (!val || !comma_count(val))
 		set_error(data, ERR_MS_COLOR, val, NULL);
 	split = ft_split(val, ',');
 	data->file->split = split;
@@ -54,7 +42,7 @@ void	position_init(t_data *data, t_vec3 *pos, char *val)
 {
 	char	**split;
 
-	if (!val)
+	if (!val || !comma_count(val))
 		set_error(data, ERR_MS_COORD, val, NULL);
 	split = ft_split(val, ',');
 	data->file->split = split;
@@ -89,7 +77,7 @@ void	vector_init(t_data *data, t_vec3 *vector, char *val)
 {
 	char	**split;
 
-	if (!val)
+	if (!val || !comma_count(val))
 		set_error(data, ERR_MS_VECTOR, val, NULL);
 	split = ft_split(val, ',');
 	data->file->split = split;

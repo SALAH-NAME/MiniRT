@@ -74,6 +74,10 @@ typedef struct s_error
 # define ERR_MS_DEGREE "Invalid degree format: expected a number but found:"
 # define ERR_DEGREE_V "Invalid degree value."
 # define ERR_DEGREE_R "Degree value must be between 0 and 180."
+// radius errors
+# define ERR_MS_RADIUS "Missing radius value."
+# define ERR_RADIUS_V "Invalid radius value."
+# define ERR_RADIUS_R "Radius value can't be negative."
 
 void		set_error(t_data *data, char *desc, char *pr, char *hint);
 void		check_errors(t_data *data);

@@ -13,12 +13,13 @@
 #ifndef CONFIG_H
 # define CONFIG_H
 
-typedef struct s_data	t_data;
-
 # define UN -1 // for undefined values or unused values
 # define EPSILON 1e-6
+# define FLT_MAX 3.402823466E+38F
+# define FLT_MIN 1.175494351E-38F
 
-enum					e_obj
+typedef struct s_data	t_data;
+enum					e_elem
 {
 	AMBIENT,
 	CAMERA,
@@ -26,15 +27,18 @@ enum					e_obj
 	PLANE,
 	SPHERE,
 	CYLINDER,
+	ELEM_COUNT,
 };
 
-enum					e_elem
+enum					e_param
 {
 	RATIO,
 	AXIS,
 	COLOR,
 	DOUBLE,
 	VECTOR,
+	DIAMETER,
+	PARAM_COUNT,
 	ID,
 	NONE,
 };
@@ -61,7 +65,6 @@ typedef struct s_info
 	const char			*name;
 	int					type;
 	t_range				range;
-	const char			*hint;
 }						t_info;
 
 typedef struct s_config
