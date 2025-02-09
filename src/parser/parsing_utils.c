@@ -12,6 +12,18 @@
 
 #include "core.h"
 
+t_color	color_normalize(t_color vec)
+{
+	double	magnitude;
+	t_color	normalized_color;
+
+	magnitude = 255.0;
+	normalized_color.r = vec.r / magnitude;
+	normalized_color.g = vec.g / magnitude;
+	normalized_color.b = vec.b / magnitude;
+	return (normalized_color);
+}
+
 int	comma_count(char *val)
 {
 	int	count;
@@ -40,14 +52,6 @@ int	valid(char **info, int count)
 		i++;
 	return (i == count);
 }
-
-// int	is_normalized_vector(double x, double y, double z)
-// {
-// 	double length;
-
-// 	length = sqrt(x * x + y * y + z * z);
-// 	return (fabs(length - 1.0) < 0.0001);
-// }
 
 int	float_valid(char *val)
 {

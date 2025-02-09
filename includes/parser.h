@@ -51,6 +51,7 @@ void		free_all(t_data *file);
 int			float_valid(char *val);
 int			int_valid(char *val);
 int			comma_count(char *val);
+t_color		color_normalize(t_color vec);
 
 // testing utils
 void		set_error(t_data *data, char *desc, char *pr, char *hint);

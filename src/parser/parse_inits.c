@@ -25,15 +25,16 @@ void	color_init(t_data *data, t_color *color, char *val)
 	if (int_valid(split[0]) == 0 || int_valid(split[1]) == 0
 		|| int_valid(split[2]) == 0)
 		set_error(data, ERR_COLOR_V, val, NULL);
-	if (ft_atoi_safe(split[0], &color->r) == 0 || color->r < 0
+	if (ft_strtod_safe(split[0], &color->r) == 0 || color->r < 0
 		|| color->r > 255)
 		set_error(data, ERR_COLOR_R, split[0], NULL);
-	if (ft_atoi_safe(split[1], &color->g) == 0 || color->g < 0
+	if (ft_strtod_safe(split[1], &color->g) == 0 || color->g < 0
 		|| color->g > 255)
 		set_error(data, ERR_COLOR_R, split[1], NULL);
-	if (ft_atoi_safe(split[2], &color->b) == 0 || color->b < 0
+	if (ft_strtod_safe(split[2], &color->b) == 0 || color->b < 0
 		|| color->b > 255)
 		set_error(data, ERR_COLOR_R, split[2], NULL);
+  *color  = color_normalize(*color);
 	ft_arrmapi(split, free);
 	data->file->split = NULL;
 }

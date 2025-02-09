@@ -17,9 +17,9 @@
 
 typedef struct s_color
 {
-	int					r;
-	int					g;
-	int					b;
+	double				r;
+	double				g;
+	double				b;
 }						t_color;
 
 typedef struct s_transform

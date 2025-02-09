@@ -40,7 +40,7 @@ void	print_object(t_object *obj)
 		printf("  Diameter: %f\n", obj->data.cylinder.radius);
 		printf("  Height: %f\n", obj->data.cylinder.height);
 	}
-	printf("  Material Color: %i, %i, %i\n", obj->material.color.r,
+	printf("  Material Color: %f, %f, %f\n", obj->material.color.r,
 		obj->material.color.g, obj->material.color.b);
 	printf("\n");
 }
@@ -54,7 +54,7 @@ void	print_scene(t_scene *scene)
 	{
 		printf("Ambient light:\n");
 		printf("  Ratio: %f\n", scene->ambient.ratio);
-		printf("  Color: %d, %d, %d\n", scene->ambient.color.r,
+		printf("  Color: %f, %f, %f\n", scene->ambient.color.r,
 			scene->ambient.color.g, scene->ambient.color.b);
 	}
 	// Printing lights in the scene
@@ -65,7 +65,7 @@ void	print_scene(t_scene *scene)
 		printf("  Position: %f, %f, %f\n", light->position.x, light->position.y,
 			light->position.z);
 		printf("  Brightness: %f\n", light->brightness);
-		printf("  Color: %d, %d, %d\n", light->color.r, light->color.g,
+		printf("  Color: %f, %f, %f\n", light->color.r, light->color.g,
 			light->color.b);
 		light = light->next;
 	}
