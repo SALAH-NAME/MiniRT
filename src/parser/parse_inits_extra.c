@@ -12,6 +12,18 @@
 
 #include "core.h"
 
+t_color	color_normalize(t_color vec)
+{
+	double	magnitude;
+	t_color	normalized_color;
+
+	magnitude = 255.0;
+	normalized_color.r = vec.r / magnitude;
+	normalized_color.g = vec.g / magnitude;
+	normalized_color.b = vec.b / magnitude;
+	return (normalized_color);
+}
+
 void	ratio_init(t_data *data, double *ratio, char *val, t_range range)
 {
 	if (!val)

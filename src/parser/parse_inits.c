@@ -34,7 +34,7 @@ void	color_init(t_data *data, t_color *color, char *val)
 	if (ft_strtod_safe(split[2], &color->b) == 0 || color->b < 0
 		|| color->b > 255)
 		set_error(data, ERR_COLOR_R, split[2], NULL);
-  *color  = color_normalize(*color);
+	*color = color_normalize(*color);
 	ft_arrmapi(split, free);
 	data->file->split = NULL;
 }
