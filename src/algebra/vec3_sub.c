@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_magnitude.c                                   :+:      :+:    :+:   */
+/*   vec3_sub.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 10:09:40 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/22 10:09:40 by souahidi         ###   ########.fr       */
+/*   Created: 2025/01/22 10:09:19 by souahidi          #+#    #+#             */
+/*   Updated: 2025/01/22 10:09:20 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algebra.h"
-#include <math.h>
 
-double	vec3_magnitude(t_vec3 v)
+t_vec3	vec3_sub(t_vec3 vec_1, t_vec3 vec_2)
 {
-	return (sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z)));
+	t_vec3	vector;
+
+	vector.x = vec_1.x - vec_2.x;
+	vector.y = vec_1.y - vec_2.y;
+	vector.z = vec_1.z - vec_2.z;
+	return (vector);
 }

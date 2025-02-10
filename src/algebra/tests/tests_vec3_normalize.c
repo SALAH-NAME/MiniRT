@@ -42,21 +42,21 @@ static void	create_and_run_normalize_tests2(void)
 {
 	t_vec3	v1;
 	t_vec3	result;
-	double	magnitude;
+	double	length;
 
 	v1 = (t_vec3){1.12345678, 2.23456789, 3.34567890};
-	magnitude = 17.44901609;
+	length = 17.44901609;
 	result = vec3_normalize(v1);
 	printf("\n-- vec3_normalize (Set 2) --\n");
-	test_message(fabs(result.x - (v1.x / sqrt(magnitude))) < 1e-8
-		&& fabs(result.y - (v1.y / sqrt(magnitude))) < 1e-8 && fabs(result.z
-			- (v1.z / sqrt(magnitude))) < 1e-8, "Normalize Test 5");
+	test_message(fabs(result.x - (v1.x / sqrt(length))) < 1e-8
+		&& fabs(result.y - (v1.y / sqrt(length))) < 1e-8 && fabs(result.z
+			- (v1.z / sqrt(length))) < 1e-8, "Normalize Test 5");
 	v1 = (t_vec3){4.56789012, 5.67890123, 6.78901234};
 	result = vec3_normalize(v1);
-	magnitude = 99.20622788;
-	test_message(fabs(result.x - (v1.x / sqrt(magnitude))) < 1e-8
-		&& fabs(result.y - (v1.y / sqrt(magnitude))) < 1e-8 && fabs(result.z
-			- (v1.z / sqrt(magnitude))) < 1e-8, "Normalize Test 6");
+	length = 99.20622788;
+	test_message(fabs(result.x - (v1.x / sqrt(length))) < 1e-8
+		&& fabs(result.y - (v1.y / sqrt(length))) < 1e-8 && fabs(result.z
+			- (v1.z / sqrt(length))) < 1e-8, "Normalize Test 6");
 }
 
 void	tests_vec3_normalize(void)

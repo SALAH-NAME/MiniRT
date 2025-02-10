@@ -23,12 +23,12 @@
 
 void	test_message(bool pass, char *message);
 bool	vec3_equals(t_vec3 a, t_vec3 b);
-void	tests_vec3_addition(void);
-void	tests_vec3_subtraction(void);
+void	tests_vec3_add(void);
+void	tests_vec3_subion(void);
 void	tests_vec3_dot(void);
-void	tests_vec3_magnitude(void);
+void	tests_vec3_length(void);
 void	tests_vec3_cross(void);
 void	tests_vec3_normalize(void);
-void	tests_vec3_scale(void);
+void	tests_vec3_mul(void);
 
 #endif

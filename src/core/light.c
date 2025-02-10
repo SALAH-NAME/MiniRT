@@ -37,7 +37,7 @@ t_color	calculate_specular(t_hit hit, t_vec3 light_dir, double coef)
 	n_dot_l = vec3_dot(hit.normal, light_dir);
 	if (n_dot_l <= 0)
 		return (color_create(0, 0, 0));
-	reflect_dir = vec3_subtract(vec3_scale(hit.normal, 2.0 * n_dot_l),
+	reflect_dir = vec3_sub(vec3_mul(hit.normal, 2.0 * n_dot_l),
 			light_dir);
 	spec = pow(fmax(vec3_dot(hit.view_dir, reflect_dir), 0.0),
 			hit.material.shininess) * hit.material.specular_coefficient * coef;
@@ -65,8 +65,8 @@ t_color	calculate_lighting(t_scene *scene, t_hit hit)
 	light = scene->lights;
 	while (light)
 	{
-		light_dir = vec3_subtract(light->position, hit.point);
-		light_dist = vec3_magnitude(light_dir);
+		light_dir = vec3_sub(light->position, hit.point);
+		light_dist = vec3_length(light_dir);
 		light_dir = vec3_normalize(light_dir);
 		shadow = find_nearest_intersection((t_ray){hit.point, light_dir},
 				scene);

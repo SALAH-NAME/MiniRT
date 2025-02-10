@@ -14,13 +14,13 @@
 
 t_color	color_normalize(t_color vec)
 {
-	double	magnitude;
+	double	length;
 	t_color	normalized_color;
 
-	magnitude = 255.0;
-	normalized_color.r = vec.r / magnitude;
-	normalized_color.g = vec.g / magnitude;
-	normalized_color.b = vec.b / magnitude;
+	length = 255.0;
+	normalized_color.r = vec.r / length;
+	normalized_color.g = vec.g / length;
+	normalized_color.b = vec.b / length;
 	return (normalized_color);
 }
 

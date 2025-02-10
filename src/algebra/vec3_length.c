@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_scale.c                                       :+:      :+:    :+:   */
+/*   vec3_length.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 10:08:53 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/22 10:08:54 by souahidi         ###   ########.fr       */
+/*   Created: 2025/01/22 10:09:40 by souahidi          #+#    #+#             */
+/*   Updated: 2025/01/22 10:09:40 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algebra.h"
+#include <math.h>
 
-t_vec3	vec3_scale(t_vec3 vec, double scalar)
+double	vec3_length(t_vec3 v)
 {
-	t_vec3	scaled_vector;
-
-	scaled_vector.x = vec.x * scalar;
-	scaled_vector.y = vec.y * scalar;
-	scaled_vector.z = vec.z * scalar;
-	return (scaled_vector);
+	return (sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z)));
 }

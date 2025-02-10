@@ -22,7 +22,6 @@
 
 # define WIDTH 480
 # define HEIGHT 560
-# define EPSILON 1e-6
 
 typedef struct s_ray
 {

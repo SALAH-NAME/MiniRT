@@ -31,12 +31,12 @@ void	test_message(bool pass, char *message)
 int	main(void)
 {
 	printf("\n=== TESTS LIB_ALGEBRA ===\n");
-	tests_vec3_addition();
-	tests_vec3_subtraction();
+	tests_vec3_add();
+	tests_vec3_subion();
 	tests_vec3_dot();
-	tests_vec3_magnitude();
+	tests_vec3_length();
 	tests_vec3_cross();
 	tests_vec3_normalize();
-	tests_vec3_scale();
+	tests_vec3_mul();
 	return (0);
 }

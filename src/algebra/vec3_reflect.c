@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_normalize.c                                   :+:      :+:    :+:   */
+/*   vec3_reflect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 08:54:48 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/22 10:07:15 by souahidi         ###   ########.fr       */
+/*   Created: 2025/02/10 09:49:38 by souahidi          #+#    #+#             */
+/*   Updated: 2025/02/10 09:49:38 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algebra.h"
-#include <math.h>
 
-t_vec3	vec3_normalize(t_vec3 vec)
+t_vec3	vec3_reflect(t_vec3 incident, t_vec3 normal)
 {
-	double	length;
-	t_vec3	normalized_vector;
-
-	length = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-	if (length == 0)
-		normalized_vector = (t_vec3){0, 0, 0};
-	else
-	{
-		normalized_vector.x = vec.x / length;
-		normalized_vector.y = vec.y / length;
-		normalized_vector.z = vec.z / length;
-	}
-	return (normalized_vector);
+	return (vec3_sub(incident, vec3_mul(normal, 2.0 * vec3_dot(incident,
+					normal))));
 }

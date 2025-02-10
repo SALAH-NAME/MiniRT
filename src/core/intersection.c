@@ -31,10 +31,10 @@ void	update_hit(t_hit *hit, double t, t_ray ray, t_object *obj)
 {
 	hit->hit = true;
 	hit->t = t;
-	hit->point = vec3_addition(ray.origin, vec3_scale(ray.direction, t));
-	hit->normal = vec3_normalize(vec3_subtract(hit->point,
+	hit->point = vec3_add(ray.origin, vec3_mul(ray.direction, t));
+	hit->normal = vec3_normalize(vec3_sub(hit->point,
 				obj->data.sphere.center));
-	hit->view_dir = vec3_scale(ray.direction, -1.0);
+	hit->view_dir = vec3_mul(ray.direction, -1.0);
 	hit->object = obj;
 	hit->material = obj->material;
 }
@@ -48,7 +48,7 @@ t_hit	solve_sphere_equation(t_ray ray, t_sphere sphere, t_object *obj)
 	double	t[2];
 
 	hit = init_hit(obj);
-	oc = vec3_subtract(ray.origin, sphere.center);
+	oc = vec3_sub(ray.origin, sphere.center);
 	abc[0] = vec3_dot(ray.direction, ray.direction);
 	abc[1] = 2.0 * vec3_dot(oc, ray.direction);
 	abc[2] = vec3_dot(oc, oc) - sphere.radius * sphere.radius;

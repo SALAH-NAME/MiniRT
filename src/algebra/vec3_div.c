@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_addition.c                                    :+:      :+:    :+:   */
+/*   vec3_div.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 10:09:29 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/22 10:09:30 by souahidi         ###   ########.fr       */
+/*   Created: 2025/02/10 09:44:50 by souahidi          #+#    #+#             */
+/*   Updated: 2025/02/10 09:44:50 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algebra.h"
 
-t_vec3	vec3_addition(t_vec3 vec_1, t_vec3 vec_2)
+t_vec3	vec3_div(t_vec3 v, double scalar)
 {
-	t_vec3	vector;
-
-	vector.x = vec_1.x + vec_2.x;
-	vector.y = vec_1.y + vec_2.y;
-	vector.z = vec_1.z + vec_2.z;
-	return (vector);
+	if (fabs(scalar) < 1e-6)
+		return (v);
+	return (vec3_mul(v, 1.0 / scalar));
 }
