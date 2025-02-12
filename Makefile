@@ -59,7 +59,7 @@ LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(MLX_DIR) \
 						 -L$(LIST_DIR)
 
-LIB_FLAGS	:= -lalgebra -lparser -lutils -lft -llist -lmlx -lXext -lX11 -lm -lz
+LIB_FLAGS	:=  -lparser -lutils -lft -llist -lalgebra -lmlx -lXext -lX11 -lm -lz
 
 
 all: $(NAME) 

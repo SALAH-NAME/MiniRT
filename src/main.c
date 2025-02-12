@@ -14,35 +14,6 @@
 #if PARSING
 
 # include "core.h"
-
-/*int	load_render(t_data *data)*/
-/*{*/
-/*	t_render	world;*/
-/**/
-/*	// Parsing map*/
-/*	// Setup mlx*/
-/*	world.mlx.ptr = mlx_init();*/
-/*	world.mlx.win = mlx_new_window(world.mlx.ptr, WIDTH, HEIGHT, "miniRT");*/
-/*	world.mlx.img = mlx_new_image(world.mlx.ptr, WIDTH, HEIGHT);*/
-/*	world.mlx.addr = mlx_get_data_addr(world.mlx.img,
-			&world.mlx.bits_per_pixel,*/
-/*			&world.mlx.line_length, &world.mlx.endian);*/
-/*	// Hooks*/
-/*	mlx_hook(world.mlx.win, KeyPress, KeyPressMask, &handle_keypress, &world);*/
-/*	mlx_hook(world.mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,*/
-/*		&world);*/
-/*	world.scene = data->scene;*/
-/*	init_scene(&world);*/
-/*	render_scene(&world);*/
-/*	mlx_loop(world.mlx.ptr);*/
-/*	mlx_destroy_image(world.mlx.ptr, world.mlx.img);*/
-/*	mlx_destroy_window(world.mlx.ptr, world.mlx.win);*/
-/*	mlx_destroy_display(world.mlx.ptr);*/
-/*	free(world.mlx.ptr);*/
-/*	// Free all*/
-/*	return (0);*/
-/*}*/
-
 int	init(t_data *data, char *av)
 {
 	if (parse_config_init(data))
@@ -77,36 +48,82 @@ int	main(int ac, char **av)
 
 #else
 
-# include "minirt.h"
-# include <stdio.h>
-# include <stdlib.h>
-
-int	main(void)
-{
-	t_render	world;
-
 # include "algebra.h"
 # include "core.h"
+# include "list.h"
 # include "minirt.h"
-	// Parsing map
-	// Setup mlx
-	world.mlx.ptr = mlx_init();
-	world.mlx.win = mlx_new_window(world.mlx.ptr, WIDTH, HEIGHT, "miniRT");
-	world.mlx.img = mlx_new_image(world.mlx.ptr, WIDTH, HEIGHT);
-	world.mlx.addr = mlx_get_data_addr(world.mlx.img, &world.mlx.bits_per_pixel,
-			&world.mlx.line_length, &world.mlx.endian);
-	// Hooks
-	mlx_hook(world.mlx.win, KeyPress, KeyPressMask, &handle_keypress, &world);
-	mlx_hook(world.mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,
-		&world);
-	init_scene(&world);
-	render_scene(&world);
-	mlx_loop(world.mlx.ptr);
-	mlx_destroy_image(world.mlx.ptr, world.mlx.img);
-	mlx_destroy_window(world.mlx.ptr, world.mlx.win);
-	mlx_destroy_display(world.mlx.ptr);
-	free(world.mlx.ptr);
-	// Free all
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+
+static bool	init_mlx(t_render *render)
+{
+	render->mlx.ptr = mlx_init();
+	if (!render->mlx.ptr)
+		return (false);
+	render->mlx.win = mlx_new_window(render->mlx.ptr, WIDTH, HEIGHT, "miniRT");
+	if (!render->mlx.win)
+		return (false);
+	render->mlx.img = mlx_new_image(render->mlx.ptr, WIDTH, HEIGHT);
+	if (!render->mlx.img)
+		return (false);
+	render->mlx.addr = mlx_get_data_addr(render->mlx.img,
+			&render->mlx.bits_per_pixel, &render->mlx.line_length,
+			&render->mlx.endian);
+	return (true);
+}
+
+static void	setup_hooks(t_render *render)
+{
+	mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_keypress, render);
+	mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,
+		render);
+}
+
+static void	cleanup_render(t_render *render)
+{
+	if (!render)
+		return ;
+	if (render->mlx.img)
+		mlx_destroy_image(render->mlx.ptr, render->mlx.img);
+	if (render->mlx.win)
+		mlx_destroy_window(render->mlx.ptr, render->mlx.win);
+	if (render->mlx.ptr)
+	{
+		mlx_destroy_display(render->mlx.ptr);
+		free(render->mlx.ptr);
+	}
+	free_scene(&render->scene);
+}
+
+static int	ft_error(char *str)
+{
+	ft_putstr_fd(str, 2);
+	write(2, "\n", 1);
+	return (1);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_render	render;
+
+	(void)argv;
+	(void)argc;
+	/*if (argc != 2)*/
+		/*return (ft_error("Usage: ./miniRT <scene.rt>"));*/
+
+	 // if (!parse_scene(&render, argv[1]))
+		// return (cleanup(&render), ft_error("Scene parsing failed"));
+
+	if (!init_mlx(&render))
+		return (cleanup_render(&render), ft_error("MLX initialization failed"));
+	setup_hooks(&render);
+	init_scene(&render);
+	render_scene(&render);
+	mlx_loop(render.mlx.ptr);
+	cleanup_render(&render);
 	return (0);
 }
 

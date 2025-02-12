@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix3_apply_rotation.c                           :+:      :+:    :+:   */
+/*   ray_intersection_shading.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 09:54:26 by souahidi          #+#    #+#             */
-/*   Updated: 2025/02/10 09:54:26 by souahidi         ###   ########.fr       */
+/*   Created: 2025/02/12 15:45:50 by souahidi          #+#    #+#             */
+/*   Updated: 2025/02/12 15:45:50 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "algebra.h"
+#include "minirt.h"
 
-t_vec3	matrix3_apply_rotation(const double *matrix, t_vec3 v)
+t_color	ray_intersection_shading(t_ray ray, t_scene *scene)
 {
-	return ((t_vec3){
-		matrix[0] * v.x + matrix[1] * v.y + matrix[2] * v.z,
-		matrix[3] * v.x + matrix[4] * v.y + matrix[5] * v.z,
-		matrix[6] * v.x + matrix[7] * v.y + matrix[8] * v.z
-	});
+	t_hit	hit;
+
+	if (find_nearest_intersection(ray, scene, &hit))
+		return (calculate_lighting(&hit, scene));
+	return ((t_color){BACKGROUND_COLOR});
 }

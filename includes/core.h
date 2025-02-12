@@ -46,6 +46,7 @@ typedef struct s_data
 
 // testing utils
 void			print_scene(t_scene *scene);
+void			free_scene(t_scene *scene);
 void			free_all(t_data *file);
 
 #endif

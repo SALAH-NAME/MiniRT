@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   solve_quadratic.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 15:48:22 by souahidi          #+#    #+#             */
-/*   Updated: 2025/01/28 15:50:07 by souahidi         ###   ########.fr       */
+/*   Created: 2025/02/12 16:05:27 by souahidi          #+#    #+#             */
+/*   Updated: 2025/02/12 16:05:27 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "core.h"
 
-t_ray	ray_create(t_vec3 origin, t_vec3 direction)
+bool	solve_quadratic(double a, double b, double c, double *t)
 {
-	t_ray	ray;
+	double	discriminant;
+	double	t1;
+	double	t2;
 
-	ray.origin = origin;
-	ray.direction = direction;
-	return (ray);
+	discriminant = b * b - 4 * a * c;
+	if (discriminant < 0)
+		return (false);
+	t1 = (-b - sqrt(discriminant)) / (2.0 * a);
+	t2 = (-b + sqrt(discriminant)) / (2.0 * a);
+	if (t1 < t2 && t1 > EPSILON)
+		*t = t1;
+	else
+		*t = t2;
+	return (*t > EPSILON);
 }

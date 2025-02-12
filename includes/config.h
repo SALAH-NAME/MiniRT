@@ -13,10 +13,9 @@
 #ifndef CONFIG_H
 # define CONFIG_H
 
+# include "float.h"
+
 # define UN -1 // for undefined values or unused values
-# define EPSILON 1e-6
-# define FLT_MAX 3.402823466E+38F
-# define FLT_MIN 1.175494351E-38F
 
 typedef struct s_data	t_data;
 enum					e_elem

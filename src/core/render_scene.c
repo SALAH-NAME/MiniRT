@@ -14,30 +14,6 @@
 #include <math.h>
 #include <stdio.h>
 
-void	pixel_to_viewport(int x, int y, t_render *render, t_vec3 *direction)
-{
-	double	px;
-	double	py;
-	double	viewport_right;
-	double	viewport_top;
-	double	half_fov_tan;
-
-	half_fov_tan = tan((render->scene.camera.fov * M_PI / 180) / 2.0);
-	if (WIDTH >= HEIGHT)
-	{
-		viewport_right = half_fov_tan;
-		viewport_top = viewport_right * ((double)HEIGHT / WIDTH);
-	}
-	else
-	{
-		viewport_top = half_fov_tan;
-		viewport_right = viewport_top / ((double)HEIGHT / WIDTH);
-	}
-	px = (2.0 * ((x + 0.5) / WIDTH) - 1.0) * viewport_right;
-	py = (1.0 - (((y + 0.5) / HEIGHT) * 2.0)) * viewport_top;
-	*direction = vec3_normalize(vec3_create(px, py, -1.0));
-}
-
 void	put_pixel_to_img(t_mlx *mlx, int x, int y, t_color color)
 {
 	char	*destination;
@@ -50,24 +26,54 @@ void	put_pixel_to_img(t_mlx *mlx, int x, int y, t_color color)
 	*(unsigned int *)destination = rgb;
 }
 
-void	render_pixel(t_render *render, int x, int y)
+void	calculate_viewport(t_camera *cam, double *v_right, double *v_top)
 {
-	t_ray	ray;
-	t_hit	hit;
-	t_color	color;
-	t_vec3	direction;
+	double	half_fov_tan;
 
-	pixel_to_viewport(x, y, render, &direction);
-	ray = ray_create(render->scene.camera.position, direction);
-	hit = find_nearest_intersection(ray, &render->scene);
-	color = calculate_lighting(&render->scene, hit);
-	put_pixel_to_img(&render->mlx, x, y, color);
+	half_fov_tan = tan((cam->fov * M_PI / 180.0) / 2.0);
+	if (WIDTH >= HEIGHT)
+	{
+		*v_right = half_fov_tan;
+		*v_top = half_fov_tan * ((double)HEIGHT / WIDTH);
+	}
+	else
+	{
+		*v_top = half_fov_tan;
+		*v_right = half_fov_tan / ((double)HEIGHT / WIDTH);
+	}
+}
+
+t_vec3	get_ray_direction(int x, int y, double v_right, double v_top)
+{
+	double	px;
+	double	py;
+
+	px = (2.0 * ((x + 0.5) / WIDTH) - 1.0) * v_right;
+	py = (1.0 - 2.0 * ((y + 0.5) / HEIGHT)) * v_top;
+	return (vec3_create(px, py, -1.0));
+}
+
+t_ray	generate_ray(t_camera *cam, int x, int y)
+{
+	double	viewport_right;
+	double	viewport_top;
+	t_vec3	ray_direction;
+	double	rotation_matrix[9];
+
+	calculate_viewport(cam, &viewport_right, &viewport_top);
+	ray_direction = get_ray_direction(x, y, viewport_right, viewport_top);
+	matrix3_create_rotation(rotation_matrix, cam->orientation);
+	ray_direction = matrix3_apply_rotation(rotation_matrix, ray_direction);
+	return ((t_ray){.origin = cam->position,
+		.direction = vec3_normalize(ray_direction)});
 }
 
 void	render_scene(t_render *render)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	t_ray	ray;
+	t_color	color_rgb;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -75,7 +81,9 @@ void	render_scene(t_render *render)
 		x = 0;
 		while (x < WIDTH)
 		{
-			render_pixel(render, x, y);
+			ray = generate_ray(&render->scene.camera, x, y);
+			color_rgb = ray_intersection_shading(ray, &render->scene);
+			put_pixel_to_img(&render->mlx, x, y, color_rgb);
 			x++;
 		}
 		y++;
