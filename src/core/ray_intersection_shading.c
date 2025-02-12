@@ -18,5 +18,7 @@ t_color	ray_intersection_shading(t_ray ray, t_scene *scene)
 
 	if (find_nearest_intersection(ray, scene, &hit))
 		return (calculate_lighting(&hit, scene));
+	//	RAY-CASTING
+	//	return (hit.material.color);
 	return ((t_color){BACKGROUND_COLOR});
 }
