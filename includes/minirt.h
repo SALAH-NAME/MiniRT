@@ -22,7 +22,6 @@
 
 # define WIDTH 480
 # define HEIGHT 560
-# define BACKGROUND_COLOR 0.2, 0.2, 0.2
 
 typedef struct s_ray
 {
@@ -73,7 +72,11 @@ void			render_scene(t_render *render);
 t_color			calculate_lighting(t_hit *hit, t_scene *scene);
 bool			solve_quadratic(double a, double b, double c, double *t);
 bool			ray_sphere_intersect(t_ray ray, t_object *obj, t_hit *hit);
+bool			ray_plane_intersect(t_ray ray, t_object *obj, t_hit *hit);
 bool			find_nearest_intersection(t_ray ray, t_scene *scene,
 					t_hit *hit);
 t_color			ray_intersection_shading(t_ray ray, t_scene *scene);
+t_intersect_fn	get_intersection_function(t_object_type type);
+bool			is_in_shadow(t_vec3 point, t_vec3 light_pos, t_scene *scene,
+					t_object *current_obj);
 #endif

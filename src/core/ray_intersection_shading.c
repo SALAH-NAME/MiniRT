@@ -20,5 +20,5 @@ t_color	ray_intersection_shading(t_ray ray, t_scene *scene)
 		return (calculate_lighting(&hit, scene));
 	//	RAY-CASTING
 	//	return (hit.material.color);
-	return ((t_color){BACKGROUND_COLOR});
+	return ((t_color){0.2, 0.2, 0.2});
 }

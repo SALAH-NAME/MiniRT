@@ -28,12 +28,12 @@ static t_color	calculate_diffuse(t_hit *hit, t_light *light, t_vec3 light_dir)
 	double	diff_factor;
 
 	diff_factor = fmax(vec3_dot(hit->normal, light_dir), 0.0);
-	diffuse_color.r = hit->material.color.r * light->color.r * diff_factor * \
-		hit->material.diffuse_coefficient * light->brightness;
-	diffuse_color.g = hit->material.color.g * light->color.g * diff_factor * \
-		hit->material.diffuse_coefficient * light->brightness;
-	diffuse_color.b = hit->material.color.b * light->color.b * diff_factor * \
-		hit->material.diffuse_coefficient * light->brightness;
+	diffuse_color.r = hit->material.color.r * light->color.r * diff_factor
+		* hit->material.diffuse_coefficient * light->brightness;
+	diffuse_color.g = hit->material.color.g * light->color.g * diff_factor
+		* hit->material.diffuse_coefficient * light->brightness;
+	diffuse_color.b = hit->material.color.b * light->color.b * diff_factor
+		* hit->material.diffuse_coefficient * light->brightness;
 	return (diffuse_color);
 }
 
@@ -44,44 +44,50 @@ static t_color	calculate_specular(t_hit *hit, t_light *light, t_vec3 light_dir)
 	double	spec_factor;
 
 	reflect_dir = vec3_reflect(vec3_mul(light_dir, -1.0), hit->normal);
-	spec_factor = pow(fmax(vec3_dot(hit->view_dir, reflect_dir), 0.0), \
-		hit->material.shininess);
-	specular_color.r = light->color.r * spec_factor * \
-		hit->material.specular_coefficient * light->brightness;
-	specular_color.g = light->color.g * spec_factor * \
-		hit->material.specular_coefficient * light->brightness;
-	specular_color.b = light->color.b * spec_factor * \
-		hit->material.specular_coefficient * light->brightness;
+	spec_factor = pow(fmax(vec3_dot(hit->view_dir, reflect_dir), 0.0),
+			hit->material.shininess);
+	specular_color.r = light->color.r * spec_factor
+		* hit->material.specular_coefficient * light->brightness;
+	specular_color.g = light->color.g * spec_factor
+		* hit->material.specular_coefficient * light->brightness;
+	specular_color.b = light->color.b * spec_factor
+		* hit->material.specular_coefficient * light->brightness;
 	return (specular_color);
 }
 
-static void	add_light_contribution(t_color *final, t_color *contrib)
+static void	add_light_contribution(t_color *final, t_color *contrib1,
+		t_color *contrib2)
 {
-	final->r += contrib->r;
-	final->g += contrib->g;
-	final->b += contrib->b;
+	final->r += contrib1->r;
+	final->g += contrib1->g;
+	final->b += contrib1->b;
+	final->r += contrib2->r;
+	final->g += contrib2->g;
+	final->b += contrib2->b;
 }
 
 t_color	calculate_lighting(t_hit *hit, t_scene *scene)
 {
 	t_color	final_color;
-	t_light	*current_light;
+	t_light	*light;
 	t_vec3	light_dir;
 	t_color	diffuse;
 	t_color	specular;
 
 	final_color = calculate_ambient(hit, &scene->ambient);
-	current_light = scene->lights;
-	while (current_light)
+	light = scene->lights;
+	while (light)
 	{
-		// IF SHADOW
-		light_dir = vec3_normalize(vec3_sub(current_light->position,
-					hit->point));
-		diffuse = calculate_diffuse(hit, current_light, light_dir);
-		specular = calculate_specular(hit, current_light, light_dir);
-		add_light_contribution(&final_color, &diffuse);
-		add_light_contribution(&final_color, &specular);
-		current_light = current_light->next;
+		if (is_in_shadow(hit->point, light->position, scene, hit->object))
+		{
+			light = light->next;
+			continue ;
+		}
+		light_dir = vec3_normalize(vec3_sub(light->position, hit->point));
+		diffuse = calculate_diffuse(hit, light, light_dir);
+		specular = calculate_specular(hit, light, light_dir);
+		add_light_contribution(&final_color, &diffuse, &specular);
+		light = light->next;
 	}
 	final_color.r = fmin(final_color.r, 1.0);
 	final_color.g = fmin(final_color.g, 1.0);

@@ -97,9 +97,9 @@ typedef enum e_object_type
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
-	// OBJ_CONE,
-	// OBJ_HYPERBOLOID,
-	// OBJ_PARABOLOID
+	/*OBJ_CONE,*/
+	/*OBJ_HYPERBOLOID,*/
+	/*OBJ_PARABOLOID*/
 }						t_object_type;
 
 typedef struct s_material
