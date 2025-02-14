@@ -19,7 +19,7 @@ void	color_init(t_data *data, t_color *color, char *val)
 	if (!val || !comma_count(val))
 		set_error(data, ERR_MS_COLOR, val, NULL);
 	split = ft_split(val, ',');
-	data->file->split = split;
+	data->file.split = split;
 	if (ft_arrlen(split) != 3)
 		set_error(data, ERR_MS_COLOR, val, NULL);
 	if (int_valid(split[0]) == 0 || int_valid(split[1]) == 0
@@ -36,7 +36,7 @@ void	color_init(t_data *data, t_color *color, char *val)
 		set_error(data, ERR_COLOR_R, split[2], NULL);
 	*color = color_normalize(*color);
 	ft_arrmapi(split, free);
-	data->file->split = NULL;
+	data->file.split = NULL;
 }
 
 void	position_init(t_data *data, t_vec3 *pos, char *val)
@@ -46,7 +46,7 @@ void	position_init(t_data *data, t_vec3 *pos, char *val)
 	if (!val || !comma_count(val))
 		set_error(data, ERR_MS_COORD, val, NULL);
 	split = ft_split(val, ',');
-	data->file->split = split;
+	data->file.split = split;
 	if (ft_arrlen(split) != 3)
 		set_error(data, ERR_MS_COORD, val, NULL);
 	if (float_valid(split[0]) == 0 || float_valid(split[1]) == 0
@@ -59,7 +59,7 @@ void	position_init(t_data *data, t_vec3 *pos, char *val)
 	if (ft_strtod_safe(split[2], &pos->z) == 0)
 		set_error(data, ERR_COORD_R, split[2], NULL);
 	ft_arrmapi(split, free);
-	data->file->split = NULL;
+	data->file.split = NULL;
 }
 
 void	degree_init(t_data *data, int *degree, char *val)
@@ -81,7 +81,7 @@ void	vector_init(t_data *data, t_vec3 *vector, char *val)
 	if (!val || !comma_count(val))
 		set_error(data, ERR_MS_VECTOR, val, NULL);
 	split = ft_split(val, ',');
-	data->file->split = split;
+	data->file.split = split;
 	if (ft_arrlen(split) != 3)
 		set_error(data, ERR_MS_VECTOR, val, NULL);
 	if (float_valid(split[0]) == 0 || float_valid(split[1]) == 0
@@ -100,5 +100,5 @@ void	vector_init(t_data *data, t_vec3 *vector, char *val)
 	if (vector->z < -1.0 || vector->z > 1.0)
 		set_error(data, ERR_VECTOR_R, split[2], NULL);
 	ft_arrmapi(split, free);
-	data->file->split = NULL;
+	data->file.split = NULL;
 }

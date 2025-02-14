@@ -53,11 +53,11 @@ void	set_error(t_data *data, char *desc, char *pr, char *hint)
 {
 	t_error	error;
 
-	if (data->file->error == 0)
+	if (data->file.error == 0)
 		return ;
-	data->file->error = 0;
-	error.file_name = data->file->file_name;
-	error.line_number = data->file->line_index;
+	data->file.error = 0;
+	error.file_name = data->file.file_name;
+	error.line_number = data->file.line_index;
 	error.description = desc;
 	error.problem = pr;
 	error.hint = "\0";

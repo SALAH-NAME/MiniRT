@@ -17,41 +17,41 @@ void	parse_line(t_data *data)
 	int	i;
 
 	i = 0;
-	if (!data->file->line[0])
+	if (!data->file.line[0])
 		return ;
-	data->file->row = ft_split(data->file->line, ' ');
-	while (data->config->elements[i].name != NULL && data->file->row[0] != NULL)
+	data->file.row = ft_split(data->file.line, ' ');
+	while (data->config->elements[i].name != NULL && data->file.row[0] != NULL)
 	{
-		if (ft_strcmp(data->file->row[0], data->config->elements[i].name) == 0)
+		if (ft_strcmp(data->file.row[0], data->config->elements[i].name) == 0)
 		{
-			if (data->file->error)
+			if (data->file.error)
 				data->config->elements[i].init_func(data);
-			ft_arrmapi(data->file->row, free);
+			ft_arrmapi(data->file.row, free);
 			return ;
 		}
 		i++;
 	}
-	set_error(data, ERR_UNREC_OBJ_TYPE, data->file->row[0], NULL);
-	ft_arrmapi(data->file->row, free);
+	set_error(data, ERR_UNREC_OBJ_TYPE, data->file.row[0], NULL);
+	ft_arrmapi(data->file.row, free);
 }
 
 void	scene_data(t_data *data)
 {
 	ft_bzero(&data->scene, sizeof(t_scene));
-	data->file->error = 1;
-	data->file->line = NULL;
-	data->file->line_index = 0;
-	data->file->line = get_next_line(data->file->fd);
-	while (data->file->line)
+	data->file.error = 1;
+	data->file.line = NULL;
+	data->file.line_index = 0;
+	data->file.line = get_next_line(data->file.fd);
+	while (data->file.line)
 	{
-		data->file->line_index++;
-		if (data->file->error)
+		data->file.line_index++;
+		if (data->file.error)
 			parse_line(data);
-		free(data->file->line);
-		data->file->line = get_next_line(data->file->fd);
+		free(data->file.line);
+		data->file.line = get_next_line(data->file.fd);
 	}
 	print_scene(&data->scene);
-	free(data->file->line);
+	free(data->file.line);
 	check_errors(data);
 }
 
@@ -67,21 +67,20 @@ int	valid_file_name(char *file_name)
 	return (0);
 }
 
-int	load_file(t_data *data, char *file_name)
+int	parse_scene(t_render *render, char *file_name)
 {
-	t_file	*file;
+	t_data	data;
 
-	file = ft_calloc(1, sizeof(t_file));
-	if (file)
-	{
-		data->file = file;
-		file->file_name = file_name;
-		file->fd = open(file_name, O_RDONLY);
-		if (file->fd == -1)
-			return (perror(file_name), 1);
-		scene_data(data);
-		close(file->fd);
-		return (data->file->error == 0);
-	}
-	return (0);
+	if (valid_file_name(file_name))
+		return (1);
+
+  data.file.file_name = file_name;
+  data.file.fd = open(file_name, O_RDONLY);
+  if (data.file.fd == -1)
+    return (perror(file_name), 1);
+  scene_data(&data);
+  close(data.file.fd);
+  render->scene = data.scene;
+  return (data.file.error == 0);
 }
+
