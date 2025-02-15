@@ -16,7 +16,7 @@
 # include <math.h>
 # include <stdbool.h>
 
-# define EPSILON 1e-7
+# define EPSILON 1e-8
 
 typedef struct s_vec3
 {
