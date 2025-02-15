@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:33:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/03 20:10:58 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/15 01:07:27 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_data
 
 // testing utils
 void			print_scene(t_scene *scene);
-void			free_scene(t_scene *scene);
+void  	free_scene(t_scene *scene);
 void			free_all(t_data *file);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 00:47:31 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/15 00:47:31 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/15 01:55:31 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "core.h"
 #include "list.h"
 #include "minirt.h"
+#include "events.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,8 +40,8 @@ static bool	init_mlx(t_render *render)
 static void	setup_hooks(t_render *render)
 {
 	mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_keypress, render);
-	mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,
-		render);
+	// mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_esq, render);
+	mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,render);
 }
 
 static void	cleanup_render(t_render *render)

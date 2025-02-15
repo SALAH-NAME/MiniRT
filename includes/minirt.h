@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:44:07 by souahidi          #+#    #+#             */
-/*   Updated: 2025/02/03 20:12:06 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/15 01:36:23 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 
 # define WIDTH 480
 # define HEIGHT 560
+
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_Q 12
+# define KEY_E 14
 
 typedef struct s_ray
 {
@@ -60,7 +67,7 @@ typedef struct s_render
 
 typedef bool	(*t_intersect_fn)(t_ray ray, t_object *obj, t_hit *hit);
 
-int				handle_keypress(int keysym, t_render *world);
+int	handle_esq(int keysym, t_render *world);
 int				handle_close(t_render *world);
 
 t_color			color_create(float r, float g, float b);
@@ -80,4 +87,6 @@ t_color			ray_intersection_shading(t_ray ray, t_scene *scene);
 t_intersect_fn	get_intersection_function(t_object_type type);
 bool			is_in_shadow(t_vec3 point, t_vec3 light_pos, t_scene *scene,
 					t_object *current_obj);
+
+
 #endif

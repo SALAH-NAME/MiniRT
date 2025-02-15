@@ -6,7 +6,7 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/02/03 19:57:52 by ysemlali         ###   ########.fr        #
+#    Updated: 2025/02/15 01:50:30 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,14 @@ LIBFT_DIR		:= $(SRC_DIR)/libft
 PARSER_DIR	:= $(SRC_DIR)/parser
 UTILS_DIR		:= $(SRC_DIR)/utils
 LIST_DIR		:= $(SRC_DIR)/list
+EVENT_DIR		:= $(SRC_DIR)/events
 
 ALGEBRA_SRC	:= $(wildcard $(ALGEBRA_DIR)/*.c)
 LIBFT_SRCS	:= $(wildcard $(LIBFT_DIR)/*.c)
 PARSER_SRCS	:= $(wildcard $(PARSER_DIR)/*.c)
 UTILS_SRCS	:= $(wildcard $(UTILS_DIR)/*.c)
 LIST_SRCS		:= $(wildcard $(LIST_DIR)/*.c)
+EVENT_SRCS	:= $(wildcard $(EVENT_DIR)/*.c)
 
 SRCS	:= $(wildcard $(SRC_DIR)/*.c)
 OBJS	:= $(SRCS:.c=.o)
@@ -49,17 +51,19 @@ LIBFT_LIB		:= $(LIBFT_DIR)/libft.a
 PARSER_LIB	:= $(PARSER_DIR)/libparser.a
 UTILS_LIB		:= $(UTILS_DIR)/libutils.a
 LIST_LIB		:= $(LIST_DIR)/liblist.a
+EVENT_LIB		:= $(EVENT_DIR)/libevent.a
 
-LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(PARSER_LIB) $(UTILS_LIB) $(LIST_LIB)
+LIBS	:= $(ALGEBRA_LIB) $(LIBFT_LIB) $(PARSER_LIB) $(UTILS_LIB) $(LIST_LIB) $(EVENT_LIB)
 
 LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(PARSER_DIR) \
 						 -L$(UTILS_DIR) \
 						 -L$(LIBFT_DIR) \
 						 -L$(MLX_DIR) \
-						 -L$(LIST_DIR)
+						 -L$(LIST_DIR)\
+						 -L$(EVENT_DIR)
 
-LIB_FLAGS	:=  -lparser -lutils -lft -llist -lalgebra -lmlx -lXext -lX11 -lm -lz
+LIB_FLAGS	:=  -lparser -lutils -lft -llist -lalgebra  -lmlx -lXext -lX11 -lm -lz -levent
 
 
 all: $(NAME) 
@@ -92,6 +96,9 @@ $(UTILS_LIB): $(UTILS_SRCS)
 $(LIST_LIB): $(LIST_SRCS)
 	$(MAKE) -C $(LIST_DIR) CFLAGS="$(CFLAGS)"
 
+$(EVENT_LIB): $(EVENT_SRCS)
+	$(MAKE) -C $(EVENT_DIR) CFLAGS="$(CFLAGS)"
+
 -include $(DEPS) $(CORE_DEPS)
 
 clean:
@@ -102,6 +109,7 @@ clean:
 	$(MAKE) -C $(PARSER_DIR) clean
 	$(MAKE) -C $(UTILS_DIR) clean
 	$(MAKE) -C $(LIST_DIR) clean
+	$(MAKE) -C $(EVENT_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
@@ -110,6 +118,7 @@ fclean: clean
 	$(MAKE) -C $(PARSER_DIR) fclean
 	$(MAKE) -C $(UTILS_DIR) fclean
 	$(MAKE) -C $(LIST_DIR) fclean
+	$(MAKE) -C $(EVENT_DIR) fclean
 
 re: fclean all
 
