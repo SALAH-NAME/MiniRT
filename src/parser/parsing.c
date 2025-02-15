@@ -12,6 +12,11 @@
 
 #include "core.h"
 
+void comment(t_data *data)
+{
+  (void)data;
+}
+
 void	parse_line(t_data *data)
 {
 	int	i;
@@ -20,12 +25,12 @@ void	parse_line(t_data *data)
 	if (!data->file.line[0])
 		return ;
 	data->file.row = ft_split(data->file.line, ' ');
-	while (data->config->elements[i].name != NULL && data->file.row[0] != NULL)
+	while (data->config.elements[i].name != NULL && data->file.row[0] != NULL)
 	{
-		if (ft_strcmp(data->file.row[0], data->config->elements[i].name) == 0)
+		if (ft_strcmp(data->file.row[0], data->config.elements[i].name) == 0)
 		{
 			if (data->file.error)
-				data->config->elements[i].init_func(data);
+				data->config.elements[i].init_func(data);
 			ft_arrmapi(data->file.row, free);
 			return ;
 		}
@@ -73,14 +78,16 @@ int	parse_scene(t_render *render, char *file_name)
 
 	if (valid_file_name(file_name))
 		return (1);
-
-  data.file.file_name = file_name;
-  data.file.fd = open(file_name, O_RDONLY);
-  if (data.file.fd == -1)
-    return (perror(file_name), 1);
-  scene_data(&data);
-  close(data.file.fd);
-  render->scene = data.scene;
-  return (data.file.error == 0);
+	if (parse_config_init(&data))
+		return (1);
+	data.file.file_name = file_name;
+	data.file.fd = open(file_name, O_RDONLY);
+	if (data.file.fd == -1)
+		return (perror(file_name), 1);
+	scene_data(&data);
+	close(data.file.fd);
+	render->scene = data.scene;
+	if (!data.file.error)
+		free_all(&data);
+	return (data.file.error != 0);
 }
-

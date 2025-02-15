@@ -59,6 +59,7 @@ t_object	*create_plane(t_vec3 center, t_vec3 normal, t_color color, int id)
 	plane->transform.position = center;
 	plane->transform.rotation = normal;
 	plane->material.color = color;
+
 	plane->material.diffuse_coefficient = 0.8;
 	plane->material.specular_coefficient = 0.2;
 	plane->material.shininess = 16.0;
@@ -69,37 +70,33 @@ t_object	*create_plane(t_vec3 center, t_vec3 normal, t_color color, int id)
 	return (plane);
 }
 
+void set_materials(t_object *obj)
+{
+
+	if (obj->type == OBJ_SPHERE)
+	{
+    obj->material.diffuse_coefficient = 0.7;
+    obj->material.specular_coefficient = 0.8;
+    obj->material.shininess = 32.0;
+	}
+	else if (obj->type == OBJ_PLANE)
+	{
+    obj->material.diffuse_coefficient = 0.8;
+    obj->material.specular_coefficient = 0.2;
+    obj->material.shininess = 16.0;
+	}
+	else if (obj->type == OBJ_CYLINDER)
+	{
+    ;
+	}
+}
+
 void	init_scene(t_render *render)
 {
-	t_light		*main_light;
-	t_light		*fill_light;
-	t_object	*floor;
-	t_object	*sphere1;
-	t_object	*sphere2;
-	t_object	*sphere3;
-
-	render->scene.camera.position = (t_vec3){1, 2, 5};
-	render->scene.camera.orientation = (t_vec3){0.0, 0.0, 0.0};
-	render->scene.camera.fov = 70.0;
-	render->scene.ambient.ratio = 0.1;
-	render->scene.ambient.color = (t_color){1.0, 1.0, 1.0};
-	main_light = create_light((t_vec3){-3, 4, 1}, 0.7, (t_color){1.0, 1.0,
-			1.0});
-	fill_light = create_light((t_vec3){3, 4, 1}, 0.3, (t_color){1.0, 1.0, 1.0});
-	main_light->next = fill_light;
-	render->scene.lights = main_light;
-	render->scene.selected_light = main_light;
-	floor = create_plane((t_vec3){-3.0000001, 0, -0}, (t_vec3){1, 0, 0},
-			(t_color){0.0, 1.0, 1.0}, 1);
-	sphere1 = create_sphere((t_vec3){0.0, -50.5, 0.0}, 50.0, (t_color){1.0, 0.0,
-			0.0}, 2);
-	sphere2 = create_sphere((t_vec3){1.0, 1.0, 0}, 0.8, (t_color){0.0, 0.0,
-			1.0}, 3);
-	sphere3 = create_sphere((t_vec3){2.2, 0.0, 0}, 0.2, (t_color){0.0, 1.0,
-			0.0}, 3);
-	floor->next = sphere1;
-	sphere1->next = sphere2;
-	sphere2->next = sphere3;
-	render->scene.objects = floor;
-	render->scene.selected_obj = sphere1;
+  t_object *obj = render->scene.objects;
+  while(obj)
+  {
+    set_materials(obj);
+    obj = obj->next;
+  }
 }

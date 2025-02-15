@@ -32,7 +32,7 @@ bool	is_in_shadow(t_vec3 point, t_vec3 light_pos, t_scene *scene,
 	{
 		if (obj != current_obj && get_intersection_function(obj->type)
 			&& get_intersection_function(obj->type)(shadow_ray, obj,
-			&shadow_hit) && shadow_hit.t < light_distance)
+				&shadow_hit) && shadow_hit.t < light_distance)
 			return (true);
 		obj = obj->next;
 	}

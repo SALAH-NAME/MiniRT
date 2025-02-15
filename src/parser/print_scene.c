@@ -17,14 +17,14 @@ void	print_object(t_object *obj)
 	printf("\nObject Type: ");
 	if (obj->type == OBJ_SPHERE)
 	{
-		printf("Sphere\n");
+		printf("Sphere: id = %d\n", obj->id);
 		printf("  Center: %f, %f, %f\n", obj->data.sphere.center.x,
 			obj->data.sphere.center.y, obj->data.sphere.center.z);
 		printf("  Diameter: %f\n", obj->data.sphere.radius);
 	}
 	else if (obj->type == OBJ_PLANE)
 	{
-		printf("Plane\n");
+		printf("Plane: id = %d\n", obj->id);
 		printf("  Center: %f, %f, %f\n", obj->data.plane.center.x,
 			obj->data.plane.center.y, obj->data.plane.center.z);
 		printf("  Normal: %f, %f, %f\n", obj->data.plane.normal.x,
@@ -32,7 +32,7 @@ void	print_object(t_object *obj)
 	}
 	else if (obj->type == OBJ_CYLINDER)
 	{
-		printf("Cylinder\n");
+		printf("Cylinder: id = %d\n" ,obj->id);
 		printf("  Center: %f, %f, %f\n", obj->data.cylinder.center.x,
 			obj->data.cylinder.center.y, obj->data.cylinder.center.z);
 		printf("  Normal: %f, %f, %f\n", obj->data.cylinder.normal.x,

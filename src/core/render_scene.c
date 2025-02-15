@@ -83,11 +83,11 @@ void	render_scene(t_render *render)
 		{
 			ray = generate_ray(&render->scene.camera, x, y);
 			color_rgb = ray_intersection_shading(ray, &render->scene);
+      (void)color_rgb;
 			put_pixel_to_img(&render->mlx, x, y, color_rgb);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(render->mlx.ptr, render->mlx.win, render->mlx.img,
-		0, 0);
+	mlx_put_image_to_window(render->mlx.ptr, render->mlx.win, render->mlx.img,0, 0);
 }

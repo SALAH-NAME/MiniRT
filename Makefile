@@ -121,8 +121,8 @@ valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
 yusuf: all
-	./$(NAME) scenes/file.rt
-
+	./$(NAME) $(SCENE) 
+# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
 .PHONY: all clean fclean re sanitize valgrind
 .SECONDARY:

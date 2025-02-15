@@ -12,7 +12,7 @@
 
 #include "core.h"
 
-t_object	*get_lst_last(t_object *list)
+static t_object	*get_lst_last(t_object *list)
 {
 	t_object	*current;
 
@@ -30,7 +30,7 @@ void	pl_init(t_data *data)
 
 	if (data->file.error == 0)
 		return ;
-	if (!valid(data->file.row + 1, data->config->elements[3].v_count))
+	if (!valid(data->file.row + 1, data->config.elements[3].v_count))
 	{
 		set_error(data, ERR_MS_VAL_PARAM, *data->file.row, NULL);
 		return ;
@@ -53,7 +53,7 @@ void	sp_init(t_data *data)
 
 	if (data->file.error == 0)
 		return ;
-	if (!valid(data->file.row + 1, data->config->elements[4].v_count))
+	if (!valid(data->file.row + 1, data->config.elements[4].v_count))
 	{
 		set_error(data, ERR_MS_VAL_PARAM, *data->file.row, NULL);
 		return ;
@@ -77,7 +77,7 @@ void	cy_init(t_data *data)
 
 	if (data->file.error == 0)
 		return ;
-	if (!valid(data->file.row + 1, data->config->elements[5].v_count))
+	if (!valid(data->file.row + 1, data->config.elements[5].v_count))
 	{
 		set_error(data, ERR_MS_VAL_PARAM, *data->file.row, NULL);
 		return ;
@@ -85,7 +85,7 @@ void	cy_init(t_data *data)
 	obj = ft_calloc(1, sizeof(t_object));
 	obj->id = data->scene.count.cy_c++;
 	obj->type = OBJ_CYLINDER;
-	range = data->config->info[DOUBLE].range;
+	range = data->config.info[DOUBLE].range;
 	position_init(data, &obj->data.cylinder.center, data->file.row[1]);
 	vector_init(data, &obj->data.cylinder.normal, data->file.row[2]);
 	radius_init(data, &obj->data.cylinder.radius, data->file.row[3]);

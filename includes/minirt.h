@@ -49,6 +49,7 @@ typedef struct s_mlx
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+  bool keys[256];
 }				t_mlx;
 
 typedef struct s_render

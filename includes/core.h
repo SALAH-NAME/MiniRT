@@ -41,7 +41,7 @@ typedef struct s_data
 	t_scene		scene;
 	t_error		error;
 	t_render	*render;
-	t_config	*config;
+	t_config	config;
 }				t_data;
 
 // testing utils

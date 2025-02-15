@@ -28,8 +28,7 @@ typedef struct s_file
 }			t_file;
 
 // parse and init
-int	parse_scene(t_render *render, char *file_name);
-int			load_file(t_data *data, char *file_name);
+int			parse_scene(t_render *render, char *file_name);
 int			valid_file_name(char *file_name);
 // obj-init
 void		a_init(t_data *data);
@@ -38,6 +37,7 @@ void		c_init(t_data *data);
 void		cy_init(t_data *data);
 void		pl_init(t_data *data);
 void		sp_init(t_data *data);
+void   comment(t_data *data);
 // info-init
 void		color_init(t_data *data, t_color *color, char *val);
 void		ratio_init(t_data *data, double *ratio, char *line, t_range range);

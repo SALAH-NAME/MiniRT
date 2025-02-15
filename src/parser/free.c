@@ -44,12 +44,12 @@ void	free_all(t_data *data)
 {
 	if (data)
 	{
-			if (data->file.split)
-			{
-				ft_arrmapi(data->file.split, free);
-				free(data->file.split);
-				data->file.split = NULL;
-			}
+		if (data->file.split)
+		{
+			ft_arrmapi(data->file.split, free);
+			free(data->file.split);
+			data->file.split = NULL;
+		}
 		free_scene(&data->scene);
 	}
 }
