@@ -47,4 +47,3 @@ void	radius_init(t_data *data, double *radius, char *val)
 	if (*radius < 0.0 || *radius > FLT_MAX)
 		set_error(data, ERR_RADIUS_R, val, NULL);
 }
-

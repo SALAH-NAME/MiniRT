@@ -1,29 +1,78 @@
 #include "minirt.h"
-# include <stdio.h>
+#include <stdio.h>
 
-void translate_vec(t_vec3 *vec, double x, double y, double z)
+void	translate_vec(t_vec3 *vec, double x, double y, double z)
 {
-    vec->x += x;
-    vec->y += y;
-    vec->z += z;
+	vec->x += x;
+	vec->y += y;
+	vec->z += z;
 }
 
-void    move_selected_forward(t_scene *scene, double distance)
+void	move_selected_forward(t_object *obj, double distance)
 {
-  printf("  hello\n");
-    if (scene->selected_obj)
-        translate_vec(&scene->selected_obj->data.plane.center, 0, distance, 0);
+	t_vec3	*center;
+
+	if (!obj)
+		return ;
+	switch (obj->type)
+	{
+	case OBJ_PLANE:
+		center = &obj->data.plane.center;
+		break ;
+	case OBJ_SPHERE:
+		center = &obj->data.sphere.center;
+		break ;
+	case OBJ_CYLINDER:
+		center = &obj->data.cylinder.center;
+		break ;
+	default:
+		return ;
+	}
+	translate_vec(center, 0, 0, distance);
 }
 
-void    move_selected_right(t_scene *scene, double distance)
+void	move_selected_right(t_object *obj, double distance)
 {
-  printf("  hello\n");
-    if (scene->selected_obj)
-        translate_vec(&scene->selected_obj->data.plane.center, 0, distance, 0);
+	t_vec3	*center;
+
+	if (!obj)
+		return ;
+	switch (obj->type)
+	{
+	case OBJ_PLANE:
+		center = &obj->data.plane.center;
+		break ;
+	case OBJ_SPHERE:
+		center = &obj->data.sphere.center;
+		break ;
+	case OBJ_CYLINDER:
+		center = &obj->data.cylinder.center;
+		break ;
+	default:
+		return ;
+	}
+	translate_vec(center, distance, 0, 0);
 }
 
-void    move_selected_up(t_scene *scene, double distance)
+void	move_selected_up(t_object *obj, double distance)
 {
-    if (scene->selected_obj)
-        translate_vec(&scene->selected_obj->data.plane.center, 0, distance, 0);
+	t_vec3	*center;
+
+	if (!obj)
+		return ;
+	switch (obj->type)
+	{
+	case OBJ_PLANE:
+		center = &obj->data.plane.center;
+		break ;
+	case OBJ_SPHERE:
+		center = &obj->data.sphere.center;
+		break ;
+	case OBJ_CYLINDER:
+		center = &obj->data.cylinder.center;
+		break ;
+	default:
+		return ;
+	}
+	translate_vec(center, 0, distance, 0);
 }

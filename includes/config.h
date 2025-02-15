@@ -26,7 +26,7 @@ enum					e_elem
 	PLANE,
 	SPHERE,
 	CYLINDER,
-  COMMENT,
+	COMMENT,
 	ELEM_COUNT,
 };
 

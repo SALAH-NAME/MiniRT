@@ -56,7 +56,7 @@ typedef struct s_mlx
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-  bool keys[256];
+	bool		keys[256];
 }				t_mlx;
 
 typedef struct s_render
@@ -67,7 +67,7 @@ typedef struct s_render
 
 typedef bool	(*t_intersect_fn)(t_ray ray, t_object *obj, t_hit *hit);
 
-int	handle_esq(int keysym, t_render *world);
+int				handle_esq(int keysym, t_render *world);
 int				handle_close(t_render *world);
 
 t_color			color_create(float r, float g, float b);
@@ -87,6 +87,5 @@ t_color			ray_intersection_shading(t_ray ray, t_scene *scene);
 t_intersect_fn	get_intersection_function(t_object_type type);
 bool			is_in_shadow(t_vec3 point, t_vec3 light_pos, t_scene *scene,
 					t_object *current_obj);
-
 
 #endif

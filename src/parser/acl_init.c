@@ -35,8 +35,8 @@ void	a_init(t_data *data)
 	}
 	range = data->config.info[0].range;
 	data->scene.count.a_c++;
-  ratio_init(data, &data->scene.ambient.ratio, data->file.row[1], range);
-  color_init(data, &data->scene.ambient.color, data->file.row[2]);
+	ratio_init(data, &data->scene.ambient.ratio, data->file.row[1], range);
+	color_init(data, &data->scene.ambient.color, data->file.row[2]);
 }
 
 void	l_init(t_data *data)
@@ -52,10 +52,10 @@ void	l_init(t_data *data)
 	light = ft_calloc(1, sizeof(t_light));
 	range = data->config.info[0].range;
 	data->scene.count.l_c++;
-  position_init(data, &light->position, data->file.row[1]);
-  ratio_init(data, &light->brightness, data->file.row[2], range);
-  color_init(data, &light->color, data->file.row[3]);
-  if (data->scene.lights == NULL)
+	position_init(data, &light->position, data->file.row[1]);
+	ratio_init(data, &light->brightness, data->file.row[2], range);
+	color_init(data, &light->color, data->file.row[3]);
+	if (data->scene.lights == NULL)
 		data->scene.lights = light;
 	else
 		get_lst_last(data->scene.lights)->next = light;
@@ -68,8 +68,8 @@ void	c_init(t_data *data)
 		set_error(data, ERR_MS_VAL_PARAM, *data->file.row, NULL);
 		return ;
 	}
-  	data->scene.count.c_c++;
-		position_init(data, &data->scene.camera.position, data->file.row[1]);
-		vector_init(data, &data->scene.camera.orientation, data->file.row[2]);
-		degree_init(data, &data->scene.camera.fov, data->file.row[3]);
+	data->scene.count.c_c++;
+	position_init(data, &data->scene.camera.position, data->file.row[1]);
+	vector_init(data, &data->scene.camera.orientation, data->file.row[2]);
+	degree_init(data, &data->scene.camera.fov, data->file.row[3]);
 }

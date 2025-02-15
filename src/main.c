@@ -12,9 +12,9 @@
 
 #include "algebra.h"
 #include "core.h"
+#include "events.h"
 #include "list.h"
 #include "minirt.h"
-#include "events.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,7 +41,8 @@ static void	setup_hooks(t_render *render)
 {
 	mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_keypress, render);
 	// mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_esq, render);
-	mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,render);
+	mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,
+		render);
 }
 
 static void	cleanup_render(t_render *render)

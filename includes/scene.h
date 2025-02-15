@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:19:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/03 20:14:27 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/15 02:31:12 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,7 @@ typedef struct s_scene
 	t_object			*selected_obj;
 	t_count				count;
 }						t_scene;
+
+void					cycle_selected_object(t_scene *scene);
 
 #endif

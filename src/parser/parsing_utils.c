@@ -94,4 +94,3 @@ int	syntax_error(char **data)
 	}
 	return (row == NULL);
 }
-

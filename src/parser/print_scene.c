@@ -32,7 +32,7 @@ void	print_object(t_object *obj)
 	}
 	else if (obj->type == OBJ_CYLINDER)
 	{
-		printf("Cylinder: id = %d\n" ,obj->id);
+		printf("Cylinder: id = %d\n", obj->id);
 		printf("  Center: %f, %f, %f\n", obj->data.cylinder.center.x,
 			obj->data.cylinder.center.y, obj->data.cylinder.center.z);
 		printf("  Normal: %f, %f, %f\n", obj->data.cylinder.normal.x,

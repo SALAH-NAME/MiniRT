@@ -59,7 +59,6 @@ t_object	*create_plane(t_vec3 center, t_vec3 normal, t_color color, int id)
 	plane->transform.position = center;
 	plane->transform.rotation = normal;
 	plane->material.color = color;
-
 	plane->material.diffuse_coefficient = 0.8;
 	plane->material.specular_coefficient = 0.2;
 	plane->material.shininess = 16.0;
@@ -70,33 +69,34 @@ t_object	*create_plane(t_vec3 center, t_vec3 normal, t_color color, int id)
 	return (plane);
 }
 
-void set_materials(t_object *obj)
+void	set_materials(t_object *obj)
 {
-
 	if (obj->type == OBJ_SPHERE)
 	{
-    obj->material.diffuse_coefficient = 0.7;
-    obj->material.specular_coefficient = 0.8;
-    obj->material.shininess = 32.0;
+		obj->material.diffuse_coefficient = 0.7;
+		obj->material.specular_coefficient = 0.8;
+		obj->material.shininess = 32.0;
 	}
 	else if (obj->type == OBJ_PLANE)
 	{
-    obj->material.diffuse_coefficient = 0.8;
-    obj->material.specular_coefficient = 0.2;
-    obj->material.shininess = 16.0;
+		obj->material.diffuse_coefficient = 0.8;
+		obj->material.specular_coefficient = 0.2;
+		obj->material.shininess = 16.0;
 	}
 	else if (obj->type == OBJ_CYLINDER)
 	{
-    ;
+		;
 	}
 }
 
 void	init_scene(t_render *render)
 {
-  t_object *obj = render->scene.objects;
-  while(obj)
-  {
-    set_materials(obj);
-    obj = obj->next;
-  }
+	t_object	*obj;
+
+	obj = render->scene.objects;
+	while (obj)
+	{
+		set_materials(obj);
+		obj = obj->next;
+	}
 }
