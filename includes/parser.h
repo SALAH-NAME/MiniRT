@@ -13,8 +13,10 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "core.h"
-# include "scene.h"
+
+
+typedef struct s_data t_data;
+typedef struct s_range t_range;
 
 typedef struct s_file
 {
@@ -56,5 +58,10 @@ t_color		color_normalize(t_color vec);
 
 // testing utils
 void		set_error(t_data *data, char *desc, char *pr, char *hint);
+void			print_scene(t_scene *scene);
+void  	free_scene(t_scene *scene);
+void			free_all(t_data *file);
+
+
 
 #endif
