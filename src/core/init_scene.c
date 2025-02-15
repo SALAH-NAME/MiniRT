@@ -78,8 +78,8 @@ void	init_scene(t_render *render)
 	t_object	*sphere2;
 	t_object	*sphere3;
 
-	render->scene.camera.position = (t_vec3){1, 2, 5};
-	render->scene.camera.orientation = (t_vec3){0.0, 0.0, 0.0};
+	render->scene.camera.position = (t_vec3){1.0, 2.0, 5.0};
+	render->scene.camera.orientation = (t_vec3){-0.0, 0.00, 0.0};
 	render->scene.camera.fov = 70.0;
 	render->scene.ambient.ratio = 0.1;
 	render->scene.ambient.color = (t_color){1.0, 1.0, 1.0};
@@ -89,7 +89,7 @@ void	init_scene(t_render *render)
 	main_light->next = fill_light;
 	render->scene.lights = main_light;
 	render->scene.selected_light = main_light;
-	floor = create_plane((t_vec3){-3.0000001, 0, -0}, (t_vec3){1, 0, 0},
+	floor = create_plane((t_vec3){-3.0000, 0, -0}, (t_vec3){1, 0, 0},
 			(t_color){0.0, 1.0, 1.0}, 1);
 	sphere1 = create_sphere((t_vec3){0.0, -50.5, 0.0}, 50.0, (t_color){1.0, 0.0,
 			0.0}, 2);
