@@ -38,6 +38,8 @@ t_object	*create_sphere(t_vec3 center, double radius, t_color color, int id)
 	sphere->transform.position = center;
 	sphere->transform.rotation = (t_vec3){0, 0, 0};
 	sphere->material.color = color;
+	sphere->material.checker_color = (t_color){0.0, 0.0, 0.0};
+	sphere->material.checker_scale = 0;
 	sphere->material.diffuse_coefficient = 0.7;
 	sphere->material.specular_coefficient = 0.8;
 	sphere->material.shininess = 32.0;
@@ -59,6 +61,8 @@ t_object	*create_plane(t_vec3 center, t_vec3 normal, t_color color, int id)
 	plane->transform.position = center;
 	plane->transform.rotation = normal;
 	plane->material.color = color;
+	plane->material.checker_color = (t_color){0.0, 0.0, 0.0};
+	plane->material.checker_scale = 0;
 	plane->material.diffuse_coefficient = 0.8;
 	plane->material.specular_coefficient = 0.2;
 	plane->material.shininess = 16.0;

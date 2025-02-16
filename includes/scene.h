@@ -105,9 +105,11 @@ typedef enum e_object_type
 typedef struct s_material
 {
 	t_color				color;
+	t_color				checker_color;
 	double				diffuse_coefficient;
 	double				specular_coefficient;
 	double				shininess;
+	double				checker_scale;
 }						t_material;
 
 typedef struct s_object

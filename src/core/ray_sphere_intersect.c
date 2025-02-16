@@ -31,6 +31,7 @@ bool	ray_sphere_intersect(t_ray ray, t_object *obj, t_hit *hit)
 	hit->point = vec3_add(ray.origin, vec3_mul(ray.direction, t));
 	hit->normal = vec3_normalize(vec3_sub(hit->point, sphere.center));
 	hit->material = obj->material;
+	hit->object = obj;
 	hit->view_dir = vec3_mul(ray.direction, -1.0);
 	return (true);
 }

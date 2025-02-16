@@ -27,3 +27,20 @@ t_color	color_multiply(t_color color, double t)
 {
 	return (color_create(color.r * t, color.g * t, color.b * t));
 }
+
+t_color	get_checker_color(t_hit *hit)
+{
+	double	x;
+	double	y;
+	double	z;
+	int		pattern;
+
+	x = hit->point.x * hit->material.checker_scale;
+	y = hit->point.y * hit->material.checker_scale;
+	z = hit->point.z * hit->material.checker_scale;
+	pattern = (int)(floor(x + EPSILON) + floor(y + EPSILON) + floor(z
+				+ EPSILON)) & 1;
+	if (pattern)
+		return (hit->material.checker_color);
+	return (hit->material.color);
+}

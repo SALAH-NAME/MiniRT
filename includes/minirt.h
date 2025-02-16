@@ -85,7 +85,7 @@ bool			find_nearest_intersection(t_ray ray, t_scene *scene,
 					t_hit *hit);
 t_color			ray_intersection_shading(t_ray ray, t_scene *scene);
 t_intersect_fn	get_intersection_function(t_object_type type);
-bool			is_in_shadow(t_vec3 point, t_vec3 light_pos, t_scene *scene,
-					t_object *current_obj);
+bool			is_in_shadow(t_vec3 point, t_vec3 light_pos, t_scene *scene, t_object *current_obj);
 
+t_color			get_checker_color(t_hit *hit);
 #endif

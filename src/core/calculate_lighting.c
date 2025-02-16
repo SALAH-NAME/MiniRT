@@ -15,10 +15,15 @@
 static t_color	calculate_ambient(t_hit *hit, t_ambientlight *ambient)
 {
 	t_color	ambient_color;
+	t_color	surface_color;
 
-	ambient_color.r = ambient->color.r * ambient->ratio * hit->material.color.r;
-	ambient_color.g = ambient->color.g * ambient->ratio * hit->material.color.g;
-	ambient_color.b = ambient->color.b * ambient->ratio * hit->material.color.b;
+	if (hit->material.checker_scale > 0)
+		surface_color = get_checker_color(hit);
+	else
+		surface_color = hit->material.color;
+	ambient_color.r = ambient->color.r * ambient->ratio * surface_color.r;
+	ambient_color.g = ambient->color.g * ambient->ratio * surface_color.g;
+	ambient_color.b = ambient->color.b * ambient->ratio * surface_color.b;
 	return (ambient_color);
 }
 
@@ -26,13 +31,18 @@ static t_color	calculate_diffuse(t_hit *hit, t_light *light, t_vec3 light_dir)
 {
 	t_color	diffuse_color;
 	double	diff_factor;
+	t_color	surface_color;
 
+	if (hit->material.checker_scale > 0)
+		surface_color = get_checker_color(hit);
+	else
+		surface_color = hit->material.color;
 	diff_factor = fmax(vec3_dot(hit->normal, light_dir), 0.0);
-	diffuse_color.r = hit->material.color.r * light->color.r * diff_factor
+	diffuse_color.r = surface_color.r * light->color.r * diff_factor
 		* hit->material.diffuse_coefficient * light->brightness;
-	diffuse_color.g = hit->material.color.g * light->color.g * diff_factor
+	diffuse_color.g = surface_color.g * light->color.g * diff_factor
 		* hit->material.diffuse_coefficient * light->brightness;
-	diffuse_color.b = hit->material.color.b * light->color.b * diff_factor
+	diffuse_color.b = surface_color.b * light->color.b * diff_factor
 		* hit->material.diffuse_coefficient * light->brightness;
 	return (diffuse_color);
 }
