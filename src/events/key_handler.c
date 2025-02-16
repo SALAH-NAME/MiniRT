@@ -16,7 +16,7 @@
 
 int	handle_keypress(int keycode, t_render *world)
 {
-	static t_object	*selction = NULL;
+	static t_object	*selection = NULL;
 
 	if (keycode == XK_Escape || keycode == XK_q)
 	{
@@ -26,24 +26,24 @@ int	handle_keypress(int keycode, t_render *world)
 	// WASD controls for X-Z plane movement
 	if (keycode == XK_Tab)
 	{
-		if (selction == NULL)
-			selction = world->scene.objects;
+		if (selection == NULL)
+			selection = world->scene.objects;
 		else
-			selction = selction->next;
-		printf("Selected object: %d\n", selction->id);
+			selection = selection->next;
+		/*printf("Selected object: %d\n", selection->id);*/
 	}
 	if (keycode == XK_w || keycode == XK_W)
-		move_selected_forward(selction, MOVE_SPEED);
+		move_selected_forward(selection, -MOVE_SPEED);
 	else if (keycode == XK_s || keycode == XK_S)
-		move_selected_forward(world->scene.objects, -MOVE_SPEED);
+		move_selected_forward(selection, MOVE_SPEED);
 	else if (keycode == XK_a || keycode == XK_A)
-		move_selected_right(world->scene.objects, -MOVE_SPEED);
+		move_selected_right(selection, -MOVE_SPEED);
 	else if (keycode == XK_d || keycode == XK_D)
-		move_selected_right(world->scene.objects, MOVE_SPEED);
+		move_selected_right(selection, MOVE_SPEED);
 	else if (keycode == XK_space)
-		move_selected_up(world->scene.objects, MOVE_SPEED);
+		move_selected_up(selection, MOVE_SPEED);
 	else if (keycode == XK_c)
-		move_selected_up(world->scene.objects, -MOVE_SPEED);
+		move_selected_up(selection, -MOVE_SPEED);
 	render_scene(world);
 	return (0);
 }

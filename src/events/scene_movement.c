@@ -3,9 +3,9 @@
 
 void	translate_vec(t_vec3 *vec, double x, double y, double z)
 {
-	vec->x += x;
-	vec->y += y;
-	vec->z += z;
+	vec->x = vec->x + x;
+	vec->y = vec->y + y;
+	vec->z = vec->z + z;
 }
 
 void	move_selected_forward(t_object *obj, double distance)
@@ -28,7 +28,7 @@ void	move_selected_forward(t_object *obj, double distance)
 	default:
 		return ;
 	}
-	translate_vec(center, 0, 0, distance);
+	translate_vec(center, 0.0, 0.0, distance);
 }
 
 void	move_selected_right(t_object *obj, double distance)
@@ -51,7 +51,7 @@ void	move_selected_right(t_object *obj, double distance)
 	default:
 		return ;
 	}
-	translate_vec(center, distance, 0, 0);
+	translate_vec(center, distance, 0.0, 0.0);
 }
 
 void	move_selected_up(t_object *obj, double distance)
@@ -74,5 +74,5 @@ void	move_selected_up(t_object *obj, double distance)
 	default:
 		return ;
 	}
-	translate_vec(center, 0, distance, 0);
+	translate_vec(center, 0.0, distance, 0.0);
 }
