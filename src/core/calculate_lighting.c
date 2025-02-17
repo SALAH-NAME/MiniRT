@@ -17,7 +17,7 @@ static t_color	calculate_ambient(t_hit *hit, t_ambientlight *ambient)
 	t_color	ambient_color;
 	t_color	surface_color;
 
-	if (hit->material.checker_scale > 0)
+	if (hit->material.checker.scale > 0)
 		surface_color = get_checker_color(hit);
 	else
 		surface_color = hit->material.color;
@@ -33,7 +33,7 @@ static t_color	calculate_diffuse(t_hit *hit, t_light *light, t_vec3 light_dir)
 	double	diff_factor;
 	t_color	surface_color;
 
-	if (hit->material.checker_scale > 0)
+	if (hit->material.checker.scale > 0)
 		surface_color = get_checker_color(hit);
 	else
 		surface_color = hit->material.color;

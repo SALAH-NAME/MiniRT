@@ -38,11 +38,13 @@ t_object	*create_sphere(t_vec3 center, double radius, t_color color, int id)
 	sphere->transform.position = center;
 	sphere->transform.rotation = (t_vec3){0, 0, 0};
 	sphere->material.color = color;
-	sphere->material.checker_color = (t_color){0.0, 0.0, 0.0};
-	sphere->material.checker_scale = 0;
+	sphere->material.checker.color = (t_color){0.0, 0.0, 0.0};
+	sphere->material.checker.scale = 0;
 	sphere->material.diffuse_coefficient = 0.7;
 	sphere->material.specular_coefficient = 0.8;
 	sphere->material.shininess = 32.0;
+	sphere->material.bump.intensity = 0.0;
+	sphere->material.bump.scale = 0.0;
 	sphere->data.sphere.center = center;
 	sphere->data.sphere.radius = radius;
 	sphere->next = NULL;
@@ -61,8 +63,8 @@ t_object	*create_plane(t_vec3 center, t_vec3 normal, t_color color, int id)
 	plane->transform.position = center;
 	plane->transform.rotation = normal;
 	plane->material.color = color;
-	plane->material.checker_color = (t_color){0.0, 0.0, 0.0};
-	plane->material.checker_scale = 0;
+	plane->material.checker.color = (t_color){0.0, 0.0, 0.0};
+	plane->material.checker.scale = 0;
 	plane->material.diffuse_coefficient = 0.8;
 	plane->material.specular_coefficient = 0.2;
 	plane->material.shininess = 16.0;
@@ -85,7 +87,7 @@ void	init_scene(t_render *render)
 	render->scene.camera.position = (t_vec3){1.0, 2.0, 5.0};
 	render->scene.camera.orientation = (t_vec3){-0.0, 0.00, 0.0};
 	render->scene.camera.fov = 70.0;
-	render->scene.ambient.ratio = 0.2;
+	render->scene.ambient.ratio = 0.3;
 	render->scene.ambient.color = (t_color){1.0, 1.0, 1.0};
 	main_light = create_light((t_vec3){-3, 4, 1}, 0.7, (t_color){1.0, 1.0,
 			1.0});
@@ -93,13 +95,16 @@ void	init_scene(t_render *render)
 	main_light->next = fill_light;
 	render->scene.lights = main_light;
 	render->scene.selected_light = main_light;
-	floor = create_plane((t_vec3){-3.0000, 0, -0}, (t_vec3){1, 0, 0},
+	floor = create_plane((t_vec3){-3.1000, 0, -0}, (t_vec3){1, 0, 0},
 			(t_color){0.0, 1.0, 1.0}, 1);
 	sphere1 = create_sphere((t_vec3){0.0, -50.5, 0.0}, 50.0, (t_color){1.0, 0.0,
 			0.0}, 2);
-	sphere1->material.checker_scale = 1;
+	sphere1->material.checker.scale = 1;
 	sphere2 = create_sphere((t_vec3){1.0, 1.0, 0}, 0.8, (t_color){0.0, 0.0,
 			1.0}, 3);
+	sphere2->material.specular_coefficient = 0.0;
+	sphere2->material.bump.intensity = 1.5;
+	sphere2->material.bump.scale = 7.0;
 	sphere3 = create_sphere((t_vec3){2.2, 0.0, 0}, 0.2, (t_color){0.0, 1.0,
 			0.0}, 3);
 	floor->next = sphere1;

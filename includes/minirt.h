@@ -80,4 +80,5 @@ t_intersect_fn	get_intersection_function(t_object_type type);
 bool			is_in_shadow(t_vec3 point, t_vec3 light_pos, t_scene *scene,
 					t_object *current_obj);
 t_color			get_checker_color(t_hit *hit);
+t_vec3			perturb_normal(t_vec3 normal, t_vec3 point, t_bump_map *bump);
 #endif

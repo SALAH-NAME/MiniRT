@@ -102,14 +102,26 @@ typedef enum e_object_type
 	/*OBJ_PARABOLOID*/
 }						t_object_type;
 
+typedef struct s_checker
+{
+	t_color				color;
+	double				scale;
+}						t_checker;
+
+typedef struct s_bump_map
+{
+	double				intensity;
+	double				scale;
+}						t_bump_map;
+
 typedef struct s_material
 {
 	t_color				color;
-	t_color				checker_color;
 	double				diffuse_coefficient;
 	double				specular_coefficient;
 	double				shininess;
-	double				checker_scale;
+	t_checker			checker;
+	t_bump_map			bump;
 }						t_material;
 
 typedef struct s_object
