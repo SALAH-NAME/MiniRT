@@ -69,6 +69,7 @@ int	parse_config_init(t_data *data)
 	elements[PLANE] = (t_elems){"pl", ID, UN, 3, &pl_init};
 	elements[SPHERE] = (t_elems){"sp", ID, UN, 3, &sp_init};
 	elements[CYLINDER] = (t_elems){"cy", ID, UN, 5, &cy_init};
+	elements[CONE] = (t_elems){"cn", ID, UN, 5, &cn_init};
 	elements[COMMENT] = (t_elems){"#", UN, UN, UN, &comment};
 	info[RATIO] = (t_info){"RATIO", VECTOR, {.d_r = {0.0, 1.0}}};
 	info[AXIS] = (t_info){"AXIS", VECTOR, {.d_r = {-1.0, 1.0}}};

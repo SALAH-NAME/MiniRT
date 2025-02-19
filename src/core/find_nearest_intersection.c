@@ -15,11 +15,12 @@
 t_intersect_fn	get_intersection_function(t_object_type type)
 {
 	static const t_intersect_fn intersection_functions[] = {
-		ray_sphere_intersect, ray_plane_intersect, ray_cylinder_intersect,
-		/*[OBJ_CYLINDER] = ray_cylinder_intersect,*/
-		/*[OBJ_CONE] = ray_cone_intersect*/
+		ray_sphere_intersect,
+    ray_plane_intersect,
+    ray_cylinder_intersect,
+		ray_cone_intersect,
 	};
-	if (type > OBJ_CYLINDER)
+	if (type > OBJ_CONE)
 		return (NULL);
 	return (intersection_functions[type]);
 }

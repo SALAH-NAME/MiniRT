@@ -38,6 +38,7 @@ void					c_init(t_data *data);
 void					cy_init(t_data *data);
 void					pl_init(t_data *data);
 void					sp_init(t_data *data);
+void					cn_init(t_data *data);
 void					comment(t_data *data);
 // info-init
 void					color_init(t_data *data, t_color *color, char *val);

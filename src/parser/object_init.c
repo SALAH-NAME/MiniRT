@@ -96,3 +96,29 @@ void	cy_init(t_data *data)
 	else
 		get_lst_last(data->scene.objects)->next = obj;
 }
+void	cn_init(t_data *data)
+{
+	t_object	*obj;
+	t_range		range;
+
+	if (data->file.error == 0)
+		return ;
+	if (!valid(data->file.row + 1, data->config.elements[CONE].v_count))
+	{
+		set_error(data, ERR_MS_VAL_PARAM, *data->file.row, NULL);
+		return ;
+	}
+	obj = ft_calloc(1, sizeof(t_object));
+	obj->id = data->scene.count.cn_c++;
+	obj->type = OBJ_CONE;
+	range = data->config.info[DOUBLE].range;
+	position_init(data, &obj->data.cone.center, data->file.row[1]);
+	vector_init(data, &obj->data.cone.normal, data->file.row[2]);
+	radius_init(data, &obj->data.cone.radius, data->file.row[3]);
+	ratio_init(data, &obj->data.cone.height, data->file.row[4], range);
+	color_init(data, &obj->material.color, data->file.row[5]);
+	if (data->scene.objects == NULL)
+		data->scene.objects = obj;
+	else
+		get_lst_last(data->scene.objects)->next = obj;
+}

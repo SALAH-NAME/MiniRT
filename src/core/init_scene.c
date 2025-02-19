@@ -89,7 +89,15 @@ void	set_materials(t_object *obj)
 	}
 	else if (obj->type == OBJ_CYLINDER)
 	{
-		;
+		obj->material.diffuse_coefficient = 0.7;
+		obj->material.specular_coefficient = 0.8;
+		obj->material.shininess = 32.0;
+	}
+	else if (obj->type == OBJ_CONE)
+	{
+		obj->material.diffuse_coefficient = 0.7;
+		obj->material.specular_coefficient = 0.8;
+		obj->material.shininess = 32.0;
 	}
 }
 

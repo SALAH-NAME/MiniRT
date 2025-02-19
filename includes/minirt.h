@@ -82,6 +82,7 @@ bool			solve_quadratic(double a, double b, double c, double *t);
 bool			ray_sphere_intersect(t_ray ray, t_object *obj, t_hit *hit);
 bool			ray_plane_intersect(t_ray ray, t_object *obj, t_hit *hit);
 bool    	ray_cylinder_intersect(t_ray ray, t_object *obj, t_hit *hit);
+bool	    ray_cone_intersect(t_ray ray, t_object *obj, t_hit *hit);
 bool			find_nearest_intersection(t_ray ray, t_scene *scene,
 					t_hit *hit);
 t_color			ray_intersection_shading(t_ray ray, t_scene *scene);

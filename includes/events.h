@@ -14,7 +14,7 @@
 # define EVENTS_H
 
 # include "minirt.h"
-# define MOVE_SPEED 0.1
+# define MOVE_SPEED 1
 
 // Key handler prototypes
 int		handle_keypress(int keycode, t_render *world);
