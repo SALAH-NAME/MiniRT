@@ -12,35 +12,47 @@
 
 #include "core.h"
 
+typedef struct s_ray_cylinder_vars {
+    t_cylinder cylinder;          // The cylinder object
+    t_vec3 oc;                    // Vector from ray origin to cylinder center
+    t_vec3 axis;                  // Normalized cylinder axis
+    t_vec3 d;                     // Ray direction
+    t_vec3 oc_proj;               // Projection of oc onto the plane perpendicular to the cylinder axis
+    t_vec3 d_proj;                // Projection of ray direction onto the plane perpendicular to the cylinder axis
+    double abc[3];                // Coefficients for the quadratic equation (a, b, c)
+    double t_side;                // Intersection distance along the ray for the cylinder side
+    t_vec3 point_side;            // Intersection point on the cylinder side
+    double height_test;           // Height test to check if the intersection is within the cylinder bounds
+    double t_caps[2];             // Intersection distances along the ray for the cylinder caps (top and bottom)
+    t_vec3 cap_centers[2];        // Centers of the cylinder caps (bottom and top)
+    double t_final;               // Final intersection distance (closest valid intersection)
+    t_vec3 cap_point;             // Intersection point on the cylinder cap
+    t_vec3 hit_point;             // Final intersection point
+    t_vec3 hit_normal;           // Normal at the intersection point
+} t_ray_cylinder_vars;
+
 bool ray_cylinder_intersect(t_ray ray, t_object *obj, t_hit *hit)
 {
-    t_cylinder cylinder = obj->data.cylinder;
-    t_vec3 oc = vec3_sub(ray.origin, cylinder.center);
-    t_vec3 axis = vec3_normalize(cylinder.normal); // Cylinder axis (assumed normalized)
-    t_vec3 d = ray.direction;
-    t_vec3 oc_proj = vec3_sub(oc, vec3_mul(axis, vec3_dot(oc, axis)));
-    t_vec3 d_proj = vec3_sub(d, vec3_mul(axis, vec3_dot(d, axis)));
+    t_ray_cylinder_vars formula;
+  formula.cylinder =obj->data.cylinder;
+  formula.oc = vec3_sub(ray.origin, cylinder.center);
+  formula.axis =  vec3_normalize(cylinder.normal);
+  formula.d = ray.direction;
+  formula.oc_proj =vec3_sub(oc, vec3_mul(axis, vec3_dot(oc, axis)));
+  formula.d_proj = vec3_sub(d, vec3_mul(axis, vec3_dot(d, axis))); 
+  formula.abc[0]  =vec3_dot(d_proj, d_proj);
+  formula.abc[1] = 2.0 * vec3_dot(oc_proj, d_proj);
+  formula.abc[2] =vec3_dot(oc_proj, oc_proj) - (cylinder.radius * cylinder.radius);
+  if (!solve_quadratic(formula.abc[0], formula.abc[1], formula.abc[2], &formula.t_side))
+    return false;
+  formula.point_side = vec3_add(ray.origin, vec3_mul(ray.direction, t_side));
+  formula.height_test = vec3_dot(vec3_sub(point_side, cylinder.center), axis);
+  if (formula.height_test < 0 || formula.height_test > formula.cylinder.height)
+        formula.t_side = -1; // Outside finite cylinder bounds
 
-    double abc[3];
-    abc[0] = vec3_dot(d_proj, d_proj);
-    abc[1] = 2.0 * vec3_dot(oc_proj, d_proj);
-    abc[2] = vec3_dot(oc_proj, oc_proj) - (cylinder.radius * cylinder.radius);
-
-    double t_side;
-    if (!solve_quadratic(abc[0], abc[1], abc[2], &t_side))
-        return false;
-
-    t_vec3 point_side = vec3_add(ray.origin, vec3_mul(ray.direction, t_side));
-    double height_test = vec3_dot(vec3_sub(point_side, cylinder.center), axis);
-
-    if (height_test < 0 || height_test > cylinder.height)
-        t_side = -1; // Outside finite cylinder bounds
-
-    // Check intersection with caps (top and bottom circles)
-    double t_caps[2];
-    t_vec3 cap_centers[2] = {
-        cylinder.center,
-        vec3_add(cylinder.center, vec3_mul(axis, cylinder.height))
+    formual.cap_centers[2] = {
+        formula.cylinder.center,
+        vec3_add(formula.cylinder.center, vec3_mul(formula.axis, formula.cylinder.height))
     };
 
     for (int i = 0; i < 2; i++) {
@@ -65,8 +77,9 @@ bool ray_cylinder_intersect(t_ray ray, t_object *obj, t_hit *hit)
     }
 
     if (t_final < 0)
-        return false; // No valid intersection
-
+        return false;
+    
+    set_values(hit, ray, cylinder, t_final)
     hit->hit = true;
     hit->t = t_final;
     hit->point = vec3_add(ray.origin, vec3_mul(ray.direction, t_final));

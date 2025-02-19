@@ -20,8 +20,8 @@
 # include <mlx.h>
 # include <stdbool.h>
 
-# define WIDTH 480
-# define HEIGHT 560
+# define WIDTH 1920
+# define HEIGHT 1080
 
 # define KEY_W 13
 # define KEY_A 0
