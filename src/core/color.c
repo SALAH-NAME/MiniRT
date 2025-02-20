@@ -35,12 +35,12 @@ t_color	get_checker_color(t_hit *hit)
 	double	z;
 	int		pattern;
 
-	x = hit->point.x * hit->material.checker_scale;
-	y = hit->point.y * hit->material.checker_scale;
-	z = hit->point.z * hit->material.checker_scale;
+	x = hit->point.x * hit->material.checker.scale;
+	y = hit->point.y * hit->material.checker.scale;
+	z = hit->point.z * hit->material.checker.scale;
 	pattern = (int)(floor(x + EPSILON) + floor(y + EPSILON) + floor(z
 				+ EPSILON)) & 1;
 	if (pattern)
-		return (hit->material.checker_color);
+		return (hit->material.checker.color);
 	return (hit->material.color);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:52:32 by souahidi          #+#    #+#             */
-/*   Updated: 2025/02/15 02:36:13 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:50:33 by souahidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	render_scene(t_render *render)
 		{
 			ray = generate_ray(&render->scene.camera, x, y);
 			color_rgb = ray_intersection_shading(ray, &render->scene);
-			(void)color_rgb;
 			put_pixel_to_img(&render->mlx, x, y, color_rgb);
 			x++;
 		}

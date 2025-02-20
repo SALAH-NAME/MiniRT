@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:19:11 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/15 02:31:12 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/03 20:14:27 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,8 @@ typedef struct s_cone
 {
 	t_vec3				center;
 	t_vec3				normal;
-	double				radius;
 	double				height;
-	struct s_cone	*next;
+	double				radius;
 }						t_cone;
 
 typedef struct s_count
@@ -105,14 +104,26 @@ typedef enum e_object_type
 	/*OBJ_PARABOLOID*/
 }						t_object_type;
 
+typedef struct s_checker
+{
+	t_color				color;
+	double				scale;
+}						t_checker;
+
+typedef struct s_bump_map
+{
+	double				intensity;
+	double				scale;
+}						t_bump_map;
+
 typedef struct s_material
 {
 	t_color				color;
-	t_color				checker_color;
 	double				diffuse_coefficient;
 	double				specular_coefficient;
 	double				shininess;
-	double				checker_scale;
+	t_checker			checker;
+	t_bump_map			bump;
 }						t_material;
 
 typedef struct s_object
@@ -141,8 +152,7 @@ typedef struct s_scene
 	t_light				*selected_light;
 	t_object			*selected_obj;
 	t_count				count;
+	bool				is_raytrace;
 }						t_scene;
-
-void					cycle_selected_object(t_scene *scene);
 
 #endif

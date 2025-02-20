@@ -29,8 +29,7 @@ typedef struct s_file
 }						t_file;
 
 // parse and init
-int						parse_scene(t_render *render, char *file_name);
-int						valid_file_name(char *file_name);
+bool						parse_scene(t_render *render, char *file_name);
 // obj-init
 void					a_init(t_data *data);
 void					l_init(t_data *data);
@@ -48,6 +47,7 @@ void					position_init(t_data *data, t_vec3 *pos, char *val);
 void					vector_init(t_data *data, t_vec3 *vector, char *val);
 void					degree_init(t_data *data, int *degree, char *val);
 void					radius_init(t_data *data, double *radius, char *val);
+void					spec_init(t_data *data, double *ratio, char *val);
 
 // utils
 int						valid(char **info, int count);

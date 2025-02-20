@@ -55,35 +55,34 @@ void	scene_data(t_data *data)
 		free(data->file.line);
 		data->file.line = get_next_line(data->file.fd);
 	}
-	/*print_scene(&data->scene);*/
+	print_scene(&data->scene);
 	free(data->file.line);
 	check_errors(data);
 }
 
-int	valid_file_name(char *file_name)
+bool	valid_file_name(char *file_name)
 {
 	char	*ext;
 
 	if (ft_strcmp(file_name, ".rt") == 0)
-		return (ft_putstr_fd("File must have a name\n", 2), 1);
+		return (ft_putstr_fd("File must have a name\n", 2), false);
 	ext = ft_strrchr(file_name, '.');
 	if (ext == NULL || ft_strcmp(ext, EXT))
-		return (ft_putstr_fd("File type not supported\n", 2), 1);
-	return (0);
+		return (ft_putstr_fd("File type not supported\n", 2), false);
+	return (true);
 }
 
-int	parse_scene(t_render *render, char *file_name)
+bool	parse_scene(t_render *render, char *file_name)
 {
 	t_data	data;
 
-	if (valid_file_name(file_name))
-		return (1);
-	if (parse_config_init(&data))
-		return (1);
+	if (valid_file_name(file_name) == false)
+		return (false);
+	parse_config_init(&data);
 	data.file.file_name = file_name;
 	data.file.fd = open(file_name, O_RDONLY);
 	if (data.file.fd == -1)
-		return (perror(file_name), 1);
+		return (perror(file_name), false);
 	scene_data(&data);
 	close(data.file.fd);
 	render->scene = data.scene;

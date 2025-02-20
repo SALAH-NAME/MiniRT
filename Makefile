@@ -16,8 +16,10 @@ CC			:= cc
 CFLAGS	:= -Wall -Wextra -Werror -ggdb
 DFLAGS	:= -MMD -MP
 
+
 INCLUDES	:= -I./includes -I/usr/local/include
 SCENE 		:= scenes/file.rt
+SCENE_BONUS := scenes/bonus_scene.rt
 
 SRC_DIR	:= src
 # LIBS_DIR	:= libs
@@ -67,6 +69,8 @@ LIB_FLAGS	:=  -lparser -lutils -lft -llist -lalgebra  -lmlx -lXext -lX11 -lm -lz
 
 
 all: $(NAME) 
+bonus: CFLAGS += -D BONUS
+bonus: all
 
 $(NAME): $(LIBS) $(CORE_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(CORE_OBJS) $(LIB_PATH) $(LIB_FLAGS) -o $(NAME)
@@ -129,8 +133,8 @@ valgrind: CFLAGS += -g
 valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
-yusuf: all
-	./$(NAME) $(SCENE) 
+yusuf: bonus
+	./$(NAME) $(SCENE_BONUS) 
 # valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
 .PHONY: all clean fclean re sanitize valgrind

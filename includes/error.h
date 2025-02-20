@@ -78,6 +78,14 @@ typedef struct s_error
 # define ERR_MS_RADIUS "Missing radius value."
 # define ERR_RADIUS_V "Invalid radius value."
 # define ERR_RADIUS_R "Radius value can't be negative."
+// checker errors
+# define ERR_MS_CHECKER "Missing checker value."
+# define ERR_CHECKER_V "Invalid checker value."
+# define ERR_CHECKER_R "Checker value can't be negative."
+// specular errors
+# define ERR_MS_SPECULAR "Missing specular value."
+# define ERR_SEPCULAR_V "Invalid specular value."
+# define ERR_SPECULAR_R "Specular value can't be negative."
 
 void		set_error(t_data *data, char *desc, char *pr, char *hint);
 void		check_errors(t_data *data);

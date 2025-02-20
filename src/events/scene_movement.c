@@ -23,12 +23,8 @@ void	move_selected_forward(t_object *obj, double distance)
 		center = &obj->data.sphere.center;
 		break ;
 	case OBJ_CYLINDER:
-		center = &obj->data.cylinder.normal;
+		center = &obj->data.cylinder.center;
 		break ;
-	case OBJ_CONE:
-		center = &obj->data.cone.normal;
-		break ;
-	
 	default:
 		return ;
 	}
@@ -50,12 +46,8 @@ void	move_selected_right(t_object *obj, double distance)
 		center = &obj->data.sphere.center;
 		break ;
 	case OBJ_CYLINDER:
-		center = &obj->data.cylinder.normal;
+		center = &obj->data.cylinder.center;
 		break ;
-	case OBJ_CONE:
-		center = &obj->data.cone.normal;
-		break ;
-	
 	default:
 		return ;
 	}
@@ -77,12 +69,10 @@ void	move_selected_up(t_object *obj, double distance)
 		center = &obj->data.sphere.center;
 		break ;
 	case OBJ_CYLINDER:
-		center = &obj->data.cylinder.normal;
-		break ;
+		center = &obj->data.cylinder.center;
 	case OBJ_CONE:
 		center = &obj->data.cone.normal;
 		break ;
-	
 	default:
 		return ;
 	}

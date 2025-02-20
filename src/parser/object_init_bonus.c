@@ -12,7 +12,7 @@
 
 #include "core.h"
 
-#ifndef BONUS
+#ifdef BONUS
 
 static t_object	*get_lst_last(t_object *list)
 {
@@ -43,6 +43,8 @@ void	pl_init(t_data *data)
 	position_init(data, &obj->data.plane.center, data->file.row[1]);
 	vector_init(data, &obj->data.plane.normal, data->file.row[2]);
 	color_init(data, &obj->material.color, data->file.row[3]);
+	color_init(data, &obj->material.checker.color, data->file.row[4]);
+	radius_init(data, &obj->material.checker.scale, data->file.row[5]);
 	if (data->scene.objects == NULL)
 		data->scene.objects = obj;
 	else
@@ -66,6 +68,7 @@ void	sp_init(t_data *data)
 	position_init(data, &obj->data.sphere.center, data->file.row[1]);
 	radius_init(data, &obj->data.sphere.radius, data->file.row[2]);
 	color_init(data, &obj->material.color, data->file.row[3]);
+	spec_init(data, &obj->material.specular_coefficient, data->file.row[4]);
 	if (data->scene.objects == NULL)
 		data->scene.objects = obj;
 	else
@@ -93,6 +96,7 @@ void	cy_init(t_data *data)
 	radius_init(data, &obj->data.cylinder.radius, data->file.row[3]);
 	ratio_init(data, &obj->data.cylinder.height, data->file.row[4], range);
 	color_init(data, &obj->material.color, data->file.row[5]);
+	spec_init(data, &obj->material.specular_coefficient, data->file.row[6]);
 	if (data->scene.objects == NULL)
 		data->scene.objects = obj;
 	else
@@ -120,6 +124,7 @@ void	cn_init(t_data *data)
 	radius_init(data, &obj->data.cone.radius, data->file.row[3]);
 	ratio_init(data, &obj->data.cone.height, data->file.row[4], range);
 	color_init(data, &obj->material.color, data->file.row[5]);
+	spec_init(data, &obj->material.specular_coefficient, data->file.row[6]);
 	if (data->scene.objects == NULL)
 		data->scene.objects = obj;
 	else

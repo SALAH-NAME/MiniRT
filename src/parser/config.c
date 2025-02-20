@@ -58,7 +58,9 @@
  *
  */
 
-int	parse_config_init(t_data *data)
+#ifdef BONUS
+
+void	parse_config_init(t_data *data)
 {
 	static t_elems	elements[ELEM_COUNT];
 	static t_info	info[PARAM_COUNT];
@@ -66,10 +68,10 @@ int	parse_config_init(t_data *data)
 	elements[AMBIENT] = (t_elems){"A", ID, 1, 2, &a_init};
 	elements[CAMERA] = (t_elems){"C", ID, 1, 3, &c_init};
 	elements[LIGHT] = (t_elems){"L", ID, 5, 3, &l_init};
-	elements[PLANE] = (t_elems){"pl", ID, UN, 3, &pl_init};
-	elements[SPHERE] = (t_elems){"sp", ID, UN, 3, &sp_init};
-	elements[CYLINDER] = (t_elems){"cy", ID, UN, 5, &cy_init};
-	elements[CONE] = (t_elems){"cn", ID, UN, 5, &cn_init};
+	elements[PLANE] = (t_elems){"pl", ID, UN, 5, &pl_init};
+	elements[SPHERE] = (t_elems){"sp", ID, UN, 4, &sp_init};
+	elements[CYLINDER] = (t_elems){"cy", ID, UN, 6, &cy_init};
+	elements[CONE] = (t_elems){"cn", ID, UN, 6, &cn_init};
 	elements[COMMENT] = (t_elems){"#", UN, UN, UN, &comment};
 	info[RATIO] = (t_info){"RATIO", VECTOR, {.d_r = {0.0, 1.0}}};
 	info[AXIS] = (t_info){"AXIS", VECTOR, {.d_r = {-1.0, 1.0}}};
@@ -78,5 +80,28 @@ int	parse_config_init(t_data *data)
 	info[DIAMETER] = (t_info){"DIAMETER", DOUBLE, {.d_r = {0, FLT_MAX}}};
 	data->config.elements = elements;
 	data->config.info = info;
-	return (0);
 }
+
+#else
+
+void	parse_config_init(t_data *data)
+{
+	static t_elems	elements[ELEM_COUNT];
+	static t_info	info[PARAM_COUNT];
+
+	elements[AMBIENT] = (t_elems){"A", ID, 1, 2, &a_init};
+	elements[CAMERA] = (t_elems){"C", ID, 1, 3, &c_init};
+	elements[LIGHT] = (t_elems){"L", ID, 1, 2, &l_init};
+	elements[PLANE] = (t_elems){"pl", ID, UN, 3, &pl_init};
+	elements[SPHERE] = (t_elems){"sp", ID, UN, 3, &sp_init};
+	elements[CYLINDER] = (t_elems){"cy", ID, UN, 5, &cy_init};
+	info[RATIO] = (t_info){"RATIO", VECTOR, {.d_r = {0.0, 1.0}}};
+	info[AXIS] = (t_info){"AXIS", VECTOR, {.d_r = {-1.0, 1.0}}};
+	info[COLOR] = (t_info){"COLOR", COLOR, {.i_r = {0, 255}}};
+	info[DOUBLE] = (t_info){"DOUBLE", DOUBLE, {.d_r = {FLT_MIN, FLT_MAX}}};
+	info[DIAMETER] = (t_info){"DIAMETER", DOUBLE, {.d_r = {0, FLT_MAX}}};
+	data->config.elements = elements;
+	data->config.info = info;
+}
+
+#endif

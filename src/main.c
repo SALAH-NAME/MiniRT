@@ -37,14 +37,12 @@ static bool	init_mlx(t_render *render)
 	return (true);
 }
 
-static void	setup_hooks(t_render *render)
-{
-	mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_keypress, render);
-	// mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_esq, render);
-	mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,
-		render);
-}
 
+static void setup_hooks(t_render *render)
+{
+    mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_keypress, render);
+    mlx_mouse_hook(render->mlx.win, &handle_mouse, render);
+}
 static void	cleanup_render(t_render *render)
 {
 	if (!render)
@@ -74,8 +72,8 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 		return (ft_error("Usage: ./miniRT <scene.rt>"));
-	if (!parse_scene(&render, argv[1]))
-		return (ft_error("Scene parsing failed"));
+	if (parse_scene(&render, argv[1]) == false)
+		return (ft_error("Scene parsing failed"), 1);
 	if (!init_mlx(&render))
 		return (cleanup_render(&render), ft_error("MLX initialization failed"));
 	setup_hooks(&render);
