@@ -124,12 +124,12 @@ void	init_scene(t_render *render)
 			(t_color){0.0, 1.0, 1.0}, 1);
 	sphere1 = create_sphere((t_vec3){0.0, -50.5, 0.0}, 50.0, (t_color){1.0, 0.0,
 			0.0}, 2);
-	sphere1->material.checker.scale = 1;
+	sphere1->material.checker.scale = 0;
 	sphere2 = create_sphere((t_vec3){1.0, 1.0, 0}, 0.8, (t_color){0.0, 0.0,
 			1.0}, 3);
 	sphere2->material.specular_coefficient = 0.0;
-	sphere2->material.bump.intensity = 1.5;
-	sphere2->material.bump.scale = 7.0;
+	sphere2->material.bump.intensity = 0.0;
+	sphere2->material.bump.scale = 0.0;
 	sphere3 = create_sphere((t_vec3){2.2, 0.0, 0}, 0.2, (t_color){0.0, 1.0,
 			0.0}, 3);
 	cone = create_cone((t_vec3){-1, 1, 0}, 15, 2);

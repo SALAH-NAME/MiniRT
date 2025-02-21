@@ -17,17 +17,14 @@ CFLAGS	= -Wall -Wextra -Werror
 
 INCLUDES = -I../../includes/
 
-SRCS = $(wildcard *.c)
+SRCS = matrix3_apply_rotation.c vec3_create.c vec3_dot.c vec3_length_squared.c \
+			 vec3_reflect.c matrix3_create_rotation.c vec3_cross.c vec3_is_zero.c \
+			 vec3_mul.c vec3_sub.c vec3_add.c vec3_div.c vec3_length.c vec3_normalize.c
+
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
 
 
-TEST_DIR = tests/
-TEST_SRCS	= $(wildcard $(TEST_DIR)/*.c)
-TEST_OBJS	= $(TEST_SRCS:.c=.o)
-TEST_DEPS	= $(TEST_OBJS:.o=.d)
-
-TEST_FLAGS = -g
 
 all: $(NAME)
 
@@ -40,23 +37,18 @@ $(NAME): $(OBJS)
 test: $(NAME) $(TEST_NAME)
 	@./$(TEST_NAME)
 
-$(TEST_NAME): $(TEST_OBJS) $(NAME)
-	$(CC) $(CFLAGS) $(TEST_OBJS) -o $(TEST_NAME) -L. -lalgebra -lm
-
-$(TEST_DIR)/%.o: $(TEST_DIR)/%.c
-	$(CC) $(CFLAGS) $(TEST_FLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
 
 
 -include $(DEPS)
 
 clean:
-	rm -f $(OBJS) $(DEPS) $(TEST_OBJS) $(TEST_DEPS)
+	rm -f $(OBJS) $(DEPS)
 
 fclean: clean
-	rm -f $(NAME) $(TEST_NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re test
-.SECONDARY: $(OBJS) $(DEPS) $(TEST_OBJS) $(TEST_DEPS)
+.SECONDARY: $(OBJS) $(DEPS)
 

@@ -12,7 +12,14 @@
 
 INCLUDES = -I../../includes/
 
-SRCS = $(wildcard *.c)
+CFLAGS	= -Wall -Wextra -Werror
+
+SRCS = calculate_lighting.c find_nearest_intersection.c noise.c render_scene.c \
+			 color.c handle_events.c ray_cone_intersect.c solve_quadratic.c \
+			 cone_calc.c init_scene.c ray_intersection_shading.c cone_hit.c \
+			 is_in_shadow.c ray_plane_intersect.c cone_surface_solver.c material.c \
+			 ray_sphere_intersect.c
+
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
 

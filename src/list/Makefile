@@ -12,9 +12,13 @@
 
 NAME = liblist.a
 
+CFLAGS	= -Wall -Wextra -Werror
+
 INCLUDES = -I../../includes/
 
-SRCS = $(wildcard *.c)
+SRCS = list_free.c list_get.c list_insert_shift.c list_length.c list_map.c \
+			 list_predicate.c  list_push_pop.c
+
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
 

@@ -27,39 +27,72 @@ ALGEBRA_DIR	:= $(SRC_DIR)/algebra
 CORE_DIR		:= $(SRC_DIR)/core
 LIBFT_DIR		:= $(SRC_DIR)/libft
 PARSER_DIR	:= $(SRC_DIR)/parser
-UTILS_DIR		:= $(SRC_DIR)/utils
 LIST_DIR		:= $(SRC_DIR)/list
 
-ALGEBRA_SRC	:= $(wildcard $(ALGEBRA_DIR)/*.c)
-LIBFT_SRCS	:= $(wildcard $(LIBFT_DIR)/*.c)
-PARSER_SRCS	:= $(wildcard $(PARSER_DIR)/*.c)
-UTILS_SRCS	:= $(wildcard $(UTILS_DIR)/*.c)
-LIST_SRCS		:= $(wildcard $(LIST_DIR)/*.c)
+ALGEBRA_SRC	:= $(ALGEBRA_DIR)/matrix3_apply_rotation.c $(ALGEBRA_DIR)/vec3_create.c \
+		$(ALGEBRA_DIR)/vec3_dot.c $(ALGEBRA_DIR)/vec3_length_squared.c $(ALGEBRA_DIR)/vec3_reflect.c \
+		$(ALGEBRA_DIR)/matrix3_create_rotation.c $(ALGEBRA_DIR)/vec3_cross.c $(ALGEBRA_DIR)/vec3_is_zero.c \
+		$(ALGEBRA_DIR)/vec3_mul.c $(ALGEBRA_DIR)/vec3_sub.c $(ALGEBRA_DIR)/vec3_add.c \
+		$(ALGEBRA_DIR)/vec3_div.c $(ALGEBRA_DIR)/vec3_length.c $(ALGEBRA_DIR)/vec3_normalize.c
 
-SRCS	:= $(wildcard $(SRC_DIR)/*.c)
+LIBFT_SRCS	:= $(LIBFT_DIR)/ft_arrlen.c $(LIBFT_DIR)/ft_isascii.c $(LIBFT_DIR)/ft_memset.c \
+							 $(LIBFT_DIR)/ft_strcmp.c $(LIBFT_DIR)/ft_strmapi.c $(LIBFT_DIR)/ft_substr.c \
+							 $(LIBFT_DIR)/ft_arrmapi.c $(LIBFT_DIR)/ft_isdigit.c $(LIBFT_DIR)/ft_numvalid.c \
+							 $(LIBFT_DIR)/ft_strcpy.c $(LIBFT_DIR)/ft_strncmp.c $(LIBFT_DIR)/ft_tolower.c \
+							 $(LIBFT_DIR)/ft_atoi.c $(LIBFT_DIR)/ft_isprint.c $(LIBFT_DIR)/ft_putchar_fd.c \
+							 $(LIBFT_DIR)/ft_strcspn.c $(LIBFT_DIR)/ft_strndup.c $(LIBFT_DIR)/ft_toupper.c \
+							 $(LIBFT_DIR)/ft_atoi_safe.c $(LIBFT_DIR)/ft_isspace.c $(LIBFT_DIR)/ft_putendl_fd.c \
+							 $(LIBFT_DIR)/ft_strdup.c $(LIBFT_DIR)/ft_strnstr.c $(LIBFT_DIR)/get_next_line.c \
+							 $(LIBFT_DIR)/ft_bzero.c $(LIBFT_DIR)/ft_itoa.c $(LIBFT_DIR)/ft_putnbr_fd.c \
+							 $(LIBFT_DIR)/ft_striteri.c $(LIBFT_DIR)/ft_strpbrk.c $(LIBFT_DIR)/get_next_line_utils.c \
+							 $(LIBFT_DIR)/ft_calloc.c $(LIBFT_DIR)/ft_memchr.c $(LIBFT_DIR)/ft_putstr_fd.c \
+							 $(LIBFT_DIR)/ft_strjoin.c $(LIBFT_DIR)/ft_strrchr.c $(LIBFT_DIR)/ft_del.c \
+							 $(LIBFT_DIR)/ft_memcmp.c $(LIBFT_DIR)/ft_split.c $(LIBFT_DIR)/ft_strlcat.c \
+							 $(LIBFT_DIR)/ft_strreplace.c $(LIBFT_DIR)/ft_isalnum.c $(LIBFT_DIR)/ft_memcpy.c \
+							 $(LIBFT_DIR)/ft_split_stack.c $(LIBFT_DIR)/ft_strlcpy.c $(LIBFT_DIR)/ft_strtod_safe.c \
+							 $(LIBFT_DIR)/ft_isalpha.c $(LIBFT_DIR)/ft_memmove.c $(LIBFT_DIR)/ft_strchr.c \
+							 $(LIBFT_DIR)/ft_strlen.c $(LIBFT_DIR)/ft_strtrim.c
+
+PARSER_SRCS	:=  $(PARSER_DIR)/acl_init.c $(PARSER_DIR)/free.c $(PARSER_DIR)/object_init.c \
+								$(PARSER_DIR)/parse_inits.c $(PARSER_DIR)/parsing.c $(PARSER_DIR)/print_scene.c \
+								$(PARSER_DIR)/config.c $(PARSER_DIR)/parse_errors.c \
+								$(PARSER_DIR)/parse_inits_extra.c $(PARSER_DIR)/parsing_utils.c
+
+
+LIST_SRCS		:= $(LIST_DIR)/list_free.c $(LIST_DIR)/list_get.c $(LIST_DIR)/list_insert_shift.c \
+							 $(LIST_DIR)/list_length.c $(LIST_DIR)/list_map.c $(LIST_DIR)/list_predicate.c \
+							 $(LIST_DIR)/list_push_pop.c
+
+
+SRCS	:= $(SRC_DIR)/main.c
 OBJS	:= $(SRCS:.c=.o)
 DEPS	:= $(OBJS:.o=.d)
 
-CORE_SRCS := $(wildcard $(CORE_DIR)/*.c)
+CORE_SRCS := $(CORE_DIR)/calculate_lighting.c $(CORE_DIR)/find_nearest_intersection.c \
+						 $(CORE_DIR)/noise.c $(CORE_DIR)/render_scene.c $(CORE_DIR)/color.c \
+						 $(CORE_DIR)/handle_events.c $(CORE_DIR)/ray_cone_intersect.c \
+						 $(CORE_DIR)/solve_quadratic.c $(CORE_DIR)/cone_calc.c $(CORE_DIR)/init_scene.c \
+						 $(CORE_DIR)/ray_intersection_shading.c $(CORE_DIR)/cone_hit.c \
+						 $(CORE_DIR)/is_in_shadow.c $(CORE_DIR)/ray_plane_intersect.c \
+						 $(CORE_DIR)/cone_surface_solver.c $(CORE_DIR)/material.c $(CORE_DIR)/ray_sphere_intersect.c
+
 CORE_OBJS := $(CORE_SRCS:.c=.o)
 CORE_DEPS := $(CORE_OBJS:.o=.d)
 
 ALGEBRA_LIB	:= $(ALGEBRA_DIR)/libalgebra.a
 LIBFT_LIB		:= $(LIBFT_DIR)/libft.a
 PARSER_LIB	:= $(PARSER_DIR)/libparser.a
-UTILS_LIB		:= $(UTILS_DIR)/libutils.a
 LIST_LIB		:= $(LIST_DIR)/liblist.a
 
-LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(PARSER_LIB) $(UTILS_LIB) $(LIST_LIB)
+LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(PARSER_LIB) $(LIST_LIB)
 
 LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(PARSER_DIR) \
-						 -L$(UTILS_DIR) \
 						 -L$(LIBFT_DIR) \
 						 -L$(MLX_DIR) \
 						 -L$(LIST_DIR)
 
-LIB_FLAGS	:=  -lparser -lutils -lft -llist -lalgebra -lmlx -lXext -lX11 -lm -lz
+LIB_FLAGS	:=  -lparser -lft -llist -lalgebra -lmlx -lXext -lX11 -lm -lz
 
 
 all: $(NAME) 
@@ -86,8 +119,6 @@ $(LIBFT_LIB): $(LIBFT_SRCS)
 $(PARSER_LIB): $(PARSER_SRCS)
 	$(MAKE) -C $(PARSER_DIR) CFLAGS="$(CFLAGS)"
 
-$(UTILS_LIB): $(UTILS_SRCS)
-	$(MAKE) -C $(UTILS_DIR) CFLAGS="$(CFLAGS)"
 
 $(LIST_LIB): $(LIST_SRCS)
 	$(MAKE) -C $(LIST_DIR) CFLAGS="$(CFLAGS)"
@@ -100,7 +131,6 @@ clean:
 	$(MAKE) -C $(ALGEBRA_DIR) clean
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(PARSER_DIR) clean
-	$(MAKE) -C $(UTILS_DIR) clean
 	$(MAKE) -C $(LIST_DIR) clean
 
 fclean: clean
@@ -108,7 +138,6 @@ fclean: clean
 	$(MAKE) -C $(ALGEBRA_DIR) fclean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(PARSER_DIR) fclean
-	$(MAKE) -C $(UTILS_DIR) fclean
 	$(MAKE) -C $(LIST_DIR) fclean
 
 re: fclean all
