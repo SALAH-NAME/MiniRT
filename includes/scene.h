@@ -78,6 +78,7 @@ typedef struct s_cylinder
 typedef struct s_cone
 {
 	t_vec3				center;
+	t_vec3				normal;
 	double				angle;
 	double				height;
 }						t_cone;
@@ -97,7 +98,7 @@ typedef enum e_object_type
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
-	/*OBJ_CONE,*/
+	OBJ_CONE,
 	/*OBJ_HYPERBOLOID,*/
 	/*OBJ_PARABOLOID*/
 }						t_object_type;
