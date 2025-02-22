@@ -21,7 +21,7 @@ static bool	solve_cone_side(t_ray ray, t_cone cone, double *t_side)
 	double	m2;
 	double	abc[3];
 
-	axis = vec3_normalize(cone.normal);
+	axis = cone.normal;
 	oc = vec3_sub(ray.origin, cone.center);
 	tan2 = (cone.radius / cone.height) * (cone.radius / cone.height);
 	m1 = vec3_dot(ray.direction, axis);
@@ -40,7 +40,7 @@ static void	check_cone_side_range(t_ray ray, t_cone cone, double *t_side)
 	t_vec3	p;
 	t_vec3	axis;
 
-	axis = vec3_normalize(cone.normal);
+	axis = cone.normal;
 	p = vec3_add(ray.origin, vec3_mul(ray.direction, *t_side));
 	height = vec3_dot(vec3_sub(p, cone.center), axis);
 	if (height < 0.0 || height > cone.height)
@@ -88,7 +88,7 @@ static void	fill_hit_cone(t_ray ray, t_hit *hit, t_cone cone, double t_final,
 	double	h;
 	double	tan2;
 
-	axis = vec3_normalize(cone.normal);
+	axis = cone.normal;
 	hit->t = t_final;
 	hit->hit = true;
 	hit->point = vec3_add(ray.origin, vec3_mul(ray.direction, t_final));
@@ -116,8 +116,12 @@ bool	ray_cone_intersect(t_ray ray, t_object *obj, t_hit *hit)
 	double	t_side;
 	double	t_bottom;
 	double	t_final;
-
 	cone = obj->data.cone;
+ 	double rotation_matrix[9]; 
+    matrix3_create_rotation(rotation_matrix, cone.normal);
+    cone.normal = vec3_normalize(matrix3_apply_rotation(rotation_matrix, vec3_create(0, 1, 0)));
+ 
+
 	if (!solve_cone_side(ray, cone, &t_side))
 		return (false);
 	check_cone_side_range(ray, cone, &t_side);

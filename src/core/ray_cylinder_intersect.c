@@ -16,7 +16,10 @@ bool ray_cylinder_intersect(t_ray ray, t_object *obj, t_hit *hit)
 {
     t_cylinder cylinder = obj->data.cylinder;
     t_vec3 oc = vec3_sub(ray.origin, cylinder.center);
-    t_vec3 axis = vec3_normalize(cylinder.normal); // Cylinder axis (assumed normalized)
+
+     double rotation_matrix[9]; 
+    matrix3_create_rotation(rotation_matrix, cylinder.normal);
+    t_vec3 axis = vec3_normalize(matrix3_apply_rotation(rotation_matrix, vec3_create(0, 1, 0)));
     t_vec3 d = ray.direction;
     t_vec3 oc_proj = vec3_sub(oc, vec3_mul(axis, vec3_dot(oc, axis)));
     t_vec3 d_proj = vec3_sub(d, vec3_mul(axis, vec3_dot(d, axis)));
