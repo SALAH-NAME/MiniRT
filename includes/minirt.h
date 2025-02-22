@@ -18,8 +18,8 @@
 # include <mlx.h>
 # include <stdbool.h>
 
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 500
+# define HEIGHT 500
 
 typedef struct s_ray_cylinder_vars
 {

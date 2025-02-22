@@ -18,7 +18,7 @@ LIBFT_SRCS	:= $(wildcard $(LIBFT_DIR)/*.c)
 
 INCLUDES	:= -I../../includes/
 
-SRCS	:= $(wildcard *.c)
+SRCS	:=  $(wildcard *.c)
 OBJS	:= $(SRCS:.c=.o)
 DEPS	:= $(SRCS:.c=.d)
 
