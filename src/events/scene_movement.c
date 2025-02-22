@@ -70,8 +70,9 @@ void	move_selected_up(t_object *obj, double distance)
 		break ;
 	case OBJ_CYLINDER:
 		center = &obj->data.cylinder.center;
+		break ;
 	case OBJ_CONE:
-		center = &obj->data.cone.normal;
+		center = &obj->data.cone.center;
 		break ;
 	default:
 		return ;

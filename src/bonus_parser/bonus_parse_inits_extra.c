@@ -47,3 +47,15 @@ void	radius_init(t_data *data, double *radius, char *val)
 	if (*radius < 0.0 || *radius > FLT_MAX)
 		set_error(data, ERR_RADIUS_R, val, NULL);
 }
+
+void	spec_init(t_data *data, double *ratio, char *val)
+{
+	if (!val)
+		set_error(data, ERR_MS_SPECULAR, val, NULL);
+	if (float_valid(val) == 0)
+		set_error(data, ERR_SEPCULAR_V, val, NULL);
+	if (ft_strtod_safe(val, ratio) == 0)
+		set_error(data, ERR_SPECULAR_R, val, NULL);
+	if (*ratio < 0.0 || *ratio > DBL_MAX)
+		set_error(data, ERR_SPECULAR_R, val, NULL);
+}

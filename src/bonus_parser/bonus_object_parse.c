@@ -12,8 +12,6 @@
 
 #include "core.h"
 
-#ifdef BONUS
-
 static t_object	*get_lst_last(t_object *list)
 {
 	t_object	*current;
@@ -130,5 +128,3 @@ void	cn_init(t_data *data)
 	else
 		get_lst_last(data->scene.objects)->next = obj;
 }
-
-#endif

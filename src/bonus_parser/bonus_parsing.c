@@ -12,6 +12,11 @@
 
 #include "core.h"
 
+void	comment(t_data *data)
+{
+	(void)data;
+}
+
 void	parse_line(t_data *data)
 {
 	int	i;

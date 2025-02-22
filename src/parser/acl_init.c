@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "core.h"
-#ifndef BONUS
 
 static t_light	*get_lst_last(t_light *list)
 {
@@ -74,5 +73,3 @@ void	c_init(t_data *data)
 	vector_init(data, &data->scene.camera.orientation, data->file.row[2]);
 	degree_init(data, &data->scene.camera.fov, data->file.row[3]);
 }
-
-#endif

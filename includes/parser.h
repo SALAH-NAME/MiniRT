@@ -29,7 +29,7 @@ typedef struct s_file
 }						t_file;
 
 // parse and init
-bool						parse_scene(t_render *render, char *file_name);
+bool					parse_scene(t_render *render, char *file_name);
 // obj-init
 void					a_init(t_data *data);
 void					l_init(t_data *data);

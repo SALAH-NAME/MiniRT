@@ -11,17 +11,16 @@
 /* ************************************************************************** */
 
 #include "events.h"
-#include "parser.h"
-#include <stdio.h>
 
 int	handle_keypress(int keycode, t_render *world)
 {
-	printf("Keycode: %d\n", keycode);
-	t_object *obj = world->scene.objects;
-	while (obj)
-		if(obj->type === OBJ_CONE)
-			t_object *selected = obj;
+	t_object	*obj;
+	t_object	*selected;
 
+	obj = world->scene.objects;
+	while (obj)
+		if (obj->type == OBJ_CONE)
+			selected = obj;
 	if (keycode == XK_Escape || keycode == XK_q)
 	{
 		mlx_loop_end(world->mlx.ptr);
@@ -33,27 +32,27 @@ int	handle_keypress(int keycode, t_render *world)
 		world->scene.camera.position.z -= MOVE_SPEED;
 		render_scene(world);
 	}
-	if(keycode == XK_s || keycode == XK_S)
+	if (keycode == XK_s || keycode == XK_S)
 	{
 		world->scene.camera.position.z += MOVE_SPEED;
 		render_scene(world);
 	}
-	if(keycode == XK_a || keycode == XK_A)
+	if (keycode == XK_a || keycode == XK_A)
 	{
 		world->scene.camera.position.x -= MOVE_SPEED;
 		render_scene(world);
 	}
-	if(keycode == XK_d || keycode == XK_D)
+	if (keycode == XK_d || keycode == XK_D)
 	{
 		world->scene.camera.position.x += MOVE_SPEED;
 		render_scene(world);
-	}	
-	if(keycode == XK_Up)
+	}
+	if (keycode == XK_Up)
 	{
 		world->scene.camera.position.y -= MOVE_SPEED;
 		render_scene(world);
 	}
-	if(keycode == XK_Down)
+	if (keycode == XK_Down)
 	{
 		world->scene.camera.position.y += MOVE_SPEED;
 		render_scene(world);
@@ -63,37 +62,35 @@ int	handle_keypress(int keycode, t_render *world)
 		world->scene.camera.orientation.x += MOVE_SPEED;
 		render_scene(world);
 	}
-	if(keycode == XK_t || keycode == XK_T)
+	if (keycode == XK_t || keycode == XK_T)
 	{
-		world->scene.is_raytrace  = !world->scene.is_raytrace;
+		world->scene.is_raytrace = !world->scene.is_raytrace;
 		render_scene(world);
 	}
-	if(key_code == XK_Left)
+	if (keycode == XK_Left)
 	{
-		
-			move_selected_up(selected, double distance)
+		move_selected_up(selected, MOVE_SPEED);
 		render_scene(world);
 	}
 	return (0);
 }
 
 // Add this new function
-int handle_mouse(int button, int x, int y, t_render *world)
+int	handle_mouse(int button, int x, int y, t_render *world)
 {
-    (void)x;  // Unused parameters
-    (void)y;
-
-    if (button == 4)  // Mouse wheel up
-    {
-        world->scene.camera.orientation.x += MOVE_SPEED;
-        render_scene(world);
-    }
-    else if (button == 5)  // Mouse wheel down
-    {
-        world->scene.camera.orientation.x -= MOVE_SPEED;
-        render_scene(world);
-    }
-    return (0);
+	(void)x; // Unused parameters
+	(void)y;
+	if (button == 4) // Mouse wheel up
+	{
+		world->scene.camera.orientation.x += MOVE_SPEED;
+		render_scene(world);
+	}
+	else if (button == 5) // Mouse wheel down
+	{
+		world->scene.camera.orientation.x -= MOVE_SPEED;
+		render_scene(world);
+	}
+	return (0);
 }
 
 // int handle_mouse_move(int x, int y, t_render *world)
@@ -101,8 +98,9 @@ int handle_mouse(int button, int x, int y, t_render *world)
 //     static int steps = 0;
 //     static int last_x = -1;
 //     static int last_y = -1;
-//     const double sensitivity = 0.05; // Adjust this value to change mouse sensitivity
-    
+//     const double sensitivity = 0.05;
+	// Adjust this value to change mouse sensitivity
+
 //     if (last_x == -1)
 //     {
 //         last_x = x;
@@ -118,7 +116,8 @@ int handle_mouse(int button, int x, int y, t_render *world)
 //     // Horizontal movement (left/right) affects X rotation
 //     world->scene.camera.orientation.x += dx * sensitivity;
 //     // Vertical movement (up/down) affects Y rotation
-//     world->scene.camera.orientation.y -= dy * sensitivity; // Negative for intuitive up/down
+//     world->scene.camera.orientation.y -= dy * sensitivity;
+	// Negative for intuitive up/down
 
 //     // Clamp vertical rotation to prevent camera flipping
 //     if (world->scene.camera.orientation.y > 89.0)

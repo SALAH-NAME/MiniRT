@@ -14,12 +14,15 @@
 # define EVENTS_H
 
 # include "minirt.h"
+# include "scene.h"
+# include <stdio.h>
+
 # define MOVE_SPEED .2
 
 // Key handler prototypes
-int	handle_keypress(int keycode, t_render *world);
-int handle_mouse(int button, int x, int y, t_render *world);
-int handle_mouse_move(int x, int y, t_render *world);
+int		handle_keypress(int keycode, t_render *world);
+int		handle_mouse(int button, int x, int y, t_render *world);
+int		handle_mouse_move(int x, int y, t_render *world);
 
 // Scene movement prototypes
 void	move_selected_forward(t_object *obj, double distance);

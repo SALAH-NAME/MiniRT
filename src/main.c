@@ -37,12 +37,12 @@ static bool	init_mlx(t_render *render)
 	return (true);
 }
 
-
-static void setup_hooks(t_render *render)
+static void	setup_hooks(t_render *render)
 {
-    mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_keypress, render);
-    mlx_mouse_hook(render->mlx.win, &handle_mouse, render);
+	mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_keypress, render);
+	mlx_mouse_hook(render->mlx.win, &handle_mouse, render);
 }
+
 static void	cleanup_render(t_render *render)
 {
 	if (!render)

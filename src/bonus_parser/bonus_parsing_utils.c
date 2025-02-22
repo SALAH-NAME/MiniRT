@@ -1,0 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/31 13:56:17 by ysemlali          #+#    #+#             */
+/*   Updated: 2025/01/05 19:40:54 by ysemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "core.h"
+
+int	comma_count(char *val)
+{
+	int	count;
+
+	count = 0;
+	if (val)
+	{
+		while (*val)
+		{
+			if (*val == ',')
+				count++;
+			val++;
+		}
+	}
+	return (count == 2);
+}
+
+int	valid(char **info, int count)
+{
+	int	i;
+
+	i = 0;
+	if (!info)
+		return (0);
+	while (info[i])
+		i++;
+	return (i == count);
+}
+
+int	float_valid(char *val)
+{
+	if (!val || !*val)
+		return (0);
+	if (*val == '-' || *val == '+')
+		val++;
+	if (!*val)
+		return (0);
+	while (*val)
+	{
+		if (!ft_isdigit(*val) && *val != '.')
+			return (0);
+		val++;
+	}
+	return (1);
+}
+
+int	int_valid(char *val)
+{
+	if (!val || !*val)
+		return (0);
+	if (*val == '-' || *val == '+')
+		val++;
+	if (!*val)
+		return (0);
+	while (*val)
+	{
+		if (!ft_isdigit(*val))
+			return (0);
+		val++;
+	}
+	return (1);
+}
+
+int	syntax_error(char **data)
+{
+	char	**row;
+	char	*col;
+
+	if (!data || !*data)
+		return (1);
+	row = data;
+	col = *data;
+	while (*row)
+	{
+		while (ft_isdigit(*col) || ft_isspace(*col) || *col == ','
+			|| *col == '.')
+			col++;
+		if (*col != '\0')
+			return (1);
+	}
+	return (row == NULL);
+}

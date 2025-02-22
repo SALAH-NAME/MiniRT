@@ -68,7 +68,7 @@ void	set_error(t_data *data, char *desc, char *pr, char *hint)
 
 void	check_errors(t_data *data)
 {
-	if (data->scene.count.l_c != data->config.elements[LIGHT].max_count)
+	if (data->scene.count.l_c == 0)
 		set_error(data, ERR_INV_ARG_NUM, "L", NULL);
 	else if (data->scene.count.c_c != data->config.elements[CAMERA].max_count)
 		set_error(data, ERR_INV_ARG_NUM, "C", NULL);

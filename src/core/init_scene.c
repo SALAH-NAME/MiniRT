@@ -25,9 +25,9 @@ void	set_materials(t_object *obj)
 
 void	set_materials(t_object *obj)
 {
-		obj->material.diffuse_coefficient = 0.7;
-		obj->material.specular_coefficient = 0.8;
-		obj->material.shininess = 32.0;
+	obj->material.diffuse_coefficient = 0.7;
+	obj->material.specular_coefficient = 0.8;
+	obj->material.shininess = 32.0;
 }
 
 #endif

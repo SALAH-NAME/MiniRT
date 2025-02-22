@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME		:= miniRT
+BONUS_NAME		:= miniRT_BONUS
 
 CC			:= cc
 CFLAGS	:= -Wall -Wextra -Werror -ggdb
@@ -32,6 +33,7 @@ PARSER_DIR	:= $(SRC_DIR)/parser
 UTILS_DIR		:= $(SRC_DIR)/utils
 LIST_DIR		:= $(SRC_DIR)/list
 EVENT_DIR		:= $(SRC_DIR)/events
+BONUS_PARSER_DIR	:= $(SRC_DIR)/bonus_parser
 
 ALGEBRA_SRC	:= $(wildcard $(ALGEBRA_DIR)/*.c)
 LIBFT_SRCS	:= $(wildcard $(LIBFT_DIR)/*.c)
@@ -39,6 +41,7 @@ PARSER_SRCS	:= $(wildcard $(PARSER_DIR)/*.c)
 UTILS_SRCS	:= $(wildcard $(UTILS_DIR)/*.c)
 LIST_SRCS		:= $(wildcard $(LIST_DIR)/*.c)
 EVENT_SRCS	:= $(wildcard $(EVENT_DIR)/*.c)
+BONUS_PARSER_SRCS	:= $(wildcard $(BONUS_PARSER_DIR)/*.c)
 
 SRCS	:= $(wildcard $(SRC_DIR)/*.c)
 OBJS	:= $(SRCS:.c=.o)
@@ -54,8 +57,10 @@ PARSER_LIB	:= $(PARSER_DIR)/libparser.a
 UTILS_LIB		:= $(UTILS_DIR)/libutils.a
 LIST_LIB		:= $(LIST_DIR)/liblist.a
 EVENT_LIB		:= $(EVENT_DIR)/libevent.a
+BONUS_PARSER_LIB	:= $(BONUS_PARSER_DIR)/libbonus_parser.a
 
 LIBS	:= $(ALGEBRA_LIB) $(LIBFT_LIB) $(PARSER_LIB) $(UTILS_LIB) $(LIST_LIB) $(EVENT_LIB)
+BONUS_LIBS	:= $(ALGEBRA_LIB) $(LIBFT_LIB) $(BONUS_PARSER_LIB) $(UTILS_LIB) $(LIST_LIB) $(EVENT_LIB)
 
 LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(PARSER_DIR) \
@@ -63,14 +68,27 @@ LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(LIBFT_DIR) \
 						 -L$(MLX_DIR) \
 						 -L$(LIST_DIR)\
-						 -L$(EVENT_DIR)
+						 -L$(EVENT_DIR)\
+						 -L$(BONUS_PARSER_DIR)
+
+BONUS_LIB_PATH := -L$(ALGEBRA_DIR) \
+									-L$(UTILS_DIR) \
+									-L$(LIBFT_DIR) \
+									-L$(MLX_DIR) \
+									-L$(LIST_DIR)\
+									-L$(EVENT_DIR)\
+									-L$(BONUS_PARSER_DIR)
+
 
 LIB_FLAGS	:=  -lparser -lutils -lft -llist -lalgebra  -lmlx -lXext -lX11 -lm -lz -levent
+BONUS_LIB_FLAGS	:=  -lbonus_parser -lutils -lft -llist -lalgebra  -lmlx -lXext -lX11 -lm -lz -levent
 
 
 all: $(NAME) 
-bonus: CFLAGS += -D BONUS
-bonus: all
+bonus : $(BONUS_NAME)
+
+$(BONUS_NAME) : $(BONUS_LIBS) $(CORE_OBJS) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(CORE_OBJS) $(BONUS_LIB_PATH) $(BONUS_LIB_FLAGS) -o $(BONUS_NAME)
 
 $(NAME): $(LIBS) $(CORE_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(CORE_OBJS) $(LIB_PATH) $(LIB_FLAGS) -o $(NAME)
@@ -103,6 +121,9 @@ $(LIST_LIB): $(LIST_SRCS)
 $(EVENT_LIB): $(EVENT_SRCS)
 	$(MAKE) -C $(EVENT_DIR) CFLAGS="$(CFLAGS)"
 
+$(BONUS_PARSER_LIB): $(BONUS_PARSER_SRCS)
+	$(MAKE) -C $(BONUS_PARSER_DIR) CFLAGS="$(CFLAGS)"
+
 -include $(DEPS) $(CORE_DEPS)
 
 clean:
@@ -114,6 +135,7 @@ clean:
 	$(MAKE) -C $(UTILS_DIR) clean
 	$(MAKE) -C $(LIST_DIR) clean
 	$(MAKE) -C $(EVENT_DIR) clean
+	$(MAKE) -C $(BONUS_PARSER_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
@@ -123,6 +145,7 @@ fclean: clean
 	$(MAKE) -C $(UTILS_DIR) fclean
 	$(MAKE) -C $(LIST_DIR) fclean
 	$(MAKE) -C $(EVENT_DIR) fclean
+	$(MAKE) -C $(BONUS_PARSER_DIR) fclean
 
 re: fclean all
 
@@ -134,9 +157,9 @@ valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
 yusuf: bonus
-	./$(NAME) $(SCENE_BONUS) 
+	./$(BONUS_NAME) $(SCENE_BONUS) 
 # valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
-.PHONY: all clean fclean re sanitize valgrind
+.PHONY: all clean fclean re bonus sanitize valgrind
 .SECONDARY:
 
