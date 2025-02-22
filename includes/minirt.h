@@ -15,8 +15,6 @@
 
 # include "algebra.h"
 # include "scene.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
 # include <mlx.h>
 # include <stdbool.h>
 

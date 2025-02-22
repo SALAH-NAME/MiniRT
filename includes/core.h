@@ -20,6 +20,8 @@
 # include "minirt.h"
 # include "parser.h"
 # include "scene.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>
@@ -31,7 +33,6 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
-
 # define KB_4 4096
 # define EXT ".rt"
 

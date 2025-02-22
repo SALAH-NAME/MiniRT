@@ -10,15 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "algebra.h"
 #include "core.h"
 #include "events.h"
-#include "list.h"
-#include "minirt.h"
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 static bool	init_mlx(t_render *render)
 {
@@ -37,10 +30,11 @@ static bool	init_mlx(t_render *render)
 	return (true);
 }
 
+
 static void	setup_hooks(t_render *render)
 {
-	mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_keypress, render);
-	mlx_mouse_hook(render->mlx.win, &handle_mouse, render);
+	mlx_hook(render->mlx.win, KeyPress, KeyPressMask, handle_keypress, render);
+  mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, close_window, render);
 }
 
 static void	cleanup_render(t_render *render)

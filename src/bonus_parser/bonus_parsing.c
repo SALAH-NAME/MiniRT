@@ -17,7 +17,7 @@ void	comment(t_data *data)
 	(void)data;
 }
 
-void	parse_line(t_data *data)
+static void	parse_line(t_data *data)
 {
 	int	i;
 
@@ -40,7 +40,7 @@ void	parse_line(t_data *data)
 	ft_arrmapi(data->file.row, free);
 }
 
-void	scene_data(t_data *data)
+static void	scene_data(t_data *data)
 {
 	ft_bzero(&data->scene, sizeof(t_scene));
 	data->file.error = 1;
@@ -60,7 +60,7 @@ void	scene_data(t_data *data)
 	check_errors(data);
 }
 
-bool	valid_file_name(char *file_name)
+static bool	valid_file_name(char *file_name)
 {
 	char	*ext;
 

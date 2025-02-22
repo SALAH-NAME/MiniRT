@@ -139,6 +139,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(BONUS_NAME)
 	$(MAKE) -C $(ALGEBRA_DIR) fclean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(PARSER_DIR) fclean
