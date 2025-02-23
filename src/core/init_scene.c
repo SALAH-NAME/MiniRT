@@ -29,7 +29,6 @@ void	set_materials(t_object *obj)
 	obj->material.specular_coefficient = 0.8;
 	obj->material.shininess = 32.0;
 }
-
 #endif
 
 

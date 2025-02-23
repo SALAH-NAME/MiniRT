@@ -50,17 +50,17 @@ void	object_movement(int keycode, t_object *objects, t_render *world)
 
 	object_selection(keycode, objects, &selected);
 	if (keycode == XK_w)
-		move_direction(selected, DIR_FORWARD, SPEED);
+		move_direction(selected, DIR_FORWARD, MV_SPEED);
 	else if (keycode == XK_s)
-		move_direction(selected, DIR_BACKWARD, SPEED);
+		move_direction(selected, DIR_BACKWARD, MV_SPEED);
 	else if (keycode == XK_a)
-		move_direction(selected, DIR_LEFT, SPEED);
+		move_direction(selected, DIR_LEFT, MV_SPEED);
 	else if (keycode == XK_d)
-		move_direction(selected, DIR_RIGHT, SPEED);
+		move_direction(selected, DIR_RIGHT, MV_SPEED);
 	else if (keycode == XK_Up)
-		move_direction(selected, DIR_UP, SPEED);
+		move_direction(selected, DIR_UP, MV_SPEED);
 	else if (keycode == XK_Down)
-		move_direction(selected, DIR_DOWN, SPEED);
+		move_direction(selected, DIR_DOWN, MV_SPEED);
 	render_scene_on_change(keycode, world);
 }
 
@@ -69,7 +69,7 @@ t_vec3	*get_object_normals(t_object *object)
 	if (!object)
 		return (NULL);
 	if (object->type == OBJ_SPHERE)
-		;
+		return(NULL);
 	if (object->type == OBJ_PLANE)
 		return (&object->data.plane.normal);
 	if (object->type == OBJ_CYLINDER)
@@ -97,16 +97,16 @@ void	object_rotation(int keycode, t_object *objects, t_render *world)
 
 	object_selection(keycode, objects, &selected);
 	if (keycode == XK_w)
-		rotate_object(selected, SPEED, 0, 0);
+		rotate_object(selected, RT_SPEED, 0, 0);
 	else if (keycode == XK_s)
-		rotate_object(selected, 0, -SPEED, 0);
+		rotate_object(selected, 0, -RT_SPEED, 0);
 	else if (keycode == XK_a)
-		rotate_object(selected, 0, 0, SPEED);
+		rotate_object(selected, 0, 0, RT_SPEED);
 	else if (keycode == XK_d)
-		rotate_object(selected, 0, 0, -SPEED);
+		rotate_object(selected, 0, 0, -RT_SPEED);
 	else if (keycode == XK_Up)
-		rotate_object(selected, SPEED, 0, 0);
+		rotate_object(selected, RT_SPEED, 0, 0);
 	else if (keycode == XK_Down)
-		rotate_object(selected, -SPEED, 0, 0);
+		rotate_object(selected, -RT_SPEED, 0, 0);
 	render_scene_on_change(keycode, world);
 }

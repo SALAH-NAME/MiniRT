@@ -15,17 +15,17 @@
 void	camera_movement(int keycode, t_camera *camera, t_render *world)
 {
 	if (keycode == XK_w)
-		camera->position.z -= SPEED;
+		camera->position.z -= MV_SPEED;
 	else if (keycode == XK_s)
-		camera->position.z += SPEED;
+		camera->position.z += MV_SPEED;
 	else if (keycode == XK_a)
-		camera->position.x -= SPEED;
+		camera->position.x -= MV_SPEED;
 	else if (keycode == XK_d)
-		camera->position.x += SPEED;
+		camera->position.x += MV_SPEED;
 	else if (keycode == XK_Up)
-		camera->position.y += SPEED;
+		camera->position.y += MV_SPEED;
 	else if (keycode == XK_Down)
-		camera->position.y -= SPEED;
+		camera->position.y -= MV_SPEED;
 	render_scene_on_change(keycode, world);
 }
 

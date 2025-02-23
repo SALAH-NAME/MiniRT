@@ -190,8 +190,8 @@ valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
 yusuf: all
-	./$(BONUS_NAME) $(SCENE_DIR)/bonus_scene.rt
-	# ./$(NAME) scenes/file.rt
+	./$(NAME) scenes/file.rt
+# ./$(BONUS_NAME) $(SCENE_DIR)/bonus_scene.rt
 
 
 .PHONY: all clean fclean re sanitize valgrind

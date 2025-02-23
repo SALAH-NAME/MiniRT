@@ -12,7 +12,6 @@
 
 #include "core.h"
 #include "events.h"
-# include "minirt.h"
 
 
 static void print_transformation_instructions(void)
@@ -89,7 +88,7 @@ int	main(int argc, char *argv[])
 	init_scene(&render);
 	render_scene(&render);
 	print_transformation_instructions();
-	mlx_loop(render.mlx.ptr);
+	// mlx_loop(render.mlx.ptr);
 	cleanup_render(&render);
 	return (0);
 }
