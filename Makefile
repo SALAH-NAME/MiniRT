@@ -6,7 +6,7 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/02/03 19:57:52 by ysemlali         ###   ########.fr        #
+#    Updated: 2025/02/23 23:43:24 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ CORE_SRCS := $(CORE_DIR)/calculate_lighting.c $(CORE_DIR)/find_nearest_intersect
 						 $(CORE_DIR)/noise.c $(CORE_DIR)/render_scene.c $(CORE_DIR)/color.c \
 						 $(CORE_DIR)/ray_cylinder_intersect.c $(CORE_DIR)/ray_cone_intersect.c \
 						 $(CORE_DIR)/solve_quadratic.c $(CORE_DIR)/cone_calc.c $(CORE_DIR)/init_scene.c \
-						 $(CORE_DIR)/ray_intersection_shading.c $(CORE_DIR)/cone_hit.c \
+						 $(CORE_DIR)/ray_intersection_shading.c $(CORE_DIR)/cone_hit.c  $(CORE_DIR)/cylinder_utils.c\
 						 $(CORE_DIR)/is_in_shadow.c $(CORE_DIR)/ray_plane_intersect.c \
 						 $(CORE_DIR)/cone_surface_solver.c $(CORE_DIR)/material.c $(CORE_DIR)/ray_sphere_intersect.c
 
@@ -189,9 +189,8 @@ valgrind: CFLAGS += -g
 valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
-yusuf: all
-	./$(NAME) scenes/file.rt
-# ./$(BONUS_NAME) $(SCENE_DIR)/bonus_scene.rt
+yusuf: bonus
+	./$(BONUS_NAME) $(SCENE_DIR)/bonus_scene.rt
 
 
 .PHONY: all clean fclean re sanitize valgrind

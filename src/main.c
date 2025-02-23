@@ -11,21 +11,6 @@
 /* ************************************************************************** */
 
 #include "core.h"
-#include "events.h"
-
-
-static void print_transformation_instructions(void)
-{
-    printf(YELLOW "📜 Transformation instructions:\n" RESET);
-    printf(GREEN "🚀 Press 1 to enter object movement mode\n" RESET);
-    printf(BLUE "🔄 Press 2 to enter object rotation mode\n" RESET);
-    printf(MAGENTA "📷 Press 3 to enter camera movement mode\n" RESET);
-    printf(CYAN "🔄 Press 4 to enter camera rotation mode\n" RESET);
-
-    printf(CYAN "🔵 Select object: Tab\n" RESET);
-    printf(GREEN "Use W, A, S, D to move objects and camera horizontally \n" RESET);
-	printf(GREEN "Use Up and Down arrow keys to move objects and camera vertically \n" RESET);
-}
 
 static bool	init_mlx(t_render *render)
 {
@@ -44,11 +29,11 @@ static bool	init_mlx(t_render *render)
 	return (true);
 }
 
-
 static void	setup_hooks(t_render *render)
 {
 	mlx_hook(render->mlx.win, KeyPress, KeyPressMask, handle_keypress, render);
-  mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, close_window, render);
+	mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, close_window,
+		render);
 }
 
 static void	cleanup_render(t_render *render)
@@ -88,7 +73,7 @@ int	main(int argc, char *argv[])
 	init_scene(&render);
 	render_scene(&render);
 	print_transformation_instructions();
-	// mlx_loop(render.mlx.ptr);
+	mlx_loop(render.mlx.ptr);
 	cleanup_render(&render);
 	return (0);
 }

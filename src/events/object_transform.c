@@ -69,7 +69,7 @@ t_vec3	*get_object_normals(t_object *object)
 	if (!object)
 		return (NULL);
 	if (object->type == OBJ_SPHERE)
-		return(NULL);
+		return (NULL);
 	if (object->type == OBJ_PLANE)
 		return (&object->data.plane.normal);
 	if (object->type == OBJ_CYLINDER)

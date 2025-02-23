@@ -86,8 +86,8 @@ t_vec3	perturb_normal(t_vec3 normal, t_vec3 point, t_bump_map *bump)
 			* bump->scale + 200, point.z * bump->scale + 200);
 	create_tangent_space(normal, &tangent, &bitangent);
 	perturbed = vec3_add(normal, vec3_add(vec3_mul(tangent, noise_vec.x
-					* bump->intensity), vec3_add(vec3_mul(bitangent,
-						noise_vec.y * bump->intensity), vec3_mul(normal,
-						noise_vec.z * bump->intensity))));
+					* bump->intensity), vec3_add(vec3_mul(bitangent, noise_vec.y
+						* bump->intensity), vec3_mul(normal, noise_vec.z
+						* bump->intensity))));
 	return (vec3_normalize(perturbed));
 }

@@ -14,14 +14,14 @@
 # define CORE_H
 
 # include "algebra.h"
+# include "cone.h"
 # include "config.h"
 # include "error.h"
+# include "events.h"
 # include "libft.h"
 # include "minirt.h"
 # include "parser.h"
 # include "scene.h"
-# include "minirt.h"
-# include "cone.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <errno.h>

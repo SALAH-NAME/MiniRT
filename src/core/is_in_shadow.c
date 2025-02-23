@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_in_shadow.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: souahidi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:24:19 by souahidi          #+#    #+#             */
-/*   Updated: 2025/02/13 13:24:19 by souahidi         ###   ########.fr       */
+/*   Updated: 2025/02/23 23:52:25 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	is_in_shadow(t_vec3 point, t_vec3 light_pos, t_scene *scene,
 	{
 		if (obj != current_obj && get_intersection_function(obj->type)
 			&& get_intersection_function(obj->type)(shadow_ray, obj,
-				&shadow_hit) && shadow_hit.t < light_distance)
+			&shadow_hit) && shadow_hit.t < light_distance)
 			return (true);
 		obj = obj->next;
 	}

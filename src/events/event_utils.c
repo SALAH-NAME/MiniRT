@@ -18,20 +18,41 @@ void	print_mode(int mode, int *last_mode)
 	{
 		if (mode == MODE_OBJECT_MOVE)
 		{
-			printf(GREEN "\n-----------🚀 Entering Mode: OJBECT MOVEMENT-----------\n" RESET);
+			printf(GREEN "\n-----------");
+			printf("🚀 Entering Mode: OJBECT MOVEMENT-----------\n" RESET);
 			printf(YELLOW "Press Tab to switch between objects\n" RESET);
 		}
 		if (mode == MODE_OBJECT_ROTATE)
 		{
-			printf(BLUE "\n-----------🚀 Entering Mode: OBJECT ROTATION-----------\n" RESET);
+			printf(BLUE "\n-----------");
+			printf("🚀 Entering Mode: OBJECT ROTATION-----------\n" RESET);
 			printf(YELLOW "Press Tab to switch between objects\n" RESET);
 		}
 		if (mode == MODE_CAMERA_MOVE)
-			printf(MAGENTA "\n-----------📷 Entering Mode: CAMERA MOVEMENT-----------\n" RESET);
+		{
+			printf(MAGENTA "\n-----------");
+			printf("📷 Entering Mode: CAMERA MOVEMENT-----------\n" RESET);
+		}
 		if (mode == MODE_CAMERA_ROTATE)
-			printf(CYAN "\n-----------📷 Entering Mode: CAMERA ROTATION-----------\n" RESET);
+		{
+			printf(CYAN "\n-----------");
+			printf("📷 Entering Mode: CAMERA ROTATION-----------\n" RESET);
+		}
 		*last_mode = mode;
 	}
+}
+
+void	print_transformation_instructions(void)
+{
+	printf(YELLOW "📜 Transformation instructions:\n" RESET);
+	printf(GREEN "🚀 Press 1 to enter object movement mode\n" RESET);
+	printf(BLUE "🔄 Press 2 to enter object rotation mode\n" RESET);
+	printf(MAGENTA "📷 Press 3 to enter camera movement mode\n" RESET);
+	printf(CYAN "🔄 Press 4 to enter camera rotation mode\n" RESET);
+	printf(CYAN "🔵 Select object: Tab\n" RESET);
+	printf(GREEN "Use W, A, S,D ");
+	printf("to move objects and camera horizontally \n" RESET);
+	printf(GREEN "Use Up and Down arrow keys to move objects and camera vertically \n" RESET);
 }
 
 void	print_selected_object(t_object *object)

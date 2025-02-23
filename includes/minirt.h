@@ -18,7 +18,6 @@
 # include <mlx.h>
 # include <stdbool.h>
 
-
 # define WIDTH 480
 # define HEIGHT 560
 
@@ -63,15 +62,16 @@ int				handle_close(t_render *world);
 
 t_color			color_create(float r, float g, float b);
 t_color			color_multiply(t_color color, double t);
-t_material		material_create(t_color color, double diffuse, double specular, double shininess);
+t_material		material_create(t_color color, double diffuse, double specular,
+					double shininess);
 void			init_scene(t_render *render);
 void			render_scene(t_render *render);
 
 t_color			calculate_lighting(t_hit *hit, t_scene *scene);
 bool			solve_quadratic(double a, double b, double c, double *t);
 bool			ray_sphere_intersect(t_ray ray, t_object *obj, t_hit *hit);
-bool 			ray_plane_intersect(t_ray ray, t_object *obj, t_hit *hit);
-bool 			ray_cylinder_intersect(t_ray ray, t_object *obj, t_hit *hit);
+bool			ray_plane_intersect(t_ray ray, t_object *obj, t_hit *hit);
+bool			ray_cylinder_intersect(t_ray ray, t_object *obj, t_hit *hit);
 bool			find_nearest_intersection(t_ray ray, t_scene *scene,
 					t_hit *hit);
 t_color			ray_intersection_shading(t_ray ray, t_scene *scene);
