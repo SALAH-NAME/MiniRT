@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "core.h"
+#include "cone.h"
 
 bool	handle_cone_hit(t_ray ray, t_hit *hit, t_cone_calc calc, double t)
 {
