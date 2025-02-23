@@ -14,6 +14,7 @@
 # define CONE_H
 
 # include "algebra.h"
+# include "minirt.h"
 # include <math.h>
 # include <stdbool.h>
 

@@ -12,6 +12,7 @@
 
 #include "core.h"
 #include "events.h"
+# include "minirt.h"
 
 
 static void print_transformation_instructions(void)

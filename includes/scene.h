@@ -81,7 +81,6 @@ typedef struct s_cone
 	t_vec3				normal;
 	double				angle;
 	double				height;
-	double				radius;
 }						t_cone;
 
 typedef struct s_count
@@ -92,7 +91,7 @@ typedef struct s_count
 	int					sp_c;
 	int					cy_c;
 	int					pl_c;
-	int					cn_c;
+	int 				cn_c;
 }						t_count;
 
 typedef enum e_object_type
@@ -153,7 +152,7 @@ typedef struct s_scene
 	t_light				*selected_light;
 	t_object			*selected_obj;
 	t_count				count;
-	bool				is_raytrace;
+	bool 				is_raytrace;
 }						t_scene;
 
 #endif

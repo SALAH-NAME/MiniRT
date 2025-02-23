@@ -115,7 +115,7 @@ void	cn_init(t_data *data)
 	range = data->config.info[DOUBLE].range;
 	position_init(data, &obj->data.cone.center, data->file.row[1]);
 	vector_init(data, &obj->data.cone.normal, data->file.row[2]);
-	radius_init(data, &obj->data.cone.radius, data->file.row[3]);
+	radius_init(data, &obj->data.cone.height, data->file.row[3]);
 	ratio_init(data, &obj->data.cone.height, data->file.row[4], range);
 	color_init(data, &obj->material.color, data->file.row[5]);
 	if (data->scene.objects == NULL)

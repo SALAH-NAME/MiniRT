@@ -11,23 +11,27 @@
 # **************************************************************************** #
 
 NAME		:= miniRT
+BONUS_NAME	:= miniRT_bonus
 
 CC			:= cc
 CFLAGS	:= -Wall -Wextra -Werror -ggdb
 DFLAGS	:= -MMD -MP
 
 INCLUDES	:= -I./includes -I/usr/local/include
-SCENE 		:= scenes/file.rt
+SCENE_DIR := scenes
+
 
 SRC_DIR	:= src
 # LIBS_DIR	:= libs
 MLX_DIR	:= /usr/local/lib/
 
+EVENT_DIR    := $(SRC_DIR)/events
 ALGEBRA_DIR	:= $(SRC_DIR)/algebra
 CORE_DIR		:= $(SRC_DIR)/core
 LIBFT_DIR		:= $(SRC_DIR)/libft
 PARSER_DIR	:= $(SRC_DIR)/parser
 LIST_DIR		:= $(SRC_DIR)/list
+BONUS_PARSER_DIR := $(SRC_DIR)/bonus_parser
 
 ALGEBRA_SRC	:= $(ALGEBRA_DIR)/matrix3_apply_rotation.c $(ALGEBRA_DIR)/vec3_create.c \
 		$(ALGEBRA_DIR)/vec3_dot.c $(ALGEBRA_DIR)/vec3_length_squared.c $(ALGEBRA_DIR)/vec3_reflect.c \
@@ -58,6 +62,11 @@ PARSER_SRCS	:=  $(PARSER_DIR)/acl_init.c $(PARSER_DIR)/free.c $(PARSER_DIR)/obje
 								$(PARSER_DIR)/config.c $(PARSER_DIR)/parse_errors.c \
 								$(PARSER_DIR)/parse_inits_extra.c $(PARSER_DIR)/parsing_utils.c
 
+BONUS_PARSER_SRCS := $(BONUS_PARSER_DIR)/bonus_acl_parse.c $(BONUS_PARSER_DIR)/bonus_free.c \
+                     $(BONUS_PARSER_DIR)/bonus_object_parse.c $(BONUS_PARSER_DIR)/bonus_parse_inits.c \
+                     $(BONUS_PARSER_DIR)/bonus_parsing.c $(BONUS_PARSER_DIR)/bonus_print_scene.c \
+                     $(BONUS_PARSER_DIR)/bonus_config.c $(BONUS_PARSER_DIR)/bonus_parse_errors.c \
+                     $(BONUS_PARSER_DIR)/bonus_parse_inits_extra.c $(BONUS_PARSER_DIR)/bonus_parsing_utils.c
 
 LIST_SRCS		:= $(LIST_DIR)/list_free.c $(LIST_DIR)/list_get.c $(LIST_DIR)/list_insert_shift.c \
 							 $(LIST_DIR)/list_length.c $(LIST_DIR)/list_map.c $(LIST_DIR)/list_predicate.c \
@@ -70,11 +79,13 @@ DEPS	:= $(OBJS:.o=.d)
 
 CORE_SRCS := $(CORE_DIR)/calculate_lighting.c $(CORE_DIR)/find_nearest_intersection.c \
 						 $(CORE_DIR)/noise.c $(CORE_DIR)/render_scene.c $(CORE_DIR)/color.c \
-						 $(CORE_DIR)/ray_cone_intersect.c \
+						 $(CORE_DIR)/ray_cylinder_intersect.c $(CORE_DIR)/ray_cone_intersect.c \
 						 $(CORE_DIR)/solve_quadratic.c $(CORE_DIR)/cone_calc.c $(CORE_DIR)/init_scene.c \
 						 $(CORE_DIR)/ray_intersection_shading.c $(CORE_DIR)/cone_hit.c \
 						 $(CORE_DIR)/is_in_shadow.c $(CORE_DIR)/ray_plane_intersect.c \
 						 $(CORE_DIR)/cone_surface_solver.c $(CORE_DIR)/material.c $(CORE_DIR)/ray_sphere_intersect.c
+
+EVENT_SRCS   := $(EVENT_DIR)/key_handler.c $(EVENT_DIR)/object_transform.c $(EVENT_DIR)/camera_transform.c $(EVENT_DIR)/event_utils.c
 
 CORE_OBJS := $(CORE_SRCS:.c=.o)
 CORE_DEPS := $(CORE_OBJS:.o=.d)
@@ -82,20 +93,39 @@ CORE_DEPS := $(CORE_OBJS:.o=.d)
 ALGEBRA_LIB	:= $(ALGEBRA_DIR)/libalgebra.a
 LIBFT_LIB		:= $(LIBFT_DIR)/libft.a
 PARSER_LIB	:= $(PARSER_DIR)/libparser.a
+BONUS_PARSER_LIB := $(BONUS_PARSER_DIR)/libbonusparser.a
 LIST_LIB		:= $(LIST_DIR)/liblist.a
+EVENT_LIB    := $(EVENT_DIR)/libevent.a
 
-LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(PARSER_LIB) $(LIST_LIB)
+LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(PARSER_LIB) $(LIST_LIB) $(EVENT_LIB)
+BONUS_LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(BONUS_PARSER_LIB) $(LIST_LIB) $(EVENT_LIB) 
 
 LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(PARSER_DIR) \
 						 -L$(LIBFT_DIR) \
 						 -L$(MLX_DIR) \
-						 -L$(LIST_DIR)
+						 -L$(LIST_DIR) \
+						 -L$(EVENT_DIR) \
 
-LIB_FLAGS	:=  -lparser -lft -llist -lalgebra -lmlx -lXext -lX11 -lm -lz
+BONUS_LIB_PATH	:= -L$(ALGEBRA_DIR) \
+						 -L$(LIBFT_DIR) \
+						 -L$(MLX_DIR) \
+						 -L$(LIST_DIR) \
+						 -L$(EVENT_DIR) \
+						 -L$(BONUS_PARSER_DIR)
+
+
+
+LIB_FLAGS	:=  -lparser -lft -llist -lalgebra -levent  -lmlx -lXext -lX11 -lm -lz
+BONUS_LIB_FLAGS	:=  -lbonus_parser -lft -llist -lalgebra -levent  -lmlx -lXext -lX11 -lm -lz
 
 
 all: $(NAME) 
+bonus: CFLAGS += -D BONUS
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(BONUS_LIBS) $(CORE_OBJS) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(CORE_OBJS) $(BONUS_LIB_PATH) $(BONUS_LIB_FLAGS) -o $(BONUS_NAME)
 
 $(NAME): $(LIBS) $(CORE_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(CORE_OBJS) $(LIB_PATH) $(LIB_FLAGS) -o $(NAME)
@@ -119,9 +149,14 @@ $(LIBFT_LIB): $(LIBFT_SRCS)
 $(PARSER_LIB): $(PARSER_SRCS)
 	$(MAKE) -C $(PARSER_DIR) CFLAGS="$(CFLAGS)"
 
+$(BONUS_PARSER_LIB): $(BONUS_PARSER_SRCS)
+	$(MAKE) -C $(BONUS_PARSER_DIR) CFLAGS="$(CFLAGS)"
 
 $(LIST_LIB): $(LIST_SRCS)
 	$(MAKE) -C $(LIST_DIR) CFLAGS="$(CFLAGS)"
+
+$(EVENT_LIB): $(EVENT_SRCS)
+	$(MAKE) -C $(EVENT_DIR) CFLAGS="$(CFLAGS)"
 
 -include $(DEPS) $(CORE_DEPS)
 
@@ -132,13 +167,18 @@ clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(PARSER_DIR) clean
 	$(MAKE) -C $(LIST_DIR) clean
+	$(MAKE) -C $(EVENT_DIR) clean
+	$(MAKE) -C $(BONUS_PARSER_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(BONUS_NAME)
 	$(MAKE) -C $(ALGEBRA_DIR) fclean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(PARSER_DIR) fclean
 	$(MAKE) -C $(LIST_DIR) fclean
+	$(MAKE) -C $(EVENT_DIR) fclean
+	$(MAKE) -C $(BONUS_PARSER_DIR) fclean
 
 re: fclean all
 
@@ -150,7 +190,8 @@ valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
 yusuf: all
-	./$(NAME) scenes/file.rt
+	./$(BONUS_NAME) $(SCENE_DIR)/bonus_scene.rt
+	# ./$(NAME) scenes/file.rt
 
 
 .PHONY: all clean fclean re sanitize valgrind

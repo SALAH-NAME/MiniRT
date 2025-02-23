@@ -17,7 +17,8 @@
 # include <X11/keysym.h>
 # include <stdio.h>
 
-# define SPEED 0.1
+# define SPEED 1
+# define RT_SPEED 0.1
 
 #define RESET "\033[0m"
 #define RED "\033[31m"

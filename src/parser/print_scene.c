@@ -14,13 +14,13 @@
 
 void	print_object(t_object *obj)
 {
-	printf("\nObject Type: ");
+	printf("\nsp ");
 	if (obj->type == OBJ_SPHERE)
 	{
-		printf("Sphere: id = %d\n", obj->id);
-		printf("  Center: %f, %f, %f\n", obj->data.sphere.center.x,
+		/*printf("Sphere: id = %d\n", obj->id);*/
+		printf("%f,%f,%f ", obj->data.sphere.center.x,
 			obj->data.sphere.center.y, obj->data.sphere.center.z);
-		printf("  Diameter: %f\n", obj->data.sphere.radius);
+		printf(" %f ", obj->data.sphere.radius);
 	}
 	else if (obj->type == OBJ_PLANE)
 	{
@@ -71,7 +71,7 @@ void	print_scene(t_scene *scene)
 	}
 	// Printing camera info
 	{
-		printf("Camera:\n");
+		printf(":\n");
 		printf("  Position: %f, %f, %f\n", scene->camera.position.x,
 			scene->camera.position.y, scene->camera.position.z);
 		printf("  Orientation: %f, %f, %f\n", scene->camera.orientation.x,
