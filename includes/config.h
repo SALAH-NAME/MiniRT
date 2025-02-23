@@ -26,6 +26,8 @@ enum					e_elem
 	PLANE,
 	SPHERE,
 	CYLINDER,
+	CONE,
+	COMMENT,
 	ELEM_COUNT,
 };
 
@@ -73,5 +75,5 @@ typedef struct s_config
 	const t_info		*info;
 }						t_config;
 
-int						parse_config_init(t_data *data);
+void					parse_config_init(t_data *data);
 #endif

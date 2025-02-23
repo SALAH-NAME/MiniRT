@@ -11,14 +11,17 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <stdio.h>
 
 t_color	ray_intersection_shading(t_ray ray, t_scene *scene)
 {
 	t_hit	hit;
 
 	if (find_nearest_intersection(ray, scene, &hit))
-		return (calculate_lighting(&hit, scene));
-	//	RAY-CASTING
-	//	return (hit.material.color);
-	return ((t_color){0.0, 0.0, 0.0});
+	{
+		if (scene->is_raytrace)
+			return (calculate_lighting(&hit, scene));
+		return (hit.material.color);
+	}
+	return ((t_color){0, 0, 0});
 }

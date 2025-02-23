@@ -6,18 +6,21 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/02/03 19:57:52 by ysemlali         ###   ########.fr        #
+#    Updated: 2025/02/15 01:50:30 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= miniRT
+BONUS_NAME		:= miniRT_BONUS
 
 CC			:= cc
 CFLAGS	:= -Wall -Wextra -Werror -ggdb
 DFLAGS	:= -MMD -MP
 
+
 INCLUDES	:= -I./includes -I/usr/local/include
 SCENE 		:= scenes/file.rt
+SCENE_BONUS := scenes/bonus_scene.rt
 
 SRC_DIR	:= src
 # LIBS_DIR	:= libs
@@ -28,12 +31,16 @@ CORE_DIR		:= $(SRC_DIR)/core
 LIBFT_DIR		:= $(SRC_DIR)/libft
 PARSER_DIR	:= $(SRC_DIR)/parser
 LIST_DIR		:= $(SRC_DIR)/list
+EVENT_DIR		:= $(SRC_DIR)/events
+BONUS_PARSER_DIR	:= $(SRC_DIR)/bonus_parser
 
-ALGEBRA_SRC	:= $(ALGEBRA_DIR)/matrix3_apply_rotation.c $(ALGEBRA_DIR)/vec3_create.c \
-		$(ALGEBRA_DIR)/vec3_dot.c $(ALGEBRA_DIR)/vec3_length_squared.c $(ALGEBRA_DIR)/vec3_reflect.c \
-		$(ALGEBRA_DIR)/matrix3_create_rotation.c $(ALGEBRA_DIR)/vec3_cross.c $(ALGEBRA_DIR)/vec3_is_zero.c \
-		$(ALGEBRA_DIR)/vec3_mul.c $(ALGEBRA_DIR)/vec3_sub.c $(ALGEBRA_DIR)/vec3_add.c \
-		$(ALGEBRA_DIR)/vec3_div.c $(ALGEBRA_DIR)/vec3_length.c $(ALGEBRA_DIR)/vec3_normalize.c
+ALGEBRA_SRC	:= $(wildcard $(ALGEBRA_DIR)/*.c)
+LIBFT_SRCS	:= $(wildcard $(LIBFT_DIR)/*.c)
+PARSER_SRCS	:= $(wildcard $(PARSER_DIR)/*.c)
+UTILS_SRCS	:= $(wildcard $(UTILS_DIR)/*.c)
+LIST_SRCS		:= $(wildcard $(LIST_DIR)/*.c)
+EVENT_SRCS	:= $(wildcard $(EVENT_DIR)/*.c)
+BONUS_PARSER_SRCS	:= $(wildcard $(BONUS_PARSER_DIR)/*.c)
 
 LIBFT_SRCS	:= $(LIBFT_DIR)/ft_arrlen.c $(LIBFT_DIR)/ft_isascii.c $(LIBFT_DIR)/ft_memset.c \
 							 $(LIBFT_DIR)/ft_strcmp.c $(LIBFT_DIR)/ft_strmapi.c $(LIBFT_DIR)/ft_substr.c \
@@ -83,19 +90,38 @@ ALGEBRA_LIB	:= $(ALGEBRA_DIR)/libalgebra.a
 LIBFT_LIB		:= $(LIBFT_DIR)/libft.a
 PARSER_LIB	:= $(PARSER_DIR)/libparser.a
 LIST_LIB		:= $(LIST_DIR)/liblist.a
+EVENT_LIB		:= $(EVENT_DIR)/libevent.a
+BONUS_PARSER_LIB	:= $(BONUS_PARSER_DIR)/libbonus_parser.a
 
-LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(PARSER_LIB) $(LIST_LIB)
+LIBS	:= $(ALGEBRA_LIB) $(LIBFT_LIB) $(PARSER_LIB) $(UTILS_LIB) $(LIST_LIB) $(EVENT_LIB)
+BONUS_LIBS	:= $(ALGEBRA_LIB) $(LIBFT_LIB) $(BONUS_PARSER_LIB) $(UTILS_LIB) $(LIST_LIB) $(EVENT_LIB)
 
 LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(PARSER_DIR) \
 						 -L$(LIBFT_DIR) \
 						 -L$(MLX_DIR) \
-						 -L$(LIST_DIR)
+						 -L$(LIST_DIR)\
+						 -L$(EVENT_DIR)\
+						 -L$(BONUS_PARSER_DIR)
 
-LIB_FLAGS	:=  -lparser -lft -llist -lalgebra -lmlx -lXext -lX11 -lm -lz
+BONUS_LIB_PATH := -L$(ALGEBRA_DIR) \
+									-L$(UTILS_DIR) \
+									-L$(LIBFT_DIR) \
+									-L$(MLX_DIR) \
+									-L$(LIST_DIR)\
+									-L$(EVENT_DIR)\
+									-L$(BONUS_PARSER_DIR)
+
+
+LIB_FLAGS	:=  -lparser -lutils -lft -llist -lalgebra  -lmlx -lXext -lX11 -lm -lz -levent
+BONUS_LIB_FLAGS	:=  -lbonus_parser -lutils -lft -llist -lalgebra  -lmlx -lXext -lX11 -lm -lz -levent
 
 
 all: $(NAME) 
+bonus : $(BONUS_NAME)
+
+$(BONUS_NAME) : $(BONUS_LIBS) $(CORE_OBJS) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(CORE_OBJS) $(BONUS_LIB_PATH) $(BONUS_LIB_FLAGS) -o $(BONUS_NAME)
 
 $(NAME): $(LIBS) $(CORE_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(CORE_OBJS) $(LIB_PATH) $(LIB_FLAGS) -o $(NAME)
@@ -123,6 +149,12 @@ $(PARSER_LIB): $(PARSER_SRCS)
 $(LIST_LIB): $(LIST_SRCS)
 	$(MAKE) -C $(LIST_DIR) CFLAGS="$(CFLAGS)"
 
+$(EVENT_LIB): $(EVENT_SRCS)
+	$(MAKE) -C $(EVENT_DIR) CFLAGS="$(CFLAGS)"
+
+$(BONUS_PARSER_LIB): $(BONUS_PARSER_SRCS)
+	$(MAKE) -C $(BONUS_PARSER_DIR) CFLAGS="$(CFLAGS)"
+
 -include $(DEPS) $(CORE_DEPS)
 
 clean:
@@ -132,13 +164,18 @@ clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(PARSER_DIR) clean
 	$(MAKE) -C $(LIST_DIR) clean
+	$(MAKE) -C $(EVENT_DIR) clean
+	$(MAKE) -C $(BONUS_PARSER_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(BONUS_NAME)
 	$(MAKE) -C $(ALGEBRA_DIR) fclean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(PARSER_DIR) fclean
 	$(MAKE) -C $(LIST_DIR) fclean
+	$(MAKE) -C $(EVENT_DIR) fclean
+	$(MAKE) -C $(BONUS_PARSER_DIR) fclean
 
 re: fclean all
 
@@ -149,10 +186,10 @@ valgrind: CFLAGS += -g
 valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
-yusuf: all
-	./$(NAME) scenes/file.rt
+yusuf: bonus
+	./$(BONUS_NAME) $(SCENE_BONUS) 
+# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
-
-.PHONY: all clean fclean re sanitize valgrind
+.PHONY: all clean fclean re bonus sanitize valgrind
 .SECONDARY:
 

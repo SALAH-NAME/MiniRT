@@ -1,0 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera_transform.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/22 14:37:02 by ysemlali          #+#    #+#             */
+/*   Updated: 2025/02/22 14:37:02 by ysemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "events.h"
+
+void	camera_movement(int keycode, t_camera *camera, t_render *world)
+{
+	if (keycode == XK_w)
+		camera->position.z -= SPEED;
+	else if (keycode == XK_s)
+		camera->position.z += SPEED;
+	else if (keycode == XK_a)
+		camera->position.x -= SPEED;
+	else if (keycode == XK_d)
+		camera->position.x += SPEED;
+	else if (keycode == XK_Up)
+		camera->position.y += SPEED;
+	else if (keycode == XK_Down)
+		camera->position.y -= SPEED;
+	render_scene_on_change(keycode, world);
+}
+
+void	camera_rotation(int keycode, t_camera *camera, t_render *world)
+{
+	if (keycode == XK_w)
+		camera->orientation.z -= SPEED;
+	else if (keycode == XK_s)
+		camera->orientation.z += SPEED;
+	else if (keycode == XK_a)
+		camera->orientation.y -= SPEED;
+	else if (keycode == XK_d)
+		camera->orientation.y += SPEED;
+	else if (keycode == XK_Up)
+		camera->orientation.x += SPEED;
+	else if (keycode == XK_Down)
+		camera->orientation.x -= SPEED;
+	render_scene_on_change(keycode, world);
+}

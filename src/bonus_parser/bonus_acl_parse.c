@@ -54,7 +54,7 @@ void	l_init(t_data *data)
 	data->scene.count.l_c++;
 	position_init(data, &light->position, data->file.row[1]);
 	ratio_init(data, &light->brightness, data->file.row[2], range);
-	color_init(data, &light->color, "255,255,255");
+	color_init(data, &light->color, data->file.row[3]);
 	if (data->scene.lights == NULL)
 		data->scene.lights = light;
 	else

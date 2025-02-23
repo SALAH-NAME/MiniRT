@@ -5,58 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/30 12:13:42 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/03 20:10:25by ysemlali         ###   ########.fr       */
+/*   Created: 2025/02/15 00:47:31 by ysemlali          #+#    #+#             */
+/*   Updated: 2025/02/15 01:55:31 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define PARSING 0
-#if PARSING
+#include "core.h"
+#include "events.h"
 
-# include "core.h"
-int	init(t_data *data, char *av)
+
+static void print_transformation_instructions(void)
 {
-	if (parse_config_init(data))
-		return (1);
-	if (load_file(data, av))
-		return (1);
-	/*if (load_render(data))*/
-	/*return (1);*/
-	return (0);
+    printf(YELLOW "📜 Transformation instructions:\n" RESET);
+    printf(GREEN "🚀 Press 1 to enter object movement mode\n" RESET);
+    printf(BLUE "🔄 Press 2 to enter object rotation mode\n" RESET);
+    printf(MAGENTA "📷 Press 3 to enter camera movement mode\n" RESET);
+    printf(CYAN "🔄 Press 4 to enter camera rotation mode\n" RESET);
+
+    printf(CYAN "🔵 Select object: Tab\n" RESET);
+    printf(GREEN "Use W, A, S, D to move objects and camera horizontally \n" RESET);
+	printf(GREEN "Use Up and Down arrow keys to move objects and camera vertically \n" RESET);
 }
-
-int	main(int ac, char **av)
-{
-	t_data	*data;
-
-	if (ac != 2)
-	{
-		printf("Usage: %s <file>\n", av[0]);
-		return (1);
-	}
-	if (valid_file_name(av[1]))
-		return (1);
-	data = ft_calloc(1, sizeof(t_data));
-	if (data)
-	{
-		if (init(data, av[1]))
-			return (free_all(data), 1);
-	}
-	free_all(data);
-	return (0);
-}
-
-#else
-
-# include "algebra.h"
-# include "core.h"
-# include "list.h"
-# include "minirt.h"
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-
 
 static bool	init_mlx(t_render *render)
 {
@@ -75,11 +44,11 @@ static bool	init_mlx(t_render *render)
 	return (true);
 }
 
+
 static void	setup_hooks(t_render *render)
 {
-	mlx_hook(render->mlx.win, KeyPress, KeyPressMask, &handle_keypress, render);
-	mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, &handle_close,
-		render);
+	mlx_hook(render->mlx.win, KeyPress, KeyPressMask, handle_keypress, render);
+  mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, close_window, render);
 }
 
 static void	cleanup_render(t_render *render)
@@ -109,22 +78,17 @@ int	main(int argc, char *argv[])
 {
 	t_render	render;
 
-	(void)argv;
-	(void)argc;
-	/*if (argc != 2)*/
-		/*return (ft_error("Usage: ./miniRT <scene.rt>"));*/
-
-	 // if (!parse_scene(&render, argv[1]))
-		// return (cleanup(&render), ft_error("Scene parsing failed"));
-
+	if (argc != 2)
+		return (ft_error("Usage: ./miniRT <scene.rt>"));
+	if (parse_scene(&render, argv[1]) == false)
+		return (ft_error("Scene parsing failed"), 1);
 	if (!init_mlx(&render))
 		return (cleanup_render(&render), ft_error("MLX initialization failed"));
 	setup_hooks(&render);
 	init_scene(&render);
 	render_scene(&render);
+	print_transformation_instructions();
 	mlx_loop(render.mlx.ptr);
 	cleanup_render(&render);
 	return (0);
 }
-
-#endif
