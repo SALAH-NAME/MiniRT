@@ -62,11 +62,11 @@ PARSER_SRCS	:=  $(PARSER_DIR)/acl_init.c $(PARSER_DIR)/free.c $(PARSER_DIR)/obje
 								$(PARSER_DIR)/config.c $(PARSER_DIR)/parse_errors.c \
 								$(PARSER_DIR)/parse_inits_extra.c $(PARSER_DIR)/parsing_utils.c
 
-BONUS_PARSER_SRCS := $(BONUS_PARSER_DIR)/bonus_acl_parse.c $(BONUS_PARSER_DIR)/bonus_free.c \
-                     $(BONUS_PARSER_DIR)/bonus_object_parse.c $(BONUS_PARSER_DIR)/bonus_parse_inits.c \
-                     $(BONUS_PARSER_DIR)/bonus_parsing.c \
-                     $(BONUS_PARSER_DIR)/bonus_config.c $(BONUS_PARSER_DIR)/bonus_parse_errors.c \
-                     $(BONUS_PARSER_DIR)/bonus_parse_inits_extra.c $(BONUS_PARSER_DIR)/bonus_parsing_utils.c
+BONUS_PARSER_SRCS := $(BONUS_PARSER_DIR)/acl_parse_bonus.c $(BONUS_PARSER_DIR)/free_bonus.c \
+                     $(BONUS_PARSER_DIR)/object_parse_bonus.c $(BONUS_PARSER_DIR)/parse_inits_bonus.c \
+                     $(BONUS_PARSER_DIR)/parsing_bonus.c \
+                     $(BONUS_PARSER_DIR)/config_bonus.c $(BONUS_PARSER_DIR)/parse_errors_bonus.c \
+                     $(BONUS_PARSER_DIR)/parse_inits_extra_bonus.c $(BONUS_PARSER_DIR)/parsing_utils_bonus.c
 
 LIST_SRCS		:= $(LIST_DIR)/list_free.c $(LIST_DIR)/list_get.c $(LIST_DIR)/list_insert_shift.c \
 							 $(LIST_DIR)/list_length.c $(LIST_DIR)/list_map.c $(LIST_DIR)/list_predicate.c \

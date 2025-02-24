@@ -14,20 +14,16 @@ NAME	:= libevent.a
 
 LIBFT_DIR		:= ../libft/
 LIBFT				:= $(LIBFT_DIR)/libft.a
-LIBFT_SRCS	:= $(wildcard $(LIBFT_DIR)/*.c)
 
 INCLUDES	:= -I../../includes/
 
-SRCS	:= $(wildcard *.c)
+SRCS	:= camera_transform.c event_utils2.c event_utils.c key_handler.c object_transform.c
 OBJS	:= $(SRCS:.c=.o)
 DEPS	:= $(SRCS:.c=.d)
 
 all: $(NAME)
 
-$(LIBFT): $(LIBFT_SRCS)
-	$(MAKE) -C $(LIBFT_DIR)
-
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
