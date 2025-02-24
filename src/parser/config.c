@@ -36,6 +36,7 @@
  *   - "DIAMETER": DOUBLE, [0, FLT_MAX]
  */
 
+
 void	parse_config_init(t_data *data)
 {
 	static t_elems	elements[ELEM_COUNT];
@@ -43,7 +44,7 @@ void	parse_config_init(t_data *data)
 
 	elements[AMBIENT] = (t_elems){"A", ID, 1, 2, &a_init};
 	elements[CAMERA] = (t_elems){"C", ID, 1, 3, &c_init};
-	elements[LIGHT] = (t_elems){"L", ID, 1, 3, &l_init};
+	elements[LIGHT] = (t_elems){"L", ID, 1, 2, &l_init};
 	elements[PLANE] = (t_elems){"pl", ID, UN, 3, &pl_init};
 	elements[SPHERE] = (t_elems){"sp", ID, UN, 3, &sp_init};
 	elements[CYLINDER] = (t_elems){"cy", ID, UN, 5, &cy_init};
@@ -52,7 +53,6 @@ void	parse_config_init(t_data *data)
 	info[COLOR] = (t_info){"COLOR", COLOR, {.i_r = {0, 255}}};
 	info[DOUBLE] = (t_info){"DOUBLE", DOUBLE, {.d_r = {FLT_MIN, FLT_MAX}}};
 	info[DIAMETER] = (t_info){"DIAMETER", DOUBLE, {.d_r = {0, FLT_MAX}}};
-	info[ANGLE] = (t_info){"ANGLE", DOUBLE, {.d_r = {0, 175}}};
 	data->config.elements = elements;
 	data->config.info = info;
 }
