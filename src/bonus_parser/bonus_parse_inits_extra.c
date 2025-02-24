@@ -68,6 +68,6 @@ void	angle_init(t_data *data, double *angle, char *val)
 		set_error(data, ERR_ANGLE_V, val, NULL);
 	if (ft_strtod_safe(val, angle) == 0)
 		set_error(data, ERR_ANGLE_R, val, NULL);
-	if (*angle < EPSILON|| *angle > 175.0 || *angle == 0)
+	if (*angle < EPSILON || *angle > 175.0 || *angle == 0)
 		set_error(data, ERR_ANGLE_R, val, NULL);
 }

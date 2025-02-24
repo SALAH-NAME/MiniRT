@@ -48,7 +48,7 @@ void					vector_init(t_data *data, t_vec3 *vector, char *val);
 void					degree_init(t_data *data, int *degree, char *val);
 void					radius_init(t_data *data, double *radius, char *val);
 void					spec_init(t_data *data, double *ratio, char *val);
-void	        angle_init(t_data *data, double *angle, char *val);
+void					angle_init(t_data *data, double *angle, char *val);
 
 // utils
 int						valid(char **info, int count);
