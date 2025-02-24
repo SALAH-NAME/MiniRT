@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   bonus_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 12:13:40 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/01/05 20:11:45 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/24 00:50:23 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	scene_data(t_data *data)
 		data->file.line = get_next_line(data->file.fd);
 	}
 	free(data->file.line);
+	print_scene(&data->scene);
 	check_errors(data);
 }
 

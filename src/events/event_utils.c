@@ -6,11 +6,12 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 14:36:59 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/24 00:15:00 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/24 00:53:43 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
+#include "parser.h"
 
 void	print_mode(int mode, int *last_mode)
 {
@@ -74,5 +75,9 @@ void	render_scene_on_change(int keycode, t_render *world)
 {
 	if (keycode == XK_s || keycode == XK_w || keycode == XK_a || keycode == XK_d
 		|| keycode == XK_Up || keycode == XK_Down)
+		{
+
 		render_scene(world);
+		print_scene(&world->scene);
+		}
 }

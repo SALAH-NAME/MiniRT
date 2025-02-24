@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 00:47:31 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/15 01:55:31 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/24 00:50:45 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char *argv[])
 	setup_hooks(&render);
 	init_scene(&render);
 	render_scene(&render);
-	print_transformation_instructions();
+	// print_transformation_instructions();
 	mlx_loop(render.mlx.ptr);
 	cleanup_render(&render);
 	return (0);
