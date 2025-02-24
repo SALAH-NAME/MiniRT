@@ -13,23 +13,12 @@
 #include "core.h"
 #include "minirt.h"
 
-#ifdef BONUS
-
 void	set_materials(t_object *obj)
 {
 	obj->material.diffuse_coefficient = 0.7;
 	obj->material.shininess = 32.0;
+	obj->material.bump.scale = 7.0;
 }
-
-#else
-
-void	set_materials(t_object *obj)
-{
-	obj->material.diffuse_coefficient = 0.7;
-	obj->material.specular_coefficient = 0.8;
-	obj->material.shininess = 32.0;
-}
-#endif
 
 void	init_scene(t_render *render)
 {

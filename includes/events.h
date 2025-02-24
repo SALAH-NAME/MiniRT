@@ -46,7 +46,8 @@ typedef enum e_mode
 	MODE_OBJECT_MOVE,
 	MODE_OBJECT_ROTATE,
 	MODE_CAMERA_MOVE,
-	MODE_CAMERA_ROTATE
+	MODE_CAMERA_ROTATE,
+	MODE_BUMP_MAP
 }			t_mode;
 
 // Key handlers
@@ -59,6 +60,8 @@ void		object_rotation(int keycode, t_object *objects, t_render *world);
 void		move_direction(t_object *object, int direction, double speed);
 void		object_selection(int keycode, t_object *objects,
 				t_object **selected);
+void		scene_transformations(int keycode, t_render *world,
+				int current_mode);
 
 // Camera transformation
 void		camera_movement(int keycode, t_camera *camera, t_render *world);

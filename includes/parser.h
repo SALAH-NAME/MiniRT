@@ -63,5 +63,6 @@ void					set_error(t_data *data, char *desc, char *pr,
 							char *hint);
 void					free_scene(t_scene *scene);
 void					free_all(t_data *file);
+void					init_scene(t_render *render);
 
 #endif

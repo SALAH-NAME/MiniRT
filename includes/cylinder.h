@@ -37,7 +37,7 @@ typedef struct s_cylinder_hit_info
 }				t_cylinder_hit_info;
 
 // Cylinder function prototypes
-t_vec3			get_cylinder_axis(t_vec3 normal);
+t_vec3			calc_cylinder_axis(t_cylinder cylinder);
 double			check_caps(t_ray ray, t_cylinder cyl, t_vec3 axis,
 					t_vec3 cap_center);
 void			set_hit_normal(t_cylinder_hit_info info);

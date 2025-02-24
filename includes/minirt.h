@@ -18,8 +18,8 @@
 # include <mlx.h>
 # include <stdbool.h>
 
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 400
+# define HEIGHT 400
 
 typedef struct s_ray
 {

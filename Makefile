@@ -14,7 +14,7 @@ NAME		:= miniRT
 BONUS_NAME	:= miniRT_bonus
 
 CC			:= cc
-CFLAGS	:= -Wall -Wextra -Werror -ggdb
+CFLAGS	:= -Wall -Wextra -Werror  
 DFLAGS	:= -MMD -MP
 
 INCLUDES	:= -I./includes -I/usr/local/include
@@ -86,7 +86,7 @@ CORE_SRCS := $(CORE_DIR)/calculate_lighting.c $(CORE_DIR)/find_nearest_intersect
 						 $(CORE_DIR)/cone_surface_solver.c $(CORE_DIR)/material.c $(CORE_DIR)/ray_sphere_intersect.c
 
 EVENT_SRCS   := $(EVENT_DIR)/key_handler.c $(EVENT_DIR)/object_transform.c $(EVENT_DIR)/camera_transform.c $(EVENT_DIR)/event_utils.c\
-				$(EVENT_DIR)/event_utils2.c
+				$(EVENT_DIR)/event_utils2.c $(EVENT_DIR)/event_bump_map_utils.c
 
 CORE_OBJS := $(CORE_SRCS:.c=.o)
 CORE_DEPS := $(CORE_OBJS:.o=.d)
@@ -122,7 +122,6 @@ BONUS_LIB_FLAGS	:=  -lbonus_parser -lft -llist -lalgebra -levent  -lmlx -lXext -
 
 
 all: $(NAME) 
-bonus: CFLAGS += -D BONUS
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(BONUS_LIBS) $(CORE_OBJS) $(OBJS)
@@ -190,8 +189,8 @@ valgrind: CFLAGS += -g
 valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(SCENE)
 
-yusuf: bonus
-	./$(BONUS_NAME) $(SCENE_DIR)/bonus_scene.rt
+yusuf: all
+	./$(NAME) $(SCENE_DIR)/mandatory_tester_scene.rt
 
 
 .PHONY: all clean fclean re sanitize valgrind

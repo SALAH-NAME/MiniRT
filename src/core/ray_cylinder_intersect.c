@@ -15,7 +15,7 @@
 
 static void	init_cylinder_calc(t_cyl_calc *calc, t_ray ray, t_cylinder cyl)
 {
-	calc->axis = get_cylinder_axis(cyl.normal);
+	calc->axis = calc_cylinder_axis(cyl);
 	calc->oc = vec3_sub(ray.origin, cyl.center);
 	calc->oc_proj = vec3_sub(calc->oc, vec3_mul(calc->axis, vec3_dot(calc->oc,
 					calc->axis)));

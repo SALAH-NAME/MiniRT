@@ -42,14 +42,9 @@ int	handle_keypress(int keycode, t_render *world)
 		current_mode = MODE_CAMERA_MOVE;
 	else if (keycode == XK_4)
 		current_mode = MODE_CAMERA_ROTATE;
+	else if (keycode == XK_5)
+		current_mode = MODE_BUMP_MAP;
 	print_mode(current_mode, &last_mode);
-	if (current_mode == MODE_OBJECT_MOVE)
-		object_movement(keycode, world->scene.objects, world);
-	else if (current_mode == MODE_OBJECT_ROTATE)
-		object_rotation(keycode, world->scene.objects, world);
-	else if (current_mode == MODE_CAMERA_MOVE)
-		camera_movement(keycode, &world->scene.camera, world);
-	else if (current_mode == MODE_CAMERA_ROTATE)
-		camera_rotation(keycode, &world->scene.camera, world);
+	scene_transformations(keycode, world, current_mode);
 	return (0);
 }
