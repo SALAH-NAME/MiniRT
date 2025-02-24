@@ -17,7 +17,8 @@
  * Initializes configuration settings for parsing scene elements.
  *
  * elements[] (t_elems):
- *   - Identifier string, Type flag, Parsing constraints, Expected params, Initializer function.
+ *   - Identifier string, Type flag, Parsing constraints, Expected params,
+	Initializer function.
  *   - "A" (Ambient Light): ID, 1 instance, 2 params, `a_init`
  *   - "C" (Camera): ID, 1 instance, 3 params, `c_init`
  *   - "L" (Light Source): ID, 1 instance, 3 params, `l_init`
