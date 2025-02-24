@@ -75,9 +75,8 @@ void	render_scene_on_change(int keycode, t_render *world)
 {
 	if (keycode == XK_s || keycode == XK_w || keycode == XK_a || keycode == XK_d
 		|| keycode == XK_Up || keycode == XK_Down)
-		{
-
+	{
 		render_scene(world);
 		print_scene(&world->scene);
-		}
+	}
 }

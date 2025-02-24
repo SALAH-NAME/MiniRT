@@ -39,6 +39,7 @@ enum					e_param
 	DOUBLE,
 	VECTOR,
 	DIAMETER,
+  ANGLE,
 	PARAM_COUNT,
 	ID,
 	NONE,

@@ -72,7 +72,7 @@ int	main(int argc, char *argv[])
 	setup_hooks(&render);
 	init_scene(&render);
 	render_scene(&render);
-	// print_transformation_instructions();
+	print_transformation_instructions();
 	mlx_loop(render.mlx.ptr);
 	cleanup_render(&render);
 	return (0);

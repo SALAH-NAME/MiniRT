@@ -30,6 +30,7 @@ void	parse_config_init(t_data *data)
 	info[COLOR] = (t_info){"COLOR", COLOR, {.i_r = {0, 255}}};
 	info[DOUBLE] = (t_info){"DOUBLE", DOUBLE, {.d_r = {FLT_MIN, FLT_MAX}}};
 	info[DIAMETER] = (t_info){"DIAMETER", DOUBLE, {.d_r = {0, FLT_MAX}}};
+	info[ANGLE] = (t_info){"ANGLE", DOUBLE, {.d_r = {0, 175}}};
 	data->config.elements = elements;
 	data->config.info = info;
 }

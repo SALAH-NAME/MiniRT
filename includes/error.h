@@ -86,6 +86,10 @@ typedef struct s_error
 # define ERR_MS_SPECULAR "Missing specular value."
 # define ERR_SEPCULAR_V "Invalid specular value."
 # define ERR_SPECULAR_R "Specular value can't be negative."
+// radius errors
+# define ERR_MS_ANGLE "Missing angle value."
+# define ERR_ANGLE_V "Invalid angle value."
+# define ERR_ANGLE_R "Angle value must be between 0 and 175"
 
 void		set_error(t_data *data, char *desc, char *pr, char *hint);
 void		check_errors(t_data *data);

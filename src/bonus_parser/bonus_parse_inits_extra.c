@@ -59,3 +59,15 @@ void	spec_init(t_data *data, double *ratio, char *val)
 	if (*ratio < 0.0 || *ratio > DBL_MAX)
 		set_error(data, ERR_SPECULAR_R, val, NULL);
 }
+
+void	angle_init(t_data *data, double *angle, char *val)
+{
+	if (!val)
+		set_error(data, ERR_MS_ANGLE, val, NULL);
+	if (float_valid(val) == 0)
+		set_error(data, ERR_ANGLE_V, val, NULL);
+	if (ft_strtod_safe(val, angle) == 0)
+		set_error(data, ERR_ANGLE_R, val, NULL);
+	if (*angle < 0.0 || *angle > 175.0)
+		set_error(data, ERR_ANGLE_R, val, NULL);
+}
