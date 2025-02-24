@@ -58,13 +58,13 @@ LIBFT_SRCS	:= $(LIBFT_DIR)/ft_arrlen.c $(LIBFT_DIR)/ft_isascii.c $(LIBFT_DIR)/ft
 							 $(LIBFT_DIR)/ft_strlen.c $(LIBFT_DIR)/ft_strtrim.c
 
 PARSER_SRCS	:=  $(PARSER_DIR)/acl_init.c $(PARSER_DIR)/free.c $(PARSER_DIR)/object_init.c \
-								$(PARSER_DIR)/parse_inits.c $(PARSER_DIR)/parsing.c $(PARSER_DIR)/print_scene.c \
+								$(PARSER_DIR)/parse_inits.c $(PARSER_DIR)/parsing.c \
 								$(PARSER_DIR)/config.c $(PARSER_DIR)/parse_errors.c \
 								$(PARSER_DIR)/parse_inits_extra.c $(PARSER_DIR)/parsing_utils.c
 
 BONUS_PARSER_SRCS := $(BONUS_PARSER_DIR)/bonus_acl_parse.c $(BONUS_PARSER_DIR)/bonus_free.c \
                      $(BONUS_PARSER_DIR)/bonus_object_parse.c $(BONUS_PARSER_DIR)/bonus_parse_inits.c \
-                     $(BONUS_PARSER_DIR)/bonus_parsing.c $(BONUS_PARSER_DIR)/bonus_print_scene.c \
+                     $(BONUS_PARSER_DIR)/bonus_parsing.c \
                      $(BONUS_PARSER_DIR)/bonus_config.c $(BONUS_PARSER_DIR)/bonus_parse_errors.c \
                      $(BONUS_PARSER_DIR)/bonus_parse_inits_extra.c $(BONUS_PARSER_DIR)/bonus_parsing_utils.c
 

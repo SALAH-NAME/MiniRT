@@ -77,6 +77,5 @@ void	render_scene_on_change(int keycode, t_render *world)
 		|| keycode == XK_Up || keycode == XK_Down)
 	{
 		render_scene(world);
-		print_scene(&world->scene);
 	}
 }

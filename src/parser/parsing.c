@@ -51,7 +51,6 @@ static void	scene_data(t_data *data)
 		data->file.line = get_next_line(data->file.fd);
 	}
 	free(data->file.line);
-	print_scene(&data->scene);
 	check_errors(data);
 }
 

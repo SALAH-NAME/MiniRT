@@ -18,14 +18,13 @@ int	close_window(t_render *render)
 	return (0);
 }
 
-
-
-int swap_render_mode(t_render *world)
+int	swap_render_mode(t_render *world)
 {
-  world->scene.is_raytracing = !world->scene.is_raytracing;
-  render_scene(world);
-  return(0);
+	world->scene.is_raytracing = !world->scene.is_raytracing;
+	render_scene(world);
+	return (0);
 }
+
 int	handle_keypress(int keycode, t_render *world)
 {
 	static int	current_mode = MODE_NONE;
