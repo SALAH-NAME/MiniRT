@@ -152,7 +152,7 @@ typedef struct s_scene
 	t_light				*selected_light;
 	t_object			*selected_obj;
 	t_count				count;
-	bool				is_raytrace;
+	bool				is_raytracing;
 }						t_scene;
 
 #endif

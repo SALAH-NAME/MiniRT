@@ -76,5 +76,6 @@ typedef struct s_config
 	const t_info		*info;
 }						t_config;
 
-void					parse_config_init(t_data *data);
+
+void	parse_config_init(t_data *data);
 #endif

@@ -39,9 +39,7 @@ int	parse_config_init(t_data *data)
 {
 	static t_elems	elements[ELEM_COUNT];
 	static t_info	info[PARAM_COUNT];
-	static t_config config;
 
-	data->config = &config;
 	elements[AMBIENT] = (t_elems){"A", ID, 1, 2, &a_init};
 	elements[CAMERA] = (t_elems){"C", ID, 1, 3, &c_init};
 	elements[LIGHT] = (t_elems){"L", ID, 1, 3, &l_init};
@@ -54,7 +52,8 @@ int	parse_config_init(t_data *data)
 	info[COLOR] = (t_info){"COLOR", COLOR, {.i_r = {0, 255}}};
 	info[DOUBLE] = (t_info){"DOUBLE", DOUBLE, {.d_r = {FLT_MIN, FLT_MAX}}};
 	info[DIAMETER] = (t_info){"DIAMETER", DOUBLE, {.d_r = {0, FLT_MAX}}};
-	data->config->elements = elements;
-	data->config->info = info;
+	info[ANGLE] = (t_info){"ANGLE", DOUBLE, {.d_r = {0, 175}}};
+	data->config.elements = elements;
+	data->config.info = info;
 	return (0);
 }

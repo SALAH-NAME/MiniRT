@@ -19,7 +19,7 @@ t_color	ray_intersection_shading(t_ray ray, t_scene *scene)
 
 	if (find_nearest_intersection(ray, scene, &hit))
 	{
-		if (scene->is_raytrace)
+		if (scene->is_raytracing)
 			return (calculate_lighting(&hit, scene));
 		return (hit.material.color);
 	}

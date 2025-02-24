@@ -35,7 +35,7 @@ void	init_scene(t_render *render)
 {
 	t_object	*obj;
 
-	render->scene.is_raytrace = true;
+	render->scene.is_raytracing = true;
 	obj = render->scene.objects;
 	while (obj)
 	{

@@ -12,6 +12,7 @@
 
 #include "core.h"
 
+
 void	parse_config_init(t_data *data)
 {
 	static t_elems	elements[ELEM_COUNT];

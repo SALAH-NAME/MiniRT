@@ -18,11 +18,21 @@ int	close_window(t_render *render)
 	return (0);
 }
 
+
+
+int swap_render_mode(t_render *world)
+{
+  world->scene.is_raytracing = !world->scene.is_raytracing;
+  render_scene(world);
+  return(0);
+}
 int	handle_keypress(int keycode, t_render *world)
 {
 	static int	current_mode = MODE_NONE;
 	static int	last_mode = MODE_NONE;
 
+	if (keycode == XK_t)
+		swap_render_mode(world);
 	if (keycode == XK_Escape || keycode == XK_q)
 		return (mlx_loop_end(world->mlx.ptr), 0);
 	if (keycode == XK_1)
