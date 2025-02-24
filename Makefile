@@ -6,7 +6,7 @@
 #    By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/01 08:54:43 by souahidi          #+#    #+#              #
-#    Updated: 2025/02/23 23:43:24 by ysemlali         ###   ########.fr        #
+#    Updated: 2025/02/24 00:00:52 by ysemlali         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,8 @@ CORE_SRCS := $(CORE_DIR)/calculate_lighting.c $(CORE_DIR)/find_nearest_intersect
 						 $(CORE_DIR)/is_in_shadow.c $(CORE_DIR)/ray_plane_intersect.c \
 						 $(CORE_DIR)/cone_surface_solver.c $(CORE_DIR)/material.c $(CORE_DIR)/ray_sphere_intersect.c
 
-EVENT_SRCS   := $(EVENT_DIR)/key_handler.c $(EVENT_DIR)/object_transform.c $(EVENT_DIR)/camera_transform.c $(EVENT_DIR)/event_utils.c
+EVENT_SRCS   := $(EVENT_DIR)/key_handler.c $(EVENT_DIR)/object_transform.c $(EVENT_DIR)/camera_transform.c $(EVENT_DIR)/event_utils.c\
+				$(EVENT_DIR)/event_utils2.c
 
 CORE_OBJS := $(CORE_SRCS:.c=.o)
 CORE_DEPS := $(CORE_OBJS:.o=.d)

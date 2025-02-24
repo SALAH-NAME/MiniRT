@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "core.h"
+#include "core.h"
 
 typedef struct s_cyl_calc
 {
@@ -37,9 +37,10 @@ typedef struct s_cylinder_hit_info
 }				t_cylinder_hit_info;
 
 // Cylinder function prototypes
-t_vec3	get_cylinder_axis(t_vec3 normal);
-double	check_caps(t_ray ray, t_cylinder cyl, t_vec3 axis, t_vec3 cap_center);
-void	set_hit_normal(t_cylinder_hit_info info);
-void	set_cylinder_hit(t_ray ray, t_object *obj, t_cyl_calc *calc, t_hit *hit);
-bool	ray_cylinder_intersect(t_ray ray, t_object *obj, t_hit *hit);
-
+t_vec3			get_cylinder_axis(t_vec3 normal);
+double			check_caps(t_ray ray, t_cylinder cyl, t_vec3 axis,
+					t_vec3 cap_center);
+void			set_hit_normal(t_cylinder_hit_info info);
+void			set_cylinder_hit(t_ray ray, t_object *obj, t_cyl_calc *calc,
+					t_hit *hit);
+bool			ray_cylinder_intersect(t_ray ray, t_object *obj, t_hit *hit);

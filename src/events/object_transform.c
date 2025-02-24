@@ -6,20 +6,11 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 14:36:53 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/22 14:36:53 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/24 00:01:32 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
-
-void	object_selection(int keycode, t_object *objects, t_object **selected)
-{
-	if (keycode == XK_Tab)
-	{
-		*selected = switch_objects(objects);
-		print_selected_object(*selected);
-	}
-}
 
 void	move_direction(t_object *object, int direction, double speed)
 {
@@ -42,26 +33,6 @@ void	move_direction(t_object *object, int direction, double speed)
 		position->z -= speed;
 	if (direction == DIR_BACKWARD)
 		position->z += speed;
-}
-
-void	object_movement(int keycode, t_object *objects, t_render *world)
-{
-	static t_object	*selected = NULL;
-
-	object_selection(keycode, objects, &selected);
-	if (keycode == XK_w)
-		move_direction(selected, DIR_FORWARD, MV_SPEED);
-	else if (keycode == XK_s)
-		move_direction(selected, DIR_BACKWARD, MV_SPEED);
-	else if (keycode == XK_a)
-		move_direction(selected, DIR_LEFT, MV_SPEED);
-	else if (keycode == XK_d)
-		move_direction(selected, DIR_RIGHT, MV_SPEED);
-	else if (keycode == XK_Up)
-		move_direction(selected, DIR_UP, MV_SPEED);
-	else if (keycode == XK_Down)
-		move_direction(selected, DIR_DOWN, MV_SPEED);
-	render_scene_on_change(keycode, world);
 }
 
 t_vec3	*get_object_normals(t_object *object)
@@ -89,6 +60,26 @@ void	rotate_object(t_object *object, double x, double y, double z)
 	if (!normal)
 		return ;
 	*normal = vec3_add(*normal, vec3_create(x, y, z));
+}
+
+void	object_movement(int keycode, t_object *objects, t_render *world)
+{
+	static t_object	*selected = NULL;
+
+	object_selection(keycode, objects, &selected);
+	if (keycode == XK_w)
+		move_direction(selected, DIR_FORWARD, MV_SPEED);
+	else if (keycode == XK_s)
+		move_direction(selected, DIR_BACKWARD, MV_SPEED);
+	else if (keycode == XK_a)
+		move_direction(selected, DIR_LEFT, MV_SPEED);
+	else if (keycode == XK_d)
+		move_direction(selected, DIR_RIGHT, MV_SPEED);
+	else if (keycode == XK_Up)
+		move_direction(selected, DIR_UP, MV_SPEED);
+	else if (keycode == XK_Down)
+		move_direction(selected, DIR_DOWN, MV_SPEED);
+	render_scene_on_change(keycode, world);
 }
 
 void	object_rotation(int keycode, t_object *objects, t_render *world)

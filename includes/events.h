@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 03:11:27 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/22 06:53:58 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/24 00:06:24 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define MAGENTA "\033[35m"
 # define CYAN "\033[36m"
 # define WHITE "\033[37m"
+# define DASH "-----------"
 
 typedef enum e_direction
 {
@@ -64,6 +65,8 @@ void		camera_movement(int keycode, t_camera *camera, t_render *world);
 void		camera_rotation(int keycode, t_camera *camera, t_render *world);
 
 // Utils
+void		object_selection(int keycode, t_object *objects,
+				t_object **selected);
 void		print_transformation_instructions(void);
 void		print_mode(int mode, int *last_mode);
 void		print_selected_object(t_object *object);

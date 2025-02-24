@@ -6,7 +6,7 @@
 /*   By: ysemlali <ysemlali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 14:36:46 by ysemlali          #+#    #+#             */
-/*   Updated: 2025/02/22 14:36:46 by ysemlali         ###   ########.fr       */
+/*   Updated: 2025/02/23 23:54:40 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ int	handle_keypress(int keycode, t_render *world)
 	static int	last_mode = MODE_NONE;
 
 	if (keycode == XK_Escape || keycode == XK_q)
-	{
-		mlx_loop_end(world->mlx.ptr);
-		return (0);
-	}
+		return (mlx_loop_end(world->mlx.ptr), 0);
 	if (keycode == XK_1)
 		current_mode = MODE_OBJECT_MOVE;
 	else if (keycode == XK_2)
