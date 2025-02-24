@@ -5,6 +5,7 @@
 **/exec
 **/run_test
 miniRT
+miniRT_bonus
 .vscode/
 **.dSYM/
 tags
