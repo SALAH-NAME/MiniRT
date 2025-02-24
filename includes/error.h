@@ -89,7 +89,7 @@ typedef struct s_error
 // radius errors
 # define ERR_MS_ANGLE "Missing angle value."
 # define ERR_ANGLE_V "Invalid angle value."
-# define ERR_ANGLE_R "Angle value must be between 0 and 175"
+# define ERR_ANGLE_R "Angle value must be above EPSILON and lower than 175"
 
 void		set_error(t_data *data, char *desc, char *pr, char *hint);
 void		check_errors(t_data *data);
