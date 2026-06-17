@@ -13,13 +13,21 @@
 #include "core.h"
 #include "cylinder.h"
 
-t_vec3	get_cylinder_axis(t_vec3 normal)
+t_vec3	calc_cylinder_axis(t_cylinder cylinder)
 {
+	t_vec3	default_axis;
+	t_vec3	axis;
 	double	rotation_matrix[9];
 
-	matrix3_create_rotation(rotation_matrix, normal);
-	return (vec3_normalize(matrix3_apply_rotation(rotation_matrix,
-				vec3_create(0, 1, 0))));
+	default_axis = (t_vec3){0.0, 0.0, 1.0};
+	if (fabs(cylinder.normal.x) > EPSILON || fabs(cylinder.normal.y) > EPSILON
+		|| fabs(cylinder.normal.z) > EPSILON)
+	{
+		matrix3_create_rotation(rotation_matrix, cylinder.normal);
+		axis = matrix3_apply_rotation(rotation_matrix, cylinder.normal);
+		return (vec3_normalize(axis));
+	}
+	return (default_axis);
 }
 
 double	check_caps(t_ray ray, t_cylinder cyl, t_vec3 axis, t_vec3 cap_center)
@@ -29,7 +37,7 @@ double	check_caps(t_ray ray, t_cylinder cyl, t_vec3 axis, t_vec3 cap_center)
 	t_vec3	cap_point;
 
 	denom = vec3_dot(ray.direction, axis);
-	if (fabs(denom) <= 1e-6)
+	if (fabs(denom) <= EPSILON)
 		return (-1);
 	t = vec3_dot(vec3_sub(cap_center, ray.origin), axis) / denom;
 	cap_point = vec3_add(ray.origin, vec3_mul(ray.direction, t));

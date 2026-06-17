@@ -17,7 +17,7 @@ LIBFT				:= $(LIBFT_DIR)/libft.a
 
 INCLUDES	:= -I../../includes/
 
-SRCS	:= camera_transform.c event_utils2.c event_utils.c key_handler.c object_transform.c
+SRCS	:= camera_transform.c event_utils2.c event_utils.c key_handler.c object_transform.c event_bump_map_utils.c
 OBJS	:= $(SRCS:.c=.o)
 DEPS	:= $(SRCS:.c=.d)
 

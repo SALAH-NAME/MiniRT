@@ -13,30 +13,35 @@
 #include "events.h"
 #include "parser.h"
 
+void	print_mode_message(int mode)
+{
+	char	*colors[5];
+	char	*messages[5];
+	int		index;
+
+	colors[0] = GREEN;
+	colors[1] = BLUE;
+	colors[2] = MAGENTA;
+	colors[3] = CYAN;
+	colors[4] = CYAN;
+	messages[0] = "🚀 Entering Mode: OBJECT MOVEMENT";
+	messages[1] = "🚀 Entering Mode: OBJECT ROTATION";
+	messages[2] = "📷 Entering Mode: CAMERA MOVEMENT";
+	messages[3] = "📷 Entering Mode: CAMERA ROTATION";
+	messages[4] = "📷 Entering Mode: BUMP MAP TRANSFORMATIONS";
+	if (mode >= MODE_OBJECT_MOVE && mode <= MODE_BUMP_MAP)
+	{
+		index = mode - MODE_OBJECT_MOVE;
+		printf("%s\n-----------\n%s\n-----------\n" RESET, colors[index],
+			messages[index]);
+	}
+}
+
 void	print_mode(int mode, int *last_mode)
 {
 	if (mode != *last_mode)
 	{
-		if (mode == MODE_OBJECT_MOVE)
-		{
-			printf(GREEN "\n-----------");
-			printf("🚀 Entering Mode: OJBECT MOVEMENT-----------\n" RESET);
-		}
-		if (mode == MODE_OBJECT_ROTATE)
-		{
-			printf(BLUE "\n-----------");
-			printf("🚀 Entering Mode: OBJECT ROTATION-----------\n" RESET);
-		}
-		if (mode == MODE_CAMERA_MOVE)
-		{
-			printf(MAGENTA "\n-----------");
-			printf("📷 Entering Mode: CAMERA MOVEMENT-----------\n" RESET);
-		}
-		if (mode == MODE_CAMERA_ROTATE)
-		{
-			printf(CYAN "\n-----------");
-			printf("📷 Entering Mode: CAMERA ROTATION-----------\n" RESET);
-		}
+		print_mode_message(mode);
 		*last_mode = mode;
 	}
 }
@@ -74,7 +79,8 @@ t_object	*switch_objects(t_object *objects)
 void	render_scene_on_change(int keycode, t_render *world)
 {
 	if (keycode == XK_s || keycode == XK_w || keycode == XK_a || keycode == XK_d
-		|| keycode == XK_Up || keycode == XK_Down)
+		|| keycode == XK_Up || keycode == XK_Down || keycode == XK_Left
+		|| keycode == XK_Right)
 	{
 		render_scene(world);
 	}
