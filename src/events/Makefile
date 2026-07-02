@@ -15,7 +15,8 @@ NAME	:= libevent.a
 LIBFT_DIR		:= ../libft/
 LIBFT				:= $(LIBFT_DIR)/libft.a
 
-INCLUDES	:= -I../../includes/
+SDL_CFLAGS	?= $(shell pkg-config --cflags sdl2)
+INCLUDES	:= -I../../includes/ $(SDL_CFLAGS)
 
 SRCS	:= camera_transform.c event_utils2.c event_utils.c key_handler.c object_transform.c event_bump_map_utils.c
 OBJS	:= $(SRCS:.c=.o)

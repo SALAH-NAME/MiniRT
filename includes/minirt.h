@@ -15,11 +15,11 @@
 
 # include "algebra.h"
 # include "scene.h"
-# include <mlx.h>
+# include <SDL2/SDL.h>
 # include <stdbool.h>
 
-# define WIDTH 400
-# define HEIGHT 400
+# define WIDTH 800
+# define HEIGHT 600
 
 typedef struct s_ray
 {
@@ -38,27 +38,23 @@ typedef struct s_hit
 	t_object	*object;
 }				t_hit;
 
-typedef struct s_mlx
+typedef struct s_sdl
 {
-	void		*ptr;
-	void		*win;
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-}				t_mlx;
+	SDL_Window		*win;
+	SDL_Surface		*surface;
+	int				quit;
+}				t_sdl;
 
 typedef struct s_render
 {
-	t_mlx		mlx;
+	t_sdl		sdl;
 	t_scene		scene;
 }				t_render;
 
 typedef bool	(*t_intersect_fn)(t_ray ray, t_object *obj, t_hit *hit);
 
-int				handle_keypress(int keysym, t_render *world);
-int				handle_close(t_render *world);
+int				handle_keypress(int keycode, t_render *world);
+int				close_window(t_render *render);
 
 t_color			color_create(float r, float g, float b);
 t_color			color_multiply(t_color color, double t);

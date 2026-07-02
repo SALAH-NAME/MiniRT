@@ -22,8 +22,6 @@
 # include "minirt.h"
 # include "parser.h"
 # include "scene.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <limits.h>

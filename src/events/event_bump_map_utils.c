@@ -31,13 +31,13 @@ static void	bump_map_transform(int keycode, t_render *world)
 	bump = get_bump_map(selected);
 	if (!bump)
 		return ;
-	if (keycode == XK_Up)
+	if (keycode == SDLK_UP)
 		bump->scale += 1;
-	if (keycode == XK_Down)
+	if (keycode == SDLK_DOWN)
 		bump->scale -= 1;
-	if (keycode == XK_Right)
+	if (keycode == SDLK_RIGHT)
 		bump->intensity += 0.5;
-	if (keycode == XK_Left)
+	if (keycode == SDLK_LEFT)
 		bump->intensity -= 0.5;
 	if (bump->scale < 0)
 		bump->scale = 0;

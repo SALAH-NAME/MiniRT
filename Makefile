@@ -14,16 +14,17 @@ NAME		:= miniRT
 BONUS_NAME	:= miniRT_bonus
 
 CC			:= cc
-CFLAGS	:= -Wall -Wextra -Werror  
+CFLAGS	:= -Wall -Wextra -Werror
 DFLAGS	:= -MMD -MP
 
-INCLUDES	:= -I./includes -I/usr/local/include
+SDL_CFLAGS	:= $(shell pkg-config --cflags sdl2)
+SDL_LIBS		:= $(shell pkg-config --libs sdl2)
+
+INCLUDES	:= -I./includes $(SDL_CFLAGS)
 SCENE_DIR := scenes
 
 
 SRC_DIR	:= src
-# LIBS_DIR	:= libs
-MLX_DIR	:= /usr/local/lib/
 
 EVENT_DIR    := $(SRC_DIR)/events
 ALGEBRA_DIR	:= $(SRC_DIR)/algebra
@@ -104,21 +105,19 @@ BONUS_LIBS	:= $(ALGEBRA_LIB)  $(LIBFT_LIB) $(BONUS_PARSER_LIB) $(LIST_LIB) $(EVE
 LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(PARSER_DIR) \
 						 -L$(LIBFT_DIR) \
-						 -L$(MLX_DIR) \
 						 -L$(LIST_DIR) \
 						 -L$(EVENT_DIR) \
 
 BONUS_LIB_PATH	:= -L$(ALGEBRA_DIR) \
 						 -L$(LIBFT_DIR) \
-						 -L$(MLX_DIR) \
 						 -L$(LIST_DIR) \
 						 -L$(EVENT_DIR) \
 						 -L$(BONUS_PARSER_DIR)
 
 
 
-LIB_FLAGS	:=  -lparser -lft -llist -lalgebra -levent  -lmlx -lXext -lX11 -lm -lz
-BONUS_LIB_FLAGS	:=  -lbonus_parser -lft -llist -lalgebra -levent  -lmlx -lXext -lX11 -lm -lz
+LIB_FLAGS	:=  -lparser -lft -llist -lalgebra -levent $(SDL_LIBS) -lm
+BONUS_LIB_FLAGS	:=  -lbonus_parser -lft -llist -lalgebra -levent $(SDL_LIBS) -lm
 
 
 all: $(NAME) 
@@ -156,7 +155,7 @@ $(LIST_LIB): $(LIST_SRCS)
 	$(MAKE) -C $(LIST_DIR) CFLAGS="$(CFLAGS)"
 
 $(EVENT_LIB): $(EVENT_SRCS)
-	$(MAKE) -C $(EVENT_DIR) CFLAGS="$(CFLAGS)"
+	$(MAKE) -C $(EVENT_DIR) CFLAGS="$(CFLAGS)" SDL_CFLAGS="$(SDL_CFLAGS)"
 
 -include $(DEPS) $(CORE_DEPS)
 

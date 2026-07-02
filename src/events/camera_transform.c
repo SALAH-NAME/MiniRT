@@ -14,34 +14,34 @@
 
 void	camera_movement(int keycode, t_camera *camera, t_render *world)
 {
-	if (keycode == XK_w)
+	if (keycode == SDLK_w)
 		camera->position.z -= MV_SPEED;
-	else if (keycode == XK_s)
+	else if (keycode == SDLK_s)
 		camera->position.z += MV_SPEED;
-	else if (keycode == XK_a)
+	else if (keycode == SDLK_a)
 		camera->position.x -= MV_SPEED;
-	else if (keycode == XK_d)
+	else if (keycode == SDLK_d)
 		camera->position.x += MV_SPEED;
-	else if (keycode == XK_Up)
+	else if (keycode == SDLK_UP)
 		camera->position.y += MV_SPEED;
-	else if (keycode == XK_Down)
+	else if (keycode == SDLK_DOWN)
 		camera->position.y -= MV_SPEED;
 	render_scene_on_change(keycode, world);
 }
 
 void	camera_rotation(int keycode, t_camera *camera, t_render *world)
 {
-	if (keycode == XK_w)
+	if (keycode == SDLK_w)
 		camera->orientation.z -= RT_SPEED;
-	else if (keycode == XK_s)
+	else if (keycode == SDLK_s)
 		camera->orientation.z += RT_SPEED;
-	else if (keycode == XK_a)
+	else if (keycode == SDLK_a)
 		camera->orientation.y += RT_SPEED;
-	else if (keycode == XK_d)
+	else if (keycode == SDLK_d)
 		camera->orientation.y -= RT_SPEED;
-	else if (keycode == XK_Up)
+	else if (keycode == SDLK_UP)
 		camera->orientation.x += RT_SPEED;
-	else if (keycode == XK_Down)
+	else if (keycode == SDLK_DOWN)
 		camera->orientation.x -= RT_SPEED;
 	render_scene_on_change(keycode, world);
 }

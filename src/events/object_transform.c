@@ -67,17 +67,17 @@ void	object_movement(int keycode, t_object *objects, t_render *world)
 	static t_object	*selected = NULL;
 
 	object_selection(keycode, objects, &selected);
-	if (keycode == XK_w)
+	if (keycode == SDLK_w)
 		move_direction(selected, DIR_FORWARD, MV_SPEED);
-	else if (keycode == XK_s)
+	else if (keycode == SDLK_s)
 		move_direction(selected, DIR_BACKWARD, MV_SPEED);
-	else if (keycode == XK_a)
+	else if (keycode == SDLK_a)
 		move_direction(selected, DIR_LEFT, MV_SPEED);
-	else if (keycode == XK_d)
+	else if (keycode == SDLK_d)
 		move_direction(selected, DIR_RIGHT, MV_SPEED);
-	else if (keycode == XK_Up)
+	else if (keycode == SDLK_UP)
 		move_direction(selected, DIR_UP, MV_SPEED);
-	else if (keycode == XK_Down)
+	else if (keycode == SDLK_DOWN)
 		move_direction(selected, DIR_DOWN, MV_SPEED);
 	render_scene_on_change(keycode, world);
 }
@@ -87,17 +87,17 @@ void	object_rotation(int keycode, t_object *objects, t_render *world)
 	static t_object	*selected = NULL;
 
 	object_selection(keycode, objects, &selected);
-	if (keycode == XK_w)
+	if (keycode == SDLK_w)
 		rotate_object(selected, RT_SPEED, 0, 0);
-	else if (keycode == XK_s)
+	else if (keycode == SDLK_s)
 		rotate_object(selected, 0, -RT_SPEED, 0);
-	else if (keycode == XK_a)
+	else if (keycode == SDLK_a)
 		rotate_object(selected, 0, 0, RT_SPEED);
-	else if (keycode == XK_d)
+	else if (keycode == SDLK_d)
 		rotate_object(selected, 0, 0, -RT_SPEED);
-	else if (keycode == XK_Up)
+	else if (keycode == SDLK_UP)
 		rotate_object(selected, RT_SPEED, 0, 0);
-	else if (keycode == XK_Down)
+	else if (keycode == SDLK_DOWN)
 		rotate_object(selected, -RT_SPEED, 0, 0);
 	render_scene_on_change(keycode, world);
 }

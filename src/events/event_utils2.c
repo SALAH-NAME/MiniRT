@@ -14,16 +14,16 @@
 
 void	print_transformation_instructions(void)
 {
-	printf(YELLOW "📜 Transformation instructions:\n" RESET);
-	printf(GREEN "🚀 Press 1 to enter object movement mode\n" RESET);
-	printf(BLUE "🔄 Press 2 to enter object rotation mode\n" RESET);
-	printf(MAGENTA "📷 Press 3 to enter camera movement mode\n" RESET);
-	printf(CYAN "🔄 Press 4 to enter camera rotation mode\n" RESET);
-	printf(CYAN "🔵 Select object: Tab\n" RESET);
-	printf(GREEN "Use W, A, S,D ");
-	printf("to move objects and camera horizontally \n" RESET);
+	printf(YELLOW "Transformation instructions:\n" RESET);
+	printf(GREEN "Press 1 to enter object movement mode\n" RESET);
+	printf(BLUE "Press 2 to enter object rotation mode\n" RESET);
+	printf(MAGENTA "Press 3 to enter camera movement mode\n" RESET);
+	printf(CYAN "Press 4 to enter camera rotation mode\n" RESET);
+	printf(CYAN "Select object: Tab\n" RESET);
+	printf(GREEN "Use W, A, S, D ");
+	printf("to move objects and camera horizontally\n" RESET);
 	printf(GREEN "Use Up and Down arrow keys");
-	printf(" to move objects and camera vertically \n" RESET);
+	printf(" to move objects and camera vertically\n" RESET);
 }
 
 void	print_selected_object(t_object *object)
@@ -31,19 +31,18 @@ void	print_selected_object(t_object *object)
 	if (!object)
 		return ;
 	if (object->type == OBJ_SPHERE)
-		printf(GREEN "🔵 Selected object: Sphere, id: %d\n" RESET, object->id);
+		printf(GREEN "Selected object: Sphere, id: %d\n" RESET, object->id);
 	else if (object->type == OBJ_PLANE)
-		printf(BLUE "🟦 Selected object: Plane, id: %d\n" RESET, object->id);
+		printf(BLUE "Selected object: Plane, id: %d\n" RESET, object->id);
 	else if (object->type == OBJ_CYLINDER)
-		printf(YELLOW "🟡 Selected object: Cylinder, id: %d\n" RESET,
-			object->id);
+		printf(YELLOW "Selected object: Cylinder, id: %d\n" RESET, object->id);
 	else if (object->type == OBJ_CONE)
-		printf(RED "🔺 Selected object: Cone, id: %d\n" RESET, object->id);
+		printf(RED "Selected object: Cone, id: %d\n" RESET, object->id);
 }
 
 void	object_selection(int keycode, t_object *objects, t_object **selected)
 {
-	if (keycode == XK_Tab)
+	if (keycode == SDLK_TAB)
 	{
 		*selected = switch_objects(objects);
 		print_selected_object(*selected);

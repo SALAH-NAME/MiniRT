@@ -14,16 +14,19 @@
 #include <math.h>
 #include <stdio.h>
 
-void	put_pixel_to_img(t_mlx *mlx, int x, int y, t_color color)
+void	put_pixel_to_img(t_sdl *sdl, int x, int y, t_color color)
 {
-	char	*destination;
-	int		rgb;
+	Uint32	*pixels;
+	int		pitch_px;
+	Uint32	rgb;
 
-	rgb = ((int)(color.r * 255) << 16) | ((int)(color.g
-				* 255) << 8) | (int)(color.b * 255);
-	destination = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel
-				/ 8));
-	*(unsigned int *)destination = rgb;
+	pixels = (Uint32 *)sdl->surface->pixels;
+	pitch_px = sdl->surface->pitch / (int)sizeof(Uint32);
+	rgb = SDL_MapRGB(sdl->surface->format,
+			(Uint8)(color.r * 255),
+			(Uint8)(color.g * 255),
+			(Uint8)(color.b * 255));
+	pixels[y * pitch_px + x] = rgb;
 }
 
 void	calculate_viewport(t_camera *cam, double *v_right, double *v_top)
@@ -75,6 +78,7 @@ void	render_scene(t_render *render)
 	t_ray	ray;
 	t_color	color_rgb;
 
+	SDL_LockSurface(render->sdl.surface);
 	y = 0;
 	while (y < HEIGHT)
 	{
@@ -83,11 +87,11 @@ void	render_scene(t_render *render)
 		{
 			ray = generate_ray(&render->scene.camera, x, y);
 			color_rgb = ray_intersection_shading(ray, &render->scene);
-			put_pixel_to_img(&render->mlx, x, y, color_rgb);
+			put_pixel_to_img(&render->sdl, x, y, color_rgb);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(render->mlx.ptr, render->mlx.win, render->mlx.img,
-		0, 0);
+	SDL_UnlockSurface(render->sdl.surface);
+	SDL_UpdateWindowSurface(render->sdl.win);
 }

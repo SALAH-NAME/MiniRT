@@ -12,43 +12,29 @@
 
 #include "core.h"
 
-static bool	init_mlx(t_render *render)
+static bool	init_sdl(t_render *render)
 {
-	render->mlx.ptr = mlx_init();
-	if (!render->mlx.ptr)
+	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		return (false);
-	render->mlx.win = mlx_new_window(render->mlx.ptr, WIDTH, HEIGHT, "miniRT");
-	if (!render->mlx.win)
-		return (false);
-	render->mlx.img = mlx_new_image(render->mlx.ptr, WIDTH, HEIGHT);
-	if (!render->mlx.img)
-		return (false);
-	render->mlx.addr = mlx_get_data_addr(render->mlx.img,
-			&render->mlx.bits_per_pixel, &render->mlx.line_length,
-			&render->mlx.endian);
+	render->sdl.win = SDL_CreateWindow("miniRT",
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
+	if (!render->sdl.win)
+		return (SDL_Quit(), false);
+	render->sdl.surface = SDL_GetWindowSurface(render->sdl.win);
+	if (!render->sdl.surface)
+		return (SDL_DestroyWindow(render->sdl.win), SDL_Quit(), false);
+	render->sdl.quit = 0;
 	return (true);
-}
-
-static void	setup_hooks(t_render *render)
-{
-	mlx_hook(render->mlx.win, KeyPress, KeyPressMask, handle_keypress, render);
-	mlx_hook(render->mlx.win, DestroyNotify, StructureNotifyMask, close_window,
-		render);
 }
 
 static void	cleanup_render(t_render *render)
 {
 	if (!render)
 		return ;
-	if (render->mlx.img)
-		mlx_destroy_image(render->mlx.ptr, render->mlx.img);
-	if (render->mlx.win)
-		mlx_destroy_window(render->mlx.ptr, render->mlx.win);
-	if (render->mlx.ptr)
-	{
-		mlx_destroy_display(render->mlx.ptr);
-		free(render->mlx.ptr);
-	}
+	if (render->sdl.win)
+		SDL_DestroyWindow(render->sdl.win);
+	SDL_Quit();
 	free_scene(&render->scene);
 }
 
@@ -59,6 +45,23 @@ static int	ft_error(char *str)
 	return (1);
 }
 
+static void	sdl_event_loop(t_render *render)
+{
+	SDL_Event	event;
+
+	while (!render->sdl.quit)
+	{
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+				render->sdl.quit = 1;
+			else if (event.type == SDL_KEYDOWN)
+				handle_keypress((int)event.key.keysym.sym, render);
+		}
+		SDL_Delay(16);
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_render	render;
@@ -67,13 +70,12 @@ int	main(int argc, char *argv[])
 		return (ft_error("Usage: ./miniRT <scene.rt>"));
 	if (parse_scene(&render, argv[1]) == false)
 		return (ft_error("Scene parsing failed"), 1);
-	if (!init_mlx(&render))
-		return (cleanup_render(&render), ft_error("MLX initialization failed"));
-	setup_hooks(&render);
+	if (!init_sdl(&render))
+		return (cleanup_render(&render), ft_error("SDL initialization failed"));
 	init_scene(&render);
 	render_scene(&render);
 	print_transformation_instructions();
-	mlx_loop(render.mlx.ptr);
+	sdl_event_loop(&render);
 	cleanup_render(&render);
 	return (0);
 }

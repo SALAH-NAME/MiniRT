@@ -14,7 +14,7 @@
 
 int	close_window(t_render *render)
 {
-	mlx_loop_end(render->mlx.ptr);
+	render->sdl.quit = 1;
 	return (0);
 }
 
@@ -30,19 +30,19 @@ int	handle_keypress(int keycode, t_render *world)
 	static int	current_mode = MODE_NONE;
 	static int	last_mode = MODE_NONE;
 
-	if (keycode == XK_t)
+	if (keycode == SDLK_t)
 		swap_render_mode(world);
-	if (keycode == XK_Escape || keycode == XK_q)
-		return (mlx_loop_end(world->mlx.ptr), 0);
-	if (keycode == XK_1)
+	if (keycode == SDLK_ESCAPE || keycode == SDLK_q)
+		return (world->sdl.quit = 1, 0);
+	if (keycode == SDLK_1)
 		current_mode = MODE_OBJECT_MOVE;
-	else if (keycode == XK_2)
+	else if (keycode == SDLK_2)
 		current_mode = MODE_OBJECT_ROTATE;
-	else if (keycode == XK_3)
+	else if (keycode == SDLK_3)
 		current_mode = MODE_CAMERA_MOVE;
-	else if (keycode == XK_4)
+	else if (keycode == SDLK_4)
 		current_mode = MODE_CAMERA_ROTATE;
-	else if (keycode == XK_5)
+	else if (keycode == SDLK_5)
 		current_mode = MODE_BUMP_MAP;
 	print_mode(current_mode, &last_mode);
 	scene_transformations(keycode, world, current_mode);

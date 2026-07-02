@@ -14,7 +14,6 @@
 # define EVENTS_H
 
 # include "minirt.h"
-# include <X11/keysym.h>
 # include <stdio.h>
 
 # define MV_SPEED 0.5
@@ -53,6 +52,7 @@ typedef enum e_mode
 // Key handlers
 int			handle_keypress(int keycode, t_render *world);
 int			close_window(t_render *render);
+int			swap_render_mode(t_render *world);
 
 // Object transformation
 void		object_movement(int keycode, t_object *objects, t_render *world);
